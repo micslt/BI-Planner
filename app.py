@@ -1,29 +1,43 @@
-from flask import Flask
+from flask import Flask, render_template, request
+import csv
+import biplanner
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
     return render_template('index.html')
-from flask import request
 
+@app.route("/fragen1")
+def fragen1():
+    return render_template("questions1.html")
 
-@app.route('/frage', methods=['GET', 'POST'])
-def frage():
-    if request.method == 'POST':
-        frage = request.form['frage']
-        antwort = beantworte_frage(frage)  # Hier kannst du deine Logik zur Beantwortung der Frage implementieren
-        return f'Deine Frage: {frage}<br>Antwort: {antwort}'
-    return '''
-    <form method="post">
-        <input type="text" name="frage" placeholder="Stelle eine Frage">
-        <input type="submit" value="Frage stellen">
-    </form>
-    '''
+@app.route("/submit", methods=["POST"])
+def submit_form():
+    # Die Antworten aus dem Formular abrufen
+    analytics_answer1 = request.form.get("analytics_answer1")
+    analytics_answer2 = request.form.get("analytics_answer2")
+    governance_answer1 = request.form.get("governance_answer1")
+    governance_answer2 = request.form.get("governance_answer2")
+    # Weitere Antworten für andere Fragen abrufen
 
-def beantworte_frage(frage):
-    # Implementiere hier deine Logik zur Beantwortung der Frage
-    return 'Antwort auf deine Frage'
+    # Eine Liste mit den Antworten erstellen
+    answers = [
+        analytics_answer1,
+        analytics_answer2,
+        governance_answer1,
+        governance_answer2,
+        # Weitere Antworten für andere Fragen hinzufügen
+    ]
+
+    # CSV-Datei öffnen und Antworten schreiben
+    filename = "antworten.csv"
+    with open(filename, "w", newline="") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(answers)
+
+    # Eine Bestätigungsseite oder eine Weiterleitung anzeigen
+    return "Vielen Dank für Ihre Antworten!"
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

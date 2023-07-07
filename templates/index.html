@@ -1,12 +1,13 @@
-<!-- index.html -->
-<!DOCTYPE html>
-<html>
+{% include "header.html" %}
 <head>
     <title>BI-Planner Tool</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <h1>BI-Planner Tool</h1>
-    <a href="{{ url_for('frage') }}"><button>Planner Tool starten</button></a>
-</body>
-</html>
+    <a href="{{ url_for('fragen1') }}"><button>Rahmenbedingungen definieren</button></a>
+    <a href="{{ url_for('fragen1') }}"><button>BI-Reifegrad prüfen</button></a>
+    <a href="{{ url_for('fragen1') }}"><button>Datenquellen erfassen</button></a>
+    <a href="{{ url_for('fragen1') }}"><button>Qualitätskontrolle Visualisierung</button></a>
+    <a href="{{ url_for('fragen1') }}"><button>Qualitätskontrolle Dasboard</button></a>
+{% include "footer.html" %}
