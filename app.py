@@ -19,10 +19,6 @@ def reifegrad():
 def rahmenbedingungen():
     return render_template("rahmenbedingungen.html")
 
-@app.route("/unternehmensziele")
-def unternehmensziele():
-    return render_template("unternehmensziele.html")
-
 @app.route("/informationsbedarf")
 def informationsbedarf():
     return render_template("informationsbedarf.html")
@@ -79,7 +75,7 @@ def submit_form():
     message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
     return render_template("message.html", message=message, redirect_url="/index")
 
-if __name__ == '__main__':
-    app.run()
 #if __name__ == '__main__':
-#    app.run(debug=True, port=5000)"
+#    app.run()
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)
