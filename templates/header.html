@@ -12,17 +12,23 @@ body {  background-color: whitesmoke;}
 </head>
 <body>
 <nav class="navbar bg-primary" data-bs-theme="dark">
-  <div class="container-fluid">
+      <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
+    <form action="/delete_all" method="POST" class="d-inline ms-auto">
+        <button class="btn btn-danger button-width" type="submit">Alle Eingaben löschen</button>
+    </form>
+
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link btn btn-light button-width" href="/">Home</a>
       </div>
     </div>
   </div>
 </nav>
+
+
 
 
 

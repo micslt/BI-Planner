@@ -89,6 +89,12 @@ def dashboard():
 def auswertungen():
     return render_template("auswertungen.html")
 
+@app.route('/delete_all', methods=['POST'])
+def delete_all():
+    open('ziele.csv', 'w').close()
+    open('antworten.csv', 'w').close()
+    return redirect('/')
+
 @app.route("/submit", methods=["POST"])
 def submit_form():
     # Die Antworten aus dem Formular abrufen
