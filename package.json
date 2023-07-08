@@ -1,0 +1,14 @@
+{
+  "name": "bi-planner",
+  "version": "1.0.0",
+  "description": "Beschreibung deiner App",
+  "main": "app.py",
+  "scripts": {
+    "start": "python app.py"
+  },
+  "dependencies": {
+    "flask": "^2.0.1",
+    "jinja": "^3.0.1",
+    "csv": "^5.5.1"
+  }
+}
