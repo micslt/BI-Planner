@@ -15,3 +15,7 @@ h1 {
 .answer {
     font-style: italic;
 }
+
+.table-container {
+    display: inline-block;
+}

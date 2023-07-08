@@ -19,6 +19,44 @@ def reifegrad():
 def rahmenbedingungen():
     return render_template("rahmenbedingungen.html")
 
+@app.route('/unternehmensziele', methods=['GET', 'POST'])
+def unternehmensziele():
+    if request.method == 'POST':
+        ziel = request.form['ziel']
+        with open('ziele.csv', 'a', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow([ziel])
+        return redirect('/unternehmensziele')  # Änderung hier, um zur Startseite zurückzukehren
+    else:
+        try:
+            with open('ziele.csv', 'r') as csvfile:
+                reader = csv.reader(csvfile)
+                # enumerate() wird verwendet, um sowohl die Ziele als auch deren Nummern zu bekommen.
+                ziele = [(i, row[0]) for i, row in enumerate(reader, start=1)]
+        except FileNotFoundError:
+            ziele = []
+    return render_template('unternehmensziele.html', ziele=ziele)
+
+@app.route('/unternehmensziele/delete', methods=['POST'])
+def delete_ziel():
+    ziel_nummer = request.form['ziel_nummer']
+
+    # Lesen Sie alle Ziele
+    with open('ziele.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        ziele = [row[0] for row in reader]
+
+    # Löschen Sie das ausgewählte Ziel
+    del ziele[int(ziel_nummer) - 1]
+
+    # Überschreiben Sie die CSV-Datei mit den verbleibenden Zielen
+    with open('ziele.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        for ziel in ziele:
+            writer.writerow([ziel])
+
+    return redirect('/unternehmensziele')
+
 @app.route("/informationsbedarf")
 def informationsbedarf():
     return render_template("informationsbedarf.html")
@@ -51,7 +89,6 @@ def dashboard():
 def auswertungen():
     return render_template("auswertungen.html")
 
-
 @app.route("/submit", methods=["POST"])
 def submit_form():
     # Die Antworten aus dem Formular abrufen
@@ -75,7 +112,5 @@ def submit_form():
     message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
     return render_template("message.html", message=message, redirect_url="/index")
 
-#if __name__ == '__main__':
-#    app.run()
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

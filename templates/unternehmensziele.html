@@ -1,0 +1,44 @@
+{% include "header.html" %}
+
+<div class="container">
+        <h3>Unternehmensziele</h3>
+        <br>
+        <form action="/unternehmensziele" method="POST"><br>
+        <div class="input-group mb-3">
+            <input type="text" id="ziel" name="ziel" class="form-control" placeholder="Unternehmensziel eingeben" aria-label="Unternehmensziel eingeben">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Ziel hinzufügen</button>
+            </div>
+        </div>
+            </form><br>
+            <h4>Gespeicherte Ziele:</h4><br>
+            <div class="table-container" style="display: inline-block;">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nummer</th>
+                            <th>Ziel</th>
+                            <th>Aktion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for nummer, ziel in ziele %}
+                        <tr>
+                            <td>{{ nummer }}</td>
+                            <td>{{ ziel }}</td>
+                            <td>
+                                <form action="/unternehmensziele/delete" method="POST">
+                                    <input type="hidden" name="ziel_nummer" value="{{ nummer }}">
+                                    <input type="submit" value="Löschen">
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+</div>
+
+
+
+{% include "footer.html" %}
