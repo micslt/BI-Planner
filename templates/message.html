@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nachricht</title>
+</head>
+<body>
+    <h1>{{ message }}</h1>
+    <p>Bitte warten Sie einen Moment...</p>
+    <script>
+        setTimeout(function() {
+            window.location.href = "{{ redirect_url }}";
+        }, 3000); // Weiterleitung nach 3 Sekunden
+    </script>
+</body>
+</html>
