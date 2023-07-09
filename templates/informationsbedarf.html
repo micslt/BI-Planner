@@ -1,5 +1,69 @@
 {% include "header.html" %}
+afdfsafasfdsfa
 
 
+<br>
+<div class="container">
+    <h3>Informationsbedarf</h3>
+    <br>
+    <form action="/informationsbedarf" method="POST">
+        <div class="input-group mb-3">
+            <input type="text" id="informationsbedarf" name="informationsbedarf" class="form-control" placeholder="Bezeichnung" aria-label="Informationsbedarf eingeben">
+            <input type="text" id="beschreibung" name="beschreibung" class="form-control" placeholder="Beschreibung" aria-label="Beschreibung">
+            <input type="text" id="nutzen" name="nutzen" class="form-control" placeholder="Nutzen" aria-label="Nutzen">
+            <input type="text" id="typ" name="typ" class="form-control" placeholder="Typ" aria-label="Typ">
+            <input type="text" id="metrik" name="metrik" class="form-control" placeholder="Metrik" aria-label="Metrik">
+            <select id="prioritaet" name="prioritaet" class="form-control" placeholder="Priorität">
+                <option value="0" selected disabled>Priorität</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+            </select>
+
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Informationsbedarf hinzufügen</button>
+            </div>
+        </div>
+    </form>
+    <br>
+    <h4>Gespeicherter Informationsbedarf:</h4>
+    <br>
+    <div class="table-container" style="display: inline-block;">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Nummer</th>
+                    <th>Informationsbedarf</th>
+                    <th>Beschreibung</th>
+                    <th>Nutzen</th>
+                    <th>Typ</th>
+                    <th>Metrik</th>
+                    <th>Priorität</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for nummer, informationsbedarf in informationsbedarf_liste %}
+                <tr>
+                    <td>{{ nummer }}</td>
+                    <td>{{ informationsbedarf[0] }}</td>
+                    <td>{{ informationsbedarf[1] }}</td>
+                    <td>{{ informationsbedarf[2] }}</td>
+                    <td>{{ informationsbedarf[3] }}</td>
+                    <td>{{ informationsbedarf[4] }}</td>
+                    <td>{{ informationsbedarf[5] }}</td>
+                    <td>
+                        <form action="/informationsbedarf/delete" method="POST">
+                            <input type="hidden" name="informationsbedarf_nummer" value="{{ nummer }}">
+                            <input type="submit" value="Löschen">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
 {% include "footer.html" %}
