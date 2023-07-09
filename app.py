@@ -12,9 +12,32 @@ def index():
     return render_template('index.html')
 
 
-@app.route("/rahmenbedingungen")
+@app.route("/rahmenbedingungen", methods=['GET', 'POST'])
 def rahmenbedingungen():
-    return render_template("rahmenbedingungen.html")
+    if request.method == 'POST':
+        it_betrieben = request.form.get('it_betrieben', '')
+        bia_aufbau = request.form.get('bia_aufbau', '')
+        personelle_ressourcen = request.form.get('personelle_ressourcen', '')
+        knowhow_vorhanden = request.form.get('knowhow_vorhanden', '')
+        finanzieller_bedarf = request.form.get('finanzieller_bedarf', '')
+        finanzielle_mittel = request.form.get('finanzielle_mittel', '')
+        personendaten_analyse = request.form.get('personendaten_analyse', '')
+        gesetzeslage = request.form.get('gesetzeslage', '')
+        compliance_vorgaben = request.form.getlist('compliance_vorgaben')
+
+        # Speichern der Antworten in einer CSV-Datei
+        filename = "rahmenbedingungen.csv"
+        with open(filename, "a", newline="") as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow([it_betrieben, bia_aufbau, personelle_ressourcen, knowhow_vorhanden,
+                             finanzieller_bedarf, finanzielle_mittel, personendaten_analyse, gesetzeslage,
+                             ', '.join(compliance_vorgaben)])
+
+        # Nachricht anzeigen und zur Startseite (index) umleiten
+        message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
+        return render_template("message.html", message=message, redirect_url="/auswertungen")
+    else:
+        return render_template("rahmenbedingungen.html")
 
 
 #############################################################################
@@ -83,7 +106,6 @@ def informationsbedarf():
     return render_template('informationsbedarf.html', informationsbedarf_liste=informationsbedarf_liste)
 
 
-
 @app.route('/informationsbedarf/delete', methods=['POST'])
 def delete_informationsbedarf():
     informationsbedarf_nummer = request.form['informationsbedarf_nummer']
@@ -103,7 +125,6 @@ def delete_informationsbedarf():
             writer.writerow([informationsbedarf])
 
     return redirect('/informationsbedarf')
-
 
 #######################################################################################
 
@@ -141,6 +162,7 @@ def delete_all():
     open('ziele.csv', 'w').close()
     open('reifegrad.csv', 'w').close()
     open('informationsbedarf.csv', 'w').close()
+    open('rahmenbedingungen.csv', 'w').close()
     return redirect('/')
 ##########################################################################################
 

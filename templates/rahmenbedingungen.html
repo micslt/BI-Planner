@@ -1,5 +1,88 @@
 {% include "header.html" %}
-
-
-
+<br>
+<div class="container">
+    <h3>Rahmenbedingungen</h3>
+    <br>
+    <form action="/rahmenbedingungen" method="POST">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="background-color: gray !important; text-align: left;">Fragen</th>
+                    <th style="background-color: gray !important; text-align: left;">Antwort</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Wie wird die IT betrieben?</td>
+                    <td>
+                        <input type="radio" name="it_betrieben" value="intern"> intern<br>
+                        <input type="radio" name="it_betrieben" value="extern"> extern
+                    </td>
+                </tr>
+                <tr>
+                    <td>Wie soll die BIA aufgebaut und betrieben werden?</td>
+                    <td>
+                        <input type="radio" name="bia_aufbau" value="einbettung"> Einbettung in bestehende Strukturen<br>
+                        <input type="radio" name="bia_aufbau" value="bi-cc"> BI-Competency Center<br>
+                        <input type="radio" name="bia_aufbau" value="externe_partner"> Externe Partner
+                    </td>
+                </tr>
+                <tr>
+                    <td>Stehen den Unternehmen genügend Personen für den Aufbau und Betrieb von BIA zur Verfügung?</td>
+                    <td>
+                        <input type="radio" name="personelle_ressourcen" value="genuegend_personen"> ja<br>
+                        <input type="radio" name="personelle_ressourcen" value="notwendiges_knowhow"> nein
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ist das notwendige Know-how für den Aufbau und den Betrieb von BIA vorhanden?</td>
+                    <td>
+                        <input type="radio" name="knowhow_vorhanden" value="ja"> ja<br>
+                        <input type="radio" name="knowhow_vorhanden" value="nein"> nein
+                    </td>
+                </tr>
+                <tr>
+                    <td>Wie hoch ist der finanzielle Bedarf für den Aufbau und den Betrieb von BIA?</td>
+                    <td>
+                        <input type="radio" name="finanzieller_bedarf" value="bekannt"> bekannt<br>
+                        <input type="radio" name="finanzieller_bedarf" value="unbekannt"> unbekannt
+                    </td>
+                </tr>
+                <tr>
+                    <td>Werden die benötigten finanziellen Mittel für Aufbau und den Betrieb der geplanten BIA bereitgestellt?</td>
+                    <td>
+                        <input type="radio" name="finanzielle_mittel" value="ja"> ja<br>
+                        <input type="radio" name="finanzielle_mittel" value="nein"> nein
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ist beabsichtigt, Personendaten im Rahmen der BIA zu analysieren?</td>
+                    <td>
+                        <input type="radio" name="personendaten_analyse" value="ja"> ja<br>
+                        <input type="radio" name="personendaten_analyse" value="nein"> nein
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ermöglicht die Gesetzeslage die Bearbeitung von Personendaten für analytische Zwecke?</td>
+                    <td>
+                        <input type="radio" name="gesetzeslage" value="ja"> ja<br>
+                        <input type="radio" name="gesetzeslage" value="nein"> nein
+                    </td>
+                </tr>
+                <tr>
+                    <td>Welche Vorgaben, Gesetze und Normen müssen innerhalb der BIA berücksichtigt werden?</td>
+                    <td>
+                        <input type="checkbox" name="compliance_vorgaben" value="dsg"> DSG<br>
+                        <input type="checkbox" name="compliance_vorgaben" value="dsgvo"> DSGVO<br>
+                        <input type="checkbox" name="compliance_vorgaben" value="normen"> Normen<br>
+                        <input type="checkbox" name="compliance_vorgaben" value="interne_richtlinien"> Interne Richtlinien
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <input type="submit" value="Absenden" class="btn btn-primary btn-lg">
+        </div>
+    </form>
+</div>
 {% include "footer.html" %}
