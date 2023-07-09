@@ -1,301 +1,308 @@
 {% include "header.html" %}
-
-<form action="{{ url_for('submit_form') }}" method="POST"> <!-- Ersetze "ziel-der-formularverarbeitung" durch die tatsächliche URL, an die das Formular gesendet werden soll -->
-    <table class="table table-striped table-hover">
-        <tr>
-            <th colspan="2" style="background-color: lightgray; text-align: center;">Organisation</th>
-        </tr>
-        <tr >
-            <td>Tragen Strategie, Kultur und Führung dazu bei, BIA zu unterstützen und zu fördern?</td>
-            <td>
-                <input type="radio" name="frage1" value="ja"> ja
-                <input type="radio" name="frage1" value="nein"> nein
-                <input type="radio" name="frage1" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr>
-            <td>Wird die BIA in der gesamten Organisation für die Entscheidungsfindung verwendet?</td>
-            <td>
-                <input type="radio" name="frage2" value="ja"> ja
-                <input type="radio" name="frage2" value="nein"> nein
-                <input type="radio" name="frage2" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr>
-            <td>Nutzen alle Teams des Unternehmens die BIA für ihre täglichen Entscheidungen?</td>
-            <td>
-                <input type="radio" name="frage3" value="ja"> ja
-                <input type="radio" name="frage3" value="nein"> nein
-                <input type="radio" name="frage3" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr>
-            <td>Ist es einfach, die BIA in bestehende Prozesse einzubinden?</td>
-            <td>
-                <input type="radio" name="frage4" value="ja"> ja
-                <input type="radio" name="frage4" value="nein"> nein
-                <input type="radio" name="frage4" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr>
-            <td>Gibt es eine Kultur des Vertrauens in die BIA?</td>
-            <td>
-                <input type="radio" name="frage5" value="ja"> ja
-                <input type="radio" name="frage5" value="nein"> nein
-                <input type="radio" name="frage5" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr style="background-color: lightgray;">
-            <td>Besteht die Bereitschaft, neue Dinge auszuprobieren?</td>
-            <td>
-                <input type="radio" name="frage6" value="ja"> ja
-                <input type="radio" name="frage6" value="nein"> nein
-                <input type="radio" name="frage6" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr>
-            <th colspan="2" style="background-color: lightgray; text-align: center;">Ressourcen</th>
-        </tr>
-        <tr style="background-color: lightgray;">
-        <td>Bestehen ausreichend finanzielle Mittel für die BIA?</td>
-        <td>
-            <input type="radio" name="frage7" value="ja"> ja
-            <input type="radio" name="frage7" value="nein"> nein
-            <input type="radio" name="frage7" value="unklar"> unklar
-        </td>
-        </tr>
-        <tr>
-            <td>Wie einfach gestaltet sich die Einführung und Umsetzung der BIA auf einer Skala von 1-5 (1 = sehr schwierig, 5 = sehr einfach)?</td>
-            <td>
-                <input type="radio" name="frage8" value="1"> 1
-                <input type="radio" name="frage8" value="2"> 2
-                <input type="radio" name="frage8" value="3"> 3
-                <input type="radio" name="frage8" value="4"> 4
-                <input type="radio" name="frage8" value="5"> 5
-            </td>
-        </tr>
-        <tr style="background-color: lightgray;">
-            <td>Entwickelt die Organisation Mitarbeitende im Bereich der BIA und baut Fähigkeiten im Bereich BIA auf?</td>
-            <td>
-                <input type="radio" name="frage9" value="ja"> ja
-                <input type="radio" name="frage9" value="nein"> nein
-                <input type="radio" name="frage9" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr>
-            <td>Verfügt das Unternehmen über die erforderlichen Talente und Fähigkeiten für BIA?</td>
-            <td>
-                <input type="radio" name="frage10" value="ja"> ja
-                <input type="radio" name="frage10" value="nein"> nein
-                <input type="radio" name="frage10" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr style="background-color: lightgray;">
-            <td>Hat das Unternehmen Schwierigkeiten, die bestehende BIA-Infrastruktur aufrechtzuerhalten?</td>
-            <td>
-                <input type="radio" name="frage11" value="ja"> ja
-                <input type="radio" name="frage11" value="nein"> nein
-                <input type="radio" name="frage11" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr>
-            <td>Ist die bestehende BIA wartungsintensiv?</td>
-            <td>
-                <input type="radio" name="frage12" value="ja"> ja
-                <input type="radio" name="frage12" value="nein"> nein
-                <input type="radio" name="frage12" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr>
-                <th colspan="2" style="background-color: lightgray; text-align: center;">Dateninfrastruktur</th>
+<br>
+<br>
+<div class="container">
+    <h3 class="rahmen">Reifegrad</h3>
+    <br>
+    Der folgende Fragebogen dient dazu, eine Beurteilung über den aktuellen Zustand der Business Intelligence vorzunehmen.
+    <br>
+    <br>
+    <form action="{{ url_for('submit_form') }}" method="POST"> <!-- Ersetze "ziel-der-formularverarbeitung" durch die tatsächliche URL, an die das Formular gesendet werden soll -->
+        <table class="table table-striped table-hover">
+            <tr>
+                <th colspan="2" style="background-color: lightgray; text-align: center;">Organisation</th>
+            </tr>
+            <tr >
+                <td>1. Tragen Strategie, Kultur und Führung dazu bei, BIA zu unterstützen und zu fördern?</td>
+                <td>
+                    <input type="radio" name="frage1" value="ja"> ja
+                    <input type="radio" name="frage1" value="nein"> nein
+                    <input type="radio" name="frage1" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr>
+                <td>2. Wird die BIA in der gesamten Organisation für die Entscheidungsfindung verwendet?</td>
+                <td>
+                    <input type="radio" name="frage2" value="ja"> ja
+                    <input type="radio" name="frage2" value="nein"> nein
+                    <input type="radio" name="frage2" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr>
+                <td>3. Nutzen alle Teams des Unternehmens die BIA für ihre täglichen Entscheidungen?</td>
+                <td>
+                    <input type="radio" name="frage3" value="ja"> ja
+                    <input type="radio" name="frage3" value="nein"> nein
+                    <input type="radio" name="frage3" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr>
+                <td>4. Ist es einfach, die BIA in bestehende Prozesse einzubinden?</td>
+                <td>
+                    <input type="radio" name="frage4" value="ja"> ja
+                    <input type="radio" name="frage4" value="nein"> nein
+                    <input type="radio" name="frage4" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr>
+                <td>5. Gibt es eine Kultur des Vertrauens in die BIA?</td>
+                <td>
+                    <input type="radio" name="frage5" value="ja"> ja
+                    <input type="radio" name="frage5" value="nein"> nein
+                    <input type="radio" name="frage5" value="unklar"> unklar
+                </td>
             </tr>
             <tr style="background-color: lightgray;">
-        <td>Ist der Zugang zu den Daten einfach zugänglich?</td>
-        <td>
-            <input type="radio" name="frage13" value="ja"> ja
-            <input type="radio" name="frage13" value="nein"> nein
-            <input type="radio" name="frage13" value="unklar"> unklar
-        </td>
-        </tr>
-        <tr>
-            <td>Werden bestehende Schnittstellen zur Datenanbindung benutzt (bspw. REST-APIs)?</td>
+                <td>6. Besteht die Bereitschaft, neue Dinge auszuprobieren?</td>
+                <td>
+                    <input type="radio" name="frage6" value="ja"> ja
+                    <input type="radio" name="frage6" value="nein"> nein
+                    <input type="radio" name="frage6" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2" style="background-color: lightgray; text-align: center;">Ressourcen</th>
+            </tr>
+            <tr style="background-color: lightgray;">
+            <td>7. Bestehen ausreichend finanzielle Mittel für die BIA?</td>
             <td>
-                <input type="radio" name="frage14" value="ja"> ja
-                <input type="radio" name="frage14" value="nein"> nein
-                <input type="radio" name="frage14" value="unklar"> unklar
+                <input type="radio" name="frage7" value="ja"> ja
+                <input type="radio" name="frage7" value="nein"> nein
+                <input type="radio" name="frage7" value="unklar"> unklar
             </td>
-        </tr>
-        <tr style="background-color: lightgray;">
-            <td>Werden die Daten in eine Analyseumgebung gespeichert oder direkt aus den operativen System bezogen?</td>
+            </tr>
+            <tr>
+                <td>8. Wie einfach gestaltet sich die Einführung und Umsetzung der BIA auf einer Skala von 1-5 (1 = sehr schwierig, 5 = sehr einfach)?</td>
+                <td>
+                    <input type="radio" name="frage8" value="1"> 1
+                    <input type="radio" name="frage8" value="2"> 2
+                    <input type="radio" name="frage8" value="3"> 3
+                    <input type="radio" name="frage8" value="4"> 4
+                    <input type="radio" name="frage8" value="5"> 5
+                </td>
+            </tr>
+            <tr style="background-color: lightgray;">
+                <td>9. Entwickelt die Organisation Mitarbeitende im Bereich der BIA und baut Fähigkeiten im Bereich BIA auf?</td>
+                <td>
+                    <input type="radio" name="frage9" value="ja"> ja
+                    <input type="radio" name="frage9" value="nein"> nein
+                    <input type="radio" name="frage9" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr>
+                <td>10. Verfügt das Unternehmen über die erforderlichen Talente und Fähigkeiten für BIA?</td>
+                <td>
+                    <input type="radio" name="frage10" value="ja"> ja
+                    <input type="radio" name="frage10" value="nein"> nein
+                    <input type="radio" name="frage10" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr style="background-color: lightgray;">
+                <td>11. Hat das Unternehmen Schwierigkeiten, die bestehende BIA-Infrastruktur aufrechtzuerhalten?</td>
+                <td>
+                    <input type="radio" name="frage11" value="ja"> ja
+                    <input type="radio" name="frage11" value="nein"> nein
+                    <input type="radio" name="frage11" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr>
+                <td>12. Ist die bestehende BIA wartungsintensiv?</td>
+                <td>
+                    <input type="radio" name="frage12" value="ja"> ja
+                    <input type="radio" name="frage12" value="nein"> nein
+                    <input type="radio" name="frage12" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr>
+                    <th colspan="2" style="background-color: lightgray; text-align: center;">Dateninfrastruktur</th>
+                </tr>
+                <tr style="background-color: lightgray;">
+            <td>13. Ist der Zugang zu den Daten einfach zugänglich?</td>
             <td>
-                <input type="radio" name="frage15" value="ja"> ja
-                <input type="radio" name="frage15" value="nein"> nein
-                <input type="radio" name="frage15" value="unklar"> unklar
+                <input type="radio" name="frage13" value="ja"> ja
+                <input type="radio" name="frage13" value="nein"> nein
+                <input type="radio" name="frage13" value="unklar"> unklar
             </td>
-        </tr>
-        <tr>
-            <td>Werden Cloud-Services genutzt?</td>
-            <td>
-                <input type="radio" name="frage16" value="ja"> ja
-                <input type="radio" name="frage17" value="nein"> nein
-                <input type="radio" name="frage18" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr style="background-color: lightgray;">
-            <td>Kann die Infrastruktur mit einem Wachstum der Nutzerzahlen umgehen?</td>
+            </tr>
+            <tr>
+                <td>14. Werden bestehende Schnittstellen zur Datenanbindung benutzt (bspw. REST-APIs)?</td>
+                <td>
+                    <input type="radio" name="frage14" value="ja"> ja
+                    <input type="radio" name="frage14" value="nein"> nein
+                    <input type="radio" name="frage14" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr style="background-color: lightgray;">
+                <td>15. Werden die Daten in eine Analyseumgebung gespeichert oder direkt aus den operativen System bezogen?</td>
+                <td>
+                    <input type="radio" name="frage15" value="ja"> ja
+                    <input type="radio" name="frage15" value="nein"> nein
+                    <input type="radio" name="frage15" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr>
+                <td>16. Werden Cloud-Services genutzt?</td>
+                <td>
+                    <input type="radio" name="frage16" value="ja"> ja
+                    <input type="radio" name="frage16" value="nein"> nein
+                    <input type="radio" name="frage16" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr style="background-color: lightgray;">
+                <td>17. Kann die Infrastruktur mit einem Wachstum der Nutzerzahlen umgehen?</td>
+                <td>
+                    <input type="radio" name="frage17" value="ja"> ja
+                    <input type="radio" name="frage17" value="nein"> nein
+                    <input type="radio" name="frage17" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr>
+                <td>18. Kann die Infrastruktur je nach Anwendungsfall skaliert werden?</td>
+                <td>
+                    <input type="radio" name="frage18" value="ja"> ja
+                    <input type="radio" name="frage18 value="nein"> nein
+                    <input type="radio" name="frage18" value="unklar"> unklar
+                </td>
+            </tr>
+                <tr>
+                    <th colspan="2" style="background-color: lightgray; text-align: center;">Analytik</th>
+                </tr>
+                <tr style="background-color: lightgray;">
+            <td>19. Welche Arten von Analysen werden verwendet?</td>
             <td>
                 <input type="radio" name="frage19" value="ja"> ja
                 <input type="radio" name="frage19" value="nein"> nein
-                <input type="radio" name="frage19" value="unklar"> unklar
             </td>
-        </tr>
-        <tr>
-            <td>Kann die Infrastruktur je nach Anwendungsfall skaliert werden?</td>
-            <td>
-                <input type="radio" name="frage20" value="ja"> ja
-                <input type="radio" name="frage20" value="nein"> nein
-                <input type="radio" name="frage20" value="unklar"> unklar
-            </td>
-        </tr>
+            </tr>
             <tr>
-                <th colspan="2" style="background-color: lightgray; text-align: center;">Analytik</th>
+                <td>20. Wie werden Analyseergebnisse in der Organisation bereitgestellt?</td>
+                <td>
+                    <input type="radio" name="frage20" value="berichte"> Berichte
+                    <input type="radio" name="frage20" value="dashboards"> Dashboards<br>
+                    <input type="radio" name="frage20" value="beides"> beides
+                    <input type="radio" name="frage20" value="keines"> keines von beiden
+                </td>
             </tr>
             <tr style="background-color: lightgray;">
-        <td>Welche Arten von Analysen werden verwendet?</td>
-        <td>
-            <input type="radio" name="frage21" value="ja"> ja
-            <input type="radio" name="frage21" value="nein"> nein
-        </td>
-        </tr>
-        <tr>
-            <td>Wie werden Analyseergebnisse in der Organisation bereitgestellt?</td>
-            <td>
-                <input type="radio" name="frage22" value="berichte"> Berichte
-                <input type="radio" name="frage22" value="dashboards"> Dashboards<br>
-                <input type="radio" name="frage22" value="beides"> beides
-                <input type="radio" name="frage22" value="keines"> keines von beiden
-            </td>
-        </tr>
-        <tr style="background-color: lightgray;">
-            <td>Können Personen aus dem operativen Geschäft eigene Analysen durchführen?</td>
-            <td>
-                <input type="radio" name="frage23" value="ja"> ja
-                <input type="radio" name="frage23" value="nein"> nein
-                <input type="radio" name="frage23" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr>
-            <td>Ist die BIA in die Geschäftsprozesse eingebettet?</td>
-            <td>
-                <input type="radio" name="frage24" value="ja"> ja
-                <input type="radio" name="frage24" value="nein"> nein
-                <input type="radio" name="frage24" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr style="background-color: lightgray;">
-            <td>Werden Vorhersagemodelle oder maschinelle Lernmodelle verwendet?</td>
-            <td>
-                <input type="radio" name="frage25" value="ja"> ja
-                <input type="radio" name="frage25" value="nein"> nein
-                <input type="radio" name="frage25" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr>
-            <td>Werden automatisierte Analysen eingesetzt?</td>
-            <td>
-                <input type="radio" name="frage26" value="ja"> ja
-                <input type="radio" name="frage26" value="nein"> nein
-                <input type="radio" name="frage26" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr>
-            <th colspan="2" style="background-color: lightgray; text-align: center;">Governance/Compliance</th>
-        </tr>
-        <tr style="background-color: lightgray;">
-            <td>Ist die Data-Governance-Strategie des Unternehmens mit der eingesetzten BIA kompatibel?</td>
-            <td>
-                <input type="radio" name="frage27" value="ja"> ja
-                <input type="radio" name="frage27" value="nein"> nein
-                <input type="radio" name="frage27" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr>
-            <td>Kann das Unternehmen die BIA effektiv mit IT-Prozessen und -Richtlinien in Einklang bringen?</td>
-            <td>
-                <input type="radio" name="frage28" value="ja"> ja
-                <input type="radio" name="frage28" value="nein"> nein
-                <input type="radio" name="frage28" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr style="background-color: lightgray;">
-            <td>Gibt es eine Zusammenarbeit zwischen operativem Geschäft und der IT?</td>
-            <td>
-                <input type="radio" name="frage29" value="ja"> ja
-                <input type="radio" name="frage29" value="nein"> nein
-                <input type="radio" name="frage29" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr>
-            <td>Kann die Organisation den ordnungsgemäßen Zugriff und die Nutzung von Daten sicherstellen?</td>
-            <td>
-                <input type="radio" name="frage30" value="ja"> ja
-                <input type="radio" name="frage30" value="nein"> nein
-                <input type="radio" name="frage30" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr style="background-color: lightgray;">
-            <td>Werden Vorhersagemodelle und maschinelle Lernmodelle überwacht?</td>
-            <td>
-                <input type="radio" name="frage31" value="ja"> ja
-                <input type="radio" name="frage31" value="nein"> nein
-                <input type="radio" name="frage31" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr>
-            <td>Sind Schutzmaßnahmen und Kontrollen implementiert?</td>
-            <td>
-                <input type="radio" name="frage32" value="ja"> ja
-                <input type="radio" name="frage32" value="nein"> nein
-                <input type="radio" name="frage32" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr style="background-color: lightgray;">
-            <td>Werden neue Modelle vor dem Einsatz getestet und kontrolliert?</td>
-            <td>
-                <input type="radio" name="frage33" value="ja"> ja
-                <input type="radio" name="frage33" value="nein"> nein
-                <input type="radio" name="frage33" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr>
-            <td>Sind die richtigen Rollen sowohl im operativen Geschäft als auch in der IT vorhanden?</td>
-            <td>
-                <input type="radio" name="frage34" value="ja"> ja
-                <input type="radio" name="frage34" value="nein"> nein
-                <input type="radio" name="frage34" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr style="background-color: lightgray;">
-            <td>Nutzt die Organisation moderne Tools, um vertrauenswürdige Datenbestände aufzubauen?</td>
-            <td>
-                <input type="radio" name="frage35" value="ja"> ja
-                <input type="radio" name="frage35" value="nein"> nein
-                <input type="radio" name="frage35" value="unklar"> unklar
-            </td>
-        </tr>
-        <tr>
-            <td>Werden Sicherheits- und Datenschutzmaßnahmen für personenbezogene Daten und andere sensible Datentypen implementiert?</td>
-            <td>
-                <input type="radio" name="frage36" value="ja"> ja
-                <input type="radio" name="frage36" value="nein"> nein
-                <input type="radio" name="frage36" value="unklar"> unklar
-            </td>
-        </tr>
-    </table>
-    <div class="text-center">
-        <input type="submit" value="Absenden" class="btn btn-primary btn-lg">
-    </div>
+                <td>21. Können Personen aus dem operativen Geschäft eigene Analysen durchführen?</td>
+                <td>
+                    <input type="radio" name="frage21" value="ja"> ja
+                    <input type="radio" name="frage21" value="nein"> nein
+                    <input type="radio" name="frage21" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr>
+                <td>22. Ist die BIA in die Geschäftsprozesse eingebettet?</td>
+                <td>
+                    <input type="radio" name="frage22" value="ja"> ja
+                    <input type="radio" name="frage22" value="nein"> nein
+                    <input type="radio" name="frage22" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr style="background-color: lightgray;">
+                <td>23. Werden Vorhersagemodelle oder maschinelle Lernmodelle verwendet?</td>
+                <td>
+                    <input type="radio" name="frage23" value="ja"> ja
+                    <input type="radio" name="frage23" value="nein"> nein
+                    <input type="radio" name="frage23" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr>
+                <td>24. Werden automatisierte Analysen eingesetzt?</td>
+                <td>
+                    <input type="radio" name="frage24" value="ja"> ja
+                    <input type="radio" name="frage24" value="nein"> nein
+                    <input type="radio" name="frage24" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2" style="background-color: lightgray; text-align: center;">Governance/Compliance</th>
+            </tr>
+            <tr style="background-color: lightgray;">
+                <td>25. Ist die Data-Governance-Strategie des Unternehmens mit der eingesetzten BIA kompatibel?</td>
+                <td>
+                    <input type="radio" name="frage25" value="ja"> ja
+                    <input type="radio" name="frage25" value="nein"> nein
+                    <input type="radio" name="frage25" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr>
+                <td>26. Kann das Unternehmen die BIA effektiv mit IT-Prozessen und -Richtlinien in Einklang bringen?</td>
+                <td>
+                    <input type="radio" name="frage26" value="ja"> ja
+                    <input type="radio" name="frage26" value="nein"> nein
+                    <input type="radio" name="frage26" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr style="background-color: lightgray;">
+                <td>27. Gibt es eine Zusammenarbeit zwischen operativem Geschäft und der IT?</td>
+                <td>
+                    <input type="radio" name="frage27" value="ja"> ja
+                    <input type="radio" name="frage27" value="nein"> nein
+                    <input type="radio" name="frage27" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr>
+                <td>28. Kann die Organisation den ordnungsgemäßen Zugriff und die Nutzung von Daten sicherstellen?</td>
+                <td>
+                    <input type="radio" name="frage28" value="ja"> ja
+                    <input type="radio" name="frage28" value="nein"> nein
+                    <input type="radio" name="frage28" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr style="background-color: lightgray;">
+                <td>29. Werden Vorhersagemodelle und maschinelle Lernmodelle überwacht?</td>
+                <td>
+                    <input type="radio" name="frage29" value="ja"> ja
+                    <input type="radio" name="frage29" value="nein"> nein
+                    <input type="radio" name="frage29" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr>
+                <td>30. Sind Schutzmaßnahmen und Kontrollen implementiert?</td>
+                <td>
+                    <input type="radio" name="frage30" value="ja"> ja
+                    <input type="radio" name="frage30" value="nein"> nein
+                    <input type="radio" name="frage30" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr style="background-color: lightgray;">
+                <td>31. Werden neue Modelle vor dem Einsatz getestet und kontrolliert?</td>
+                <td>
+                    <input type="radio" name="frage31" value="ja"> ja
+                    <input type="radio" name="frage31" value="nein"> nein
+                    <input type="radio" name="frage31" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr>
+                <td>32. Sind die richtigen Rollen sowohl im operativen Geschäft als auch in der IT vorhanden?</td>
+                <td>
+                    <input type="radio" name="frage32" value="ja"> ja
+                    <input type="radio" name="frage32" value="nein"> nein
+                    <input type="radio" name="frage32" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr style="background-color: lightgray;">
+                <td>33. Nutzt die Organisation moderne Tools, um vertrauenswürdige Datenbestände aufzubauen?</td>
+                <td>
+                    <input type="radio" name="frage33" value="ja"> ja
+                    <input type="radio" name="frage33" value="nein"> nein
+                    <input type="radio" name="frage33" value="unklar"> unklar
+                </td>
+            </tr>
+            <tr>
+                <td>34. Werden Sicherheits- und Datenschutzmaßnahmen für personenbezogene Daten und andere sensible Datentypen implementiert?</td>
+                <td>
+                    <input type="radio" name="frage34" value="ja"> ja
+                    <input type="radio" name="frage34" value="nein"> nein
+                    <input type="radio" name="frage34" value="unklar"> unklar
+                </td>
+            </tr>
+        </table>
+        <div class="text-center">
+            <input type="submit" value="Absenden" class="btn btn-primary btn-lg">
+        </div>
 
-</form>
-
+    </form>
+</div>
 {% include "footer.html" %}

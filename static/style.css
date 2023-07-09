@@ -19,3 +19,10 @@ h1 {
 .table-container {
     display: inline-block;
 }
+
+.rahmen {
+  border: 1px solid #333;
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 5px;
+}

@@ -11,160 +11,7 @@ def home():
 def index():
     return render_template('index.html')
 
-
-@app.route("/rahmenbedingungen", methods=['GET', 'POST'])
-def rahmenbedingungen():
-    if request.method == 'POST':
-        it_betrieben = request.form.get('it_betrieben', '')
-        bia_aufbau = request.form.get('bia_aufbau', '')
-        personelle_ressourcen = request.form.get('personelle_ressourcen', '')
-        knowhow_vorhanden = request.form.get('knowhow_vorhanden', '')
-        finanzieller_bedarf = request.form.get('finanzieller_bedarf', '')
-        finanzielle_mittel = request.form.get('finanzielle_mittel', '')
-        personendaten_analyse = request.form.get('personendaten_analyse', '')
-        gesetzeslage = request.form.get('gesetzeslage', '')
-        compliance_vorgaben = request.form.getlist('compliance_vorgaben')
-
-        # Speichern der Antworten in einer CSV-Datei
-        filename = "rahmenbedingungen.csv"
-        with open(filename, "a", newline="") as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow([it_betrieben, bia_aufbau, personelle_ressourcen, knowhow_vorhanden,
-                             finanzieller_bedarf, finanzielle_mittel, personendaten_analyse, gesetzeslage,
-                             ', '.join(compliance_vorgaben)])
-
-        # Nachricht anzeigen und zur Startseite (index) umleiten
-        message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
-        return render_template("message.html", message=message, redirect_url="/auswertungen")
-    else:
-        return render_template("rahmenbedingungen.html")
-
-
-#############################################################################
-@app.route('/unternehmensziele', methods=['GET', 'POST'])
-def unternehmensziele():
-    if request.method == 'POST':
-        ziel = request.form['ziel']
-        with open('ziele.csv', 'a', newline='') as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow([ziel])
-        return redirect('/unternehmensziele')  # Änderung hier, um zur Startseite zurückzukehren
-    else:
-        try:
-            with open('ziele.csv', 'r') as csvfile:
-                reader = csv.reader(csvfile)
-                # enumerate() wird verwendet, um sowohl die Ziele als auch deren Nummern zu bekommen.
-                ziele = [(i, row[0]) for i, row in enumerate(reader, start=1)]
-        except FileNotFoundError:
-            ziele = []
-    return render_template('unternehmensziele.html', ziele=ziele)
-
-@app.route('/unternehmensziele/delete', methods=['POST'])
-def delete_ziel():
-    ziel_nummer = request.form['ziel_nummer']
-
-    # Lesen Sie alle Ziele
-    with open('ziele.csv', 'r') as csvfile:
-        reader = csv.reader(csvfile)
-        ziele = [row[0] for row in reader]
-
-    # Löschen Sie das ausgewählte Ziel
-    del ziele[int(ziel_nummer) - 1]
-
-    # Überschreiben Sie die CSV-Datei mit den verbleibenden Zielen
-    with open('ziele.csv', 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        for ziel in ziele:
-            writer.writerow([ziel])
-
-    return redirect('/unternehmensziele')
-#######################################################################################
-
-@app.route('/informationsbedarf', methods=['GET', 'POST'])
-def informationsbedarf():
-    if request.method == 'POST':
-        informationsbedarf = request.form['informationsbedarf']
-        beschreibung = request.form['beschreibung']
-        nutzen = request.form['nutzen']
-        typ = request.form['typ']
-        metrik = request.form['metrik']
-        prioritaet = request.form.get('prioritaet', '-')  # Standardwert "-" verwenden, falls nicht angegeben
-
-        with open('informationsbedarf.csv', 'a', newline='') as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow([informationsbedarf, beschreibung, nutzen, typ, metrik, prioritaet])
-
-        return redirect('/informationsbedarf')
-    else:
-        try:
-            with open('informationsbedarf.csv', 'r') as csvfile:
-                reader = csv.reader(csvfile)
-                # enumerate() wird verwendet, um sowohl die Informationsbedarfe als auch deren Nummern zu bekommen.
-                informationsbedarf_liste = [(i, row) for i, row in enumerate(reader, start=1)]
-        except FileNotFoundError:
-            informationsbedarf_liste = []
-    return render_template('informationsbedarf.html', informationsbedarf_liste=informationsbedarf_liste)
-
-
-@app.route('/informationsbedarf/delete', methods=['POST'])
-def delete_informationsbedarf():
-    informationsbedarf_nummer = request.form['informationsbedarf_nummer']
-
-    # Lesen Sie alle Informationsbedarfe
-    with open('informationsbedarf.csv', 'r') as csvfile:
-        reader = csv.reader(csvfile)
-        informationsbedarf = [row[0] for row in reader]
-
-    # Löschen Sie den ausgewählten Informationsbedarf
-    del informationsbedarf[int(informationsbedarf_nummer) - 1]
-
-    # Überschreiben Sie die CSV-Datei mit den verbleibenden Informationsbedarfen
-    with open('informationsbedarf.csv', 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        for informationsbedarf in informationsbedarf:
-            writer.writerow([informationsbedarf])
-
-    return redirect('/informationsbedarf')
-
-#######################################################################################
-
-
-@app.route("/datenquellen")
-def datenquellen():
-    return render_template("datenquellen.html")
-
-@app.route("/datenmanagementkonzept")
-def datenmanagementkonzept():
-    return render_template("datenmanagementkonzept.html")
-
-@app.route("/etl")
-def etl():
-    return render_template("etl.html")
-
-@app.route("/analysen")
-def analysen():
-    return render_template("analysen.html")
-
-@app.route("/visualisierung")
-def visualisierung():
-    return render_template("visualisierung.html")
-
-@app.route("/dashboard")
-def dashboard():
-    return render_template("dashboard.html")
-
-@app.route("/auswertungen")
-def auswertungen():
-    return render_template("auswertungen.html")
-
-@app.route('/delete_all', methods=['POST'])
-def delete_all():
-    open('ziele.csv', 'w').close()
-    open('reifegrad.csv', 'w').close()
-    open('informationsbedarf.csv', 'w').close()
-    open('rahmenbedingungen.csv', 'w').close()
-    return redirect('/')
-##########################################################################################
+###################################1. Standortbestimmung################################################################
 
 @app.route("/reifegrad")
 def reifegrad():
@@ -227,6 +74,216 @@ def submit_form():
     # Nachricht anzeigen und zur Startseite (index) umleiten
     message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
     return render_template("message.html", message=message, redirect_url="/auswertungen")
+
+
+##############################################2. Rahmenbedingungen######################################################
+
+@app.route("/rahmenbedingungen", methods=['GET', 'POST'])
+def rahmenbedingungen():
+    if request.method == 'POST':
+        it_betrieben = request.form.get('it_betrieben', '')
+        bia_aufbau = request.form.get('bia_aufbau', '')
+        personelle_ressourcen = request.form.get('personelle_ressourcen', '')
+        knowhow_vorhanden = request.form.get('knowhow_vorhanden', '')
+        finanzieller_bedarf = request.form.get('finanzieller_bedarf', '')
+        finanzielle_mittel = request.form.get('finanzielle_mittel', '')
+        personendaten_analyse = request.form.get('personendaten_analyse', '')
+        gesetzeslage = request.form.get('gesetzeslage', '')
+        compliance_vorgaben = request.form.getlist('compliance_vorgaben')
+
+        # Speichern der Antworten in einer CSV-Datei
+        filename = "rahmenbedingungen.csv"
+        with open(filename, "a", newline="") as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow([it_betrieben, bia_aufbau, personelle_ressourcen, knowhow_vorhanden,
+                             finanzieller_bedarf, finanzielle_mittel, personendaten_analyse, gesetzeslage,
+                             ', '.join(compliance_vorgaben)])
+
+        # Nachricht anzeigen und zur Startseite (index) umleiten
+        message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
+        return render_template("message.html", message=message, redirect_url="/auswertungen")
+    else:
+        return render_template("rahmenbedingungen.html")
+
+
+##################################################3.Planung#############################################################
+
+@app.route('/unternehmensziele', methods=['GET', 'POST'])
+def unternehmensziele():
+    if request.method == 'POST':
+        ziel = request.form['ziel']
+        with open('ziele.csv', 'a', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow([ziel])
+        return redirect('/unternehmensziele')  # Änderung hier, um zur Startseite zurückzukehren
+    else:
+        try:
+            with open('ziele.csv', 'r') as csvfile:
+                reader = csv.reader(csvfile)
+                # enumerate() wird verwendet, um sowohl die Ziele als auch deren Nummern zu bekommen.
+                ziele = [(i, row[0]) for i, row in enumerate(reader, start=1)]
+        except FileNotFoundError:
+            ziele = []
+    return render_template('unternehmensziele.html', ziele=ziele)
+
+@app.route('/unternehmensziele/delete', methods=['POST'])
+def delete_ziel():
+    ziel_nummer = request.form['ziel_nummer']
+
+    # Lesen Sie alle Ziele
+    with open('ziele.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        ziele = [row[0] for row in reader]
+
+    # Löschen Sie das ausgewählte Ziel
+    del ziele[int(ziel_nummer) - 1]
+
+    # Überschreiben Sie die CSV-Datei mit den verbleibenden Zielen
+    with open('ziele.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        for ziel in ziele:
+            writer.writerow([ziel])
+
+    return redirect('/unternehmensziele')
+
+
+@app.route('/informationsbedarf', methods=['GET', 'POST'])
+def informationsbedarf():
+    if request.method == 'POST':
+        informationsbedarf = request.form['informationsbedarf']
+        beschreibung = request.form['beschreibung']
+        nutzen = request.form['nutzen']
+        typ = request.form['typ']
+        metrik = request.form['metrik']
+        prioritaet = request.form.get('prioritaet', '-')  # Standardwert "-" verwenden, falls nicht angegeben
+
+        with open('informationsbedarf.csv', 'a', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow([informationsbedarf, beschreibung, nutzen, typ, metrik, prioritaet])
+
+        return redirect('/informationsbedarf')
+    else:
+        try:
+            with open('informationsbedarf.csv', 'r') as csvfile:
+                reader = csv.reader(csvfile)
+                # enumerate() wird verwendet, um sowohl die Informationsbedarfe als auch deren Nummern zu bekommen.
+                informationsbedarf_liste = [(i, row) for i, row in enumerate(reader, start=1)]
+        except FileNotFoundError:
+            informationsbedarf_liste = []
+    return render_template('informationsbedarf.html', informationsbedarf_liste=informationsbedarf_liste)
+
+
+@app.route('/informationsbedarf/delete', methods=['POST'])
+def delete_informationsbedarf():
+    informationsbedarf_nummer = request.form['informationsbedarf_nummer']
+
+    # Lesen Sie alle Informationsbedarfe
+    with open('informationsbedarf.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        informationsbedarf = [row[0] for row in reader]
+
+    # Löschen Sie den ausgewählten Informationsbedarf
+    del informationsbedarf[int(informationsbedarf_nummer) - 1]
+
+    # Überschreiben Sie die CSV-Datei mit den verbleibenden Informationsbedarfen
+    with open('informationsbedarf.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        for informationsbedarf in informationsbedarf:
+            writer.writerow([informationsbedarf])
+
+    return redirect('/informationsbedarf')
+
+
+@app.route("/datenquellen", methods=['GET', 'POST'])
+def datenquellen():
+    if request.method == 'POST':
+        anwendung = request.form['anwendung']
+        inhalt = request.form['inhalt']
+
+        with open('datenquellen.csv', 'a', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow([anwendung, inhalt])
+
+        return redirect('/datenquellen')  # Änderung hier, um zur Startseite zurückzukehren
+    else:
+        try:
+            with open('datenquellen.csv', 'r') as csvfile:
+                reader = csv.reader(csvfile)
+                # enumerate() wird verwendet, um sowohl die Datenquellen als auch deren Nummern zu bekommen.
+                datenquellen = [(i, row) for i, row in enumerate(reader, start=1)]
+        except FileNotFoundError:
+            datenquellen = []
+
+    return render_template('datenquellen.html', datenquellen=datenquellen)
+
+
+@app.route('/datenquellen/delete', methods=['POST'])
+def delete_datenquelle():
+    datenquelle_nummer = request.form['datenquelle_nummer']
+
+    # Lesen Sie alle Datenquellen
+    with open('datenquellen.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        datenquellen = [row for row in reader]
+
+    # Löschen Sie die ausgewählte Datenquelle
+    del datenquellen[int(datenquelle_nummer) - 1]
+
+    # Überschreiben Sie die CSV-Datei mit den verbleibenden Datenquellen
+    with open('datenquellen.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        for datenquelle in datenquellen:
+            writer.writerow(datenquelle)
+
+    return redirect('/datenquellen')
+
+##################################################4. Datenbereitstellung################################################
+
+
+@app.route("/datenmanagementkonzept")
+def datenmanagementkonzept():
+    return render_template("datenmanagementkonzept.html")
+
+@app.route("/etl")
+def etl():
+    return render_template("etl.html")
+
+##################################################5. Informationsgenerierung############################################
+
+
+@app.route("/analysen")
+def analysen():
+    return render_template("analysen.html")
+
+##################################################6. Informationsbereitstellung#########################################
+
+
+@app.route("/visualisierung")
+def visualisierung():
+    return render_template("visualisierung.html")
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
+##################################################7. Auswertungen#######################################################
+
+@app.route("/auswertungen")
+def auswertungen():
+    return render_template("auswertungen.html")
+
+
+##################################################Functionality#########################################################
+
+
+@app.route('/delete_all', methods=['POST'])
+def delete_all():
+    open('ziele.csv', 'w').close()
+    open('reifegrad.csv', 'w').close()
+    open('informationsbedarf.csv', 'w').close()
+    open('rahmenbedingungen.csv', 'w').close()
+    return redirect('/')
+
 
 
 
