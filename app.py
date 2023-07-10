@@ -240,9 +240,21 @@ def delete_datenquelle():
 ##################################################4. Datenbereitstellung################################################
 
 
-@app.route("/datenmanagementkonzept")
+@app.route("/datenmanagementkonzept", methods=["GET", "POST"])
 def datenmanagementkonzept():
+    if request.method == "POST":
+        konzeption = request.form.getlist("konzeption")
+        architektur = request.form.getlist("architektur")
+        applikation = request.form["applikation"]
+
+        with open("datenmanagementkonzept.csv", "a", newline="") as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow([konzeption, architektur, applikation])
+
+        return redirect("/datenmanagementkonzept")
+
     return render_template("datenmanagementkonzept.html")
+
 
 @app.route("/etl")
 def etl():
