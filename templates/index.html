@@ -8,6 +8,7 @@
             <div class="btn-group d-grid gap-2">
                 <h4>1. Standortbestimmung</h4>
                 <a href="{{ url_for('reifegrad') }}" class="btn btn-primary" role="button">BI-Reifegrad prüfen</a>
+                <a href="{{ url_for('auswertungen') }}" class="btn btn-primary" role="button">Auswertungen</a>
                 <br>
                 <h4>2. Rahmenbedingungen</h4>
                 <a href="{{ url_for('rahmenbedingungen') }}" class="btn btn-primary" role="button">Rahmenbedingungen erfassen</a>
@@ -28,8 +29,11 @@
                 <a href="{{ url_for('visualisierung') }}" class="btn btn-primary" role="button">Qualitätskontrolle Visualisierung</a>
                 <a href="{{ url_for('dashboard') }}" class="btn btn-primary" role="button">Qualitätskontrolle Dashboard</a>
                 <br>
-                <h4>7. Auswertungen</h4>
+                <h4>7. Zusammenfassung</h4>
                 <a href="{{ url_for('auswertungen') }}" class="btn btn-primary" role="button">Auswertungen</a>
+                <br>
+                <h4>Feedback</h4>
+                <a href="{{ url_for('feedback') }}" class="btn btn-primary" role="button">Feedback an den Entwickler</a>
             </div>
         </div>
     </div>

@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect
 import csv
+import os
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -243,23 +245,46 @@ def delete_datenquelle():
 @app.route("/datenmanagementkonzept", methods=["GET", "POST"])
 def datenmanagementkonzept():
     if request.method == "POST":
-        konzeption = request.form.getlist("konzeption")
-        architektur = request.form.getlist("architektur")
-        applikation = request.form["applikation"]
+        form_data = request.form
 
-        with open("datenmanagementkonzept.csv", "a", newline="") as csvfile:
+        # Überprüfe, ob die CSV-Datei vorhanden ist
+        csv_exists = os.path.isfile("datenmanagementkonzept.csv")
+
+        with open("datenmanagementkonzept.csv", "a", newline="", encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow([konzeption, architektur, applikation])
 
-        return redirect("/datenmanagementkonzept")
+            # Schreibe Header, falls CSV-Datei neu erstellt wurde
+            if not csv_exists:
+                writer.writerow(form_data.keys())
+            writer.writerow(form_data.values())
 
     return render_template("datenmanagementkonzept.html")
 
-
-@app.route("/etl")
+@app.route("/etl", methods=["GET", "POST"])
 def etl():
     return render_template("etl.html")
 
+@app.route("/submit_etl", methods=["GET", "POST"])
+def submit_etl():
+    if request.method == "POST":
+        form_data = request.form
+
+        # Überprüfe, ob die CSV-Datei vorhanden ist
+        csv_exists = os.path.isfile("etl.csv")
+
+        with open("etl.csv", "a", newline="", encoding="utf-8") as csvfile:
+            writer = csv.writer(csvfile)
+
+            # Schreibe Header, falls CSV-Datei neu erstellt wurde
+            if not csv_exists:
+                writer.writerow(form_data.keys())
+
+            writer.writerow(form_data.values())
+
+
+        # Nachricht anzeigen und zur Startseite (index) umleiten
+    message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
+    return render_template("message.html", message=message, redirect_url="/etl")
 ##################################################5. Informationsgenerierung############################################
 
 
@@ -284,6 +309,49 @@ def dashboard():
 def auswertungen():
     return render_template("auswertungen.html")
 
+##################################################8. Feedback### #######################################################
+@app.route("/feedback")
+def feedback():
+    return render_template("feedback.html")
+
+
+@app.route("/submit_feedback", methods=["GET", "POST"])
+def submit_feedback():
+    if request.method == "POST":
+        form_data = request.form
+        save_feedback(form_data)
+
+    message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
+    return render_template("message.html", message=message, redirect_url="/end")
+
+def save_feedback(form_data):
+    fieldnames = list(form_data.keys())
+    feedback_data = list(form_data.values())
+
+    with open("feedback.csv", "a", newline="", encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        if csvfile.tell() == 0:
+            writer.writerow(fieldnames)
+        writer.writerow(feedback_data)
+
+@app.route("/end")
+def end():
+    return render_template("end.html")
+
+
+@app.route("/feedback_auswertung")
+def feedback_auswertung():
+    # DataFrame aus CSV erstellen
+    df = pd.read_csv("feedback.csv", encoding="utf-8")
+
+    # Daten als HTML-Tabelle rendern
+    table_html = df.to_html(index=False)
+
+    return render_template("feedback_auswertung.html", table_html=table_html)
+
+
+
+
 
 ##################################################Functionality#########################################################
 
@@ -294,6 +362,8 @@ def delete_all():
     open('reifegrad.csv', 'w').close()
     open('informationsbedarf.csv', 'w').close()
     open('rahmenbedingungen.csv', 'w').close()
+    open('datenmanagementkonzept.csv', 'w').close()
+    open('etl.csv', 'w').close()
     return redirect('/')
 
 

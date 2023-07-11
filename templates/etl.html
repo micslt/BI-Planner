@@ -6,5 +6,246 @@
 </div>
 
 
+<div class="container">
+    <h3>Datenextraktion</h3>
+    <br>
+    <form action="/submit_etl" method="POST"><br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th colspan="2" style="background-color: blue; color: white;">Datenextraktion</th>
+                </tr>
+            </thead>
+            <tbody>
+                                <tr style="background-color: gray;">
+                    <td colspan="2"><strong>Identifikation der Datenquelle</strong></td>
+                </tr>
+                <tr style="background-color: lightgray;">
+                    <td>Name der Applikation</td>
+                    <td><input type="text" name="applikationsname"></td>
+                </tr>
+                <tr style="background-color: silver;">
+                    <td>Datenart</td>
+                    <td>
+                        <input type="radio" name="datenart" value="Systeme mit operativen Geschäftsdaten"> Systeme mit operativen Geschäftsdaten<br>
+                        <input type="radio" name="datenart" value="Systeme mit Personaldaten"> Systeme mit Personaldaten<br>
+                        <input type="radio" name="datenart" value="Systeme mit finanziellen Geschäftsdaten"> Systeme mit finanziellen Geschäftsdaten<br>
+                        <input type="radio" name="datenart" value="Externe Datenquellen"> Externe Datenquellen<br>
+                        <input type="radio" name="datenart" value="Metadaten"> Metadaten<br>
+                        <input type="radio" name="datenart" value="Andere"> Andere: <input type="text" name="andere_beschreibung">
+                    </td>
+                </tr>
+                <tr style="background-color: gray;">
+                    <td colspan="2"><strong>Zeitliche Abfragesteuerung</strong></td>
+                </tr>
+                <tr style="background-color: lightgray;">
+                    <td>Abfragen außerhalb der operativen Nutzungszeiten möglich?</td>
+                    <td>
+                        <input type="radio" name="abfragen_möglich" value="ja"> ja<br>
+                        <input type="radio" name="abfragen_möglich" value="nein"> nein
+                    </td>
+                </tr>
+                <tr style="background-color: silver;">
+                    <td>Geplanter Zeitpunkt Frequenz</td>
+                    <td>
+                        <input type="text" name="geplanter_zeitpunkt">
+                        <br>
+                        <input type="checkbox" name="frequenz" value="täglich"> täglich
+                        <input type="checkbox" name="frequenz" value="wöchentlich"> wöchentlich
+                        <input type="checkbox" name="frequenz" value="monatlich"> monatlich
+                    </td>
+                </tr>
+                <tr style="background-color: lightgray;">
+                    <td>Abfragen außerhalb der operativen Nutzungszeiten möglich?</td>
+                    <td>
+                        <input type="radio" name="abfragen_möglich_2" value="ja"> ja<br>
+                        <input type="radio" name="abfragen_möglich_2" value="nein"> nein
+                    </td>
+                </tr>
+                <tr style="background-color: gray;">
+                    <td colspan="2"><strong>Eingriffe in das operative System</strong></td>
+                </tr>
+                <tr style="background-color: lightgray;">
+                    <td>Abfrageart</td>
+                    <td>
+                        <input type="radio" name="abfrageart" value="Direkt auf Datenbank"> Direkt auf Datenbank<br>
+                        <input type="radio" name="abfrageart" value="REST API"> REST API<br>
+                        <input type="radio" name="abfrageart" value="Andere"> Andere: <input type="text" name="andere_abfrageart">
+                    </td>
+                </tr>
+                <tr style="background-color: silver;">
+                    <td>Beschreibung der Konfiguration</td>
+                    <td><input type="text" name="konfigurationsbeschreibung"></td>
+                </tr>
+                <tr style="background-color: gray;">
+                    <td colspan="2"><strong>Abfragestrategie</strong></td>
+                </tr>
+                <tr style="background-color: lightgray;">
+                    <td>Verfahren</td>
+                    <td>
+                        <input type="radio" name="verfahren" value="komplett"> komplett<br>
+                        <input type="radio" name="verfahren" value="Änderungen"> Änderungen<br>
+                        <input type="radio" name="verfahren" value="Trigger"> Trigger<br>
+                        <input type="radio" name="verfahren" value="Log Sniffing"> Log Sniffing
+                    </td>
+                </tr>
+                <tr style="background-color: gray;">
+                    <td colspan="2"><strong>Datenübertragung</strong></td>
+                </tr>
+                <tr style="background-color: lightgray;">
+                    <td>Komprimierung bei der Datenübertragung implementiert</td>
+                    <td>
+                        <input type="radio" name="datenübertragung_komprimierung" value="ja"> ja<br>
+                        <input type="radio" name="datenübertragung_komprimierung" value="nein"> nein
+                    </td>
+                </tr>
+                <tr style="background-color: silver;">
+                    <td>Verschlüsselung der Datenübertragung sichergestellt</td>
+                    <td>
+                        <input type="radio" name="datenübertragung_verschlüsselung" value="ja"> ja<br>
+                        <input type="radio" name="datenübertragung_verschlüsselung" value="nein"> nein
+                    </td>
+                </tr>
+                <tr style="background-color: gray;">
+                    <td colspan="2"><strong>Datenschutz</strong></td>
+                </tr>
+                <tr style="background-color: lightgray;">
+                    <td>Handling mit Personendaten</td>
+                    <td>
+                        <input type="radio" name="personendaten_handling" value="erkennbar"> erkennbar<br>
+                        <input type="radio" name="personendaten_handling" value="pseudonymisiert"> pseudonymisiert<br>
+                        <input type="radio" name="personendaten_handling" value="anonymisiert"> anonymisiert
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th colspan="2" style="background-color: blue; color: white;">Datentransformation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background-color: gray;">
+                    <td colspan="2"><strong>Schema</strong></td>
+                </tr>
+                <tr style="background-color: lightgray;">
+                    <td>Namenskonflikte</td>
+                    <td>
+                        <input type="radio" name="namenskonflikte" value="vorhanden"> vorhanden<br>
+                        <input type="radio" name="namenskonflikte" value="nicht vorhanden"> nicht vorhanden
+                    </td>
+                </tr>
+                <tr style="background-color: silver;">
+                    <td>Strukturelle Konflikte</td>
+                    <td>
+                        <input type="radio" name="strukturelle_konflikte" value="vorhanden"> vorhanden<br>
+                        <input type="radio" name="strukturelle_konflikte" value="nicht vorhanden"> nicht vorhanden
+                    </td>
+                </tr>
+                <tr style="background-color: gray;">
+                    <td colspan="2"><strong>Aufzeichnungsebene</strong></td>
+                </tr>
+                <tr style="background-color: lightgray;">
+                    <td>Duplizierte oder widersprüchliche Werte</td>
+                    <td>
+                        <input type="radio" name="duplizierte_werte" value="vorhanden"> vorhanden<br>
+                        <input type="radio" name="duplizierte_werte" value="nicht vorhanden"> nicht vorhanden
+                    </td>
+                </tr>
+                <tr style="background-color: silver;">
+                    <td>Inkonsistenzen</td>
+                    <td>
+                        <input type="radio" name="inkonsistenzen" value="vorhanden"> vorhanden<br>
+                        <input type="radio" name="inkonsistenzen" value="nicht vorhanden"> nicht vorhanden
+                    </td>
+                </tr>
+                <tr style="background-color: gray;">
+                    <td colspan="2"><strong>Wertebene</strong></td>
+                </tr>
+                <tr style="background-color: lightgray;">
+                    <td>Datumsformate</td>
+                    <td>
+                        <input type="radio" name="datumsformate" value="stimmig"> stimmig<br>
+                        <input type="radio" name="datumsformate" value="unterschiedlich"> unterschiedlich
+                    </td>
+                </tr>
+                <tr style="background-color: silver;">
+                    <td>Kommastellen</td>
+                    <td>
+                        <input type="radio" name="kommastellen" value="einheitlich"> einheitlich<br>
+                        <input type="radio" name="kommastellen" value="nicht einheitlich"> nicht einheitlich
+                    </td>
+                </tr>
+                <tr style="background-color: lightgray;">
+                    <td>Fehlende Werte</td>
+                    <td>
+                        <input type="radio" name="fehlende_werte" value="einheitlich"> einheitlich<br>
+                        <input type="radio" name="fehlende_werte" value="nicht einheitlich"> nicht einheitlich
+                    </td>
+                </tr>
+                <tr style="background-color: silver;">
+                    <td>Verwendung von SQL-Operatoren</td>
+                    <td>
+                        <input type="radio" name="sql_operatoren" value="vorhanden"> vorhanden<br>
+                        <input type="radio" name="sql_operatoren" value="nicht vorhanden"> nicht vorhanden
+                    </td>
+                </tr>
+                <tr style="background-color: gray;">
+                    <td colspan="2"><strong>Schlüssel</strong></td>
+                </tr>
+                <tr style="background-color: lightgray;">
+                    <td>Bezeichnung Primärschlüssel</td>
+                    <td><input type="text" name="bezeichnung_primärschlüssel"></td>
+                </tr>
+                <tr style="background-color: silver;">
+                    <td>Primärschlüssel über alle Datenbestände einheitlich?</td>
+                    <td>
+                        <input type="radio" name="primärschlüssel_einheitlich" value="stimmig"> stimmig<br>
+                        <input type="radio" name="primärschlüssel_einheitlich" value="unterschiedlich"> unterschiedlich
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th colspan="2" style="background-color: blue; color: white;">Laden</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background-color: gray;">
+                    <td colspan="2"><strong>Vorgehensweise</strong></td>
+                </tr>
+                <tr style="background-color: lightgray;">
+                    <td>Ladevorgang</td>
+                    <td>
+                        <input type="radio" name="ladevorgang" value="komplett"> komplett<br>
+                        <input type="radio" name="ladevorgang" value="inkrementell"> inkrementell
+                    </td>
+                </tr>
+                <tr style="background-color: silver;">
+                    <td>Zielort</td>
+                    <td><input type="text" name="zielort"></td>
+                </tr>
+                <tr style="background-color: lightgray;">
+                    <td>Name der Datentabelle</td>
+                    <td><input type="text" name="datentabellenname"></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <div class="text-center">
+            <input type="submit" value="Speichern" class="btn btn-primary btn-lg">
+        </div>
+    </form>
+</div>
+
+
+
 
 {% include "footer.html" %}
