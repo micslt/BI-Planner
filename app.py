@@ -287,10 +287,50 @@ def submit_etl():
     return render_template("message.html", message=message, redirect_url="/etl")
 ##################################################5. Informationsgenerierung############################################
 
-
-@app.route("/analysen")
+@app.route("/analysen", methods=['GET', 'POST'])
 def analysen():
-    return render_template("analysen.html")
+    if request.method == 'POST':
+        analyse = request.form['informationsbedarf']
+        messzahl = request.form['messzahl']
+        art = request.form['art']
+        berechnung = request.form['berechnung']
+
+        with open('analysen.csv', 'a', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow([analyse, messzahl, art, berechnung])
+
+        return redirect('/analysen')  # Änderung hier, um zur Startseite zurückzukehren
+    else:
+        try:
+            with open('analysen.csv', 'r') as csvfile:
+                reader = csv.reader(csvfile)
+                # enumerate() wird verwendet, um sowohl die analysen als auch deren Nummern zu bekommen.
+                analysen = [(i, row) for i, row in enumerate(reader, start=1)]
+        except FileNotFoundError:
+            analysen = []
+
+    return render_template('analysen.html', analysen=analysen)
+
+
+@app.route('/analysen/delete', methods=['POST'])
+def delete_analyse():
+    analyse_nummer = request.form['analyse_nummer']
+
+    # Lesen Sie alle analysen
+    with open('analysen.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        analysen = [row for row in reader]
+
+    # Löschen Sie die ausgewählte analyse
+    del analysen[int(analyse_nummer) - 1]
+
+    # Überschreiben Sie die CSV-Datei mit den verbleibenden analysen
+    with open('analysen.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        for analyse in analysen:
+            writer.writerow(analyse)
+
+    return redirect('/analysen')
 
 ##################################################6. Informationsbereitstellung#########################################
 
@@ -348,8 +388,6 @@ def feedback_auswertung():
     table_html = df.to_html(index=False)
 
     return render_template("feedback_auswertung.html", table_html=table_html)
-
-
 
 
 

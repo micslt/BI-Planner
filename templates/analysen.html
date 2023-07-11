@@ -3,6 +3,52 @@
 <br>
 <div class="container">
     <h3 class="rahmen">Analysen</h3>    <br>
+    <br>
+    <form action="/analysen" method="POST">
+        <div class="input-group mb-3">
+            <input type="text" id="informationsbedarf" name="informationsbedarf" class="form-control" placeholder="Informationsbedarf" aria-label="Informationsbedarf eingeben">
+            <input type="text" id="messzahl" name="messzahl" class="form-control" placeholder="Messzahl " aria-label="Messzahl eingeben">
+            <input type="text" id="art" name="art" class="form-control" placeholder="Art " aria-label="Art eingeben">
+            <input type="text" id="berechnung" name="berechnung" class="form-control" placeholder="Berechnung " aria-label="Berechnung eingeben">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Informationsbedarf hinzufügen</button>
+            </div>
+        </div>
+    </form>
+    <br>
+    <h4 class="rahmen">Gespeicherte analysen</h4>
+    <br>
+    <div class="table-container" style="display: inline-block;">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Nummer</th>
+                    <th>Informationsbedarf</th>
+                    <th>Messzahl</th>
+                    <th>Art</th>
+                    <th>Berechnung</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for nummer, analyse in analysen %}
+                <tr>
+                    <td>{{ nummer }}</td>
+                    <td>{{ analyse[0] }}</td>
+                    <td>{{ analyse[1] }}</td>
+                    <td>{{ analyse[2] }}</td>
+                    <td>{{ analyse[3] }}</td>
+                    <td>
+                        <form action="/analysen/delete" method="POST">
+                            <input type="hidden" name="analyse_nummer" value="{{ nummer }}">
+                            <input type="submit" value="Löschen">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 
 {% include "footer.html" %}
