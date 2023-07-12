@@ -334,14 +334,81 @@ def delete_analyse():
 
 ##################################################6. Informationsbereitstellung#########################################
 
+@app.route("/informationsbereitstellung")
+def informationsbereitstellung():
+    return render_template("informationsbereitstellung.html")
+
+@app.route("/submit_informationsbereitstellung", methods=["GET", "POST"])
+def submit_informationsbereitstellung():
+    if request.method == "POST":
+        form_data = request.form
+
+        # Überprüfe, ob die CSV-Datei vorhanden ist
+        csv_exists = os.path.isfile("informationsbereitstellung.csv")
+
+        with open("informationsbereitstellung.csv", "a", newline="", encoding="utf-8") as csvfile:
+            writer = csv.writer(csvfile)
+
+            # Schreibe Header, falls CSV-Datei neu erstellt wurde
+            if not csv_exists:
+                writer.writerow(form_data.keys())
+
+            writer.writerow(form_data.values())
+
+        # Nachricht anzeigen und zur Startseite (index) umleiten
+    message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
+    return render_template("message.html", message=message, redirect_url="/")
 
 @app.route("/visualisierung")
 def visualisierung():
     return render_template("visualisierung.html")
 
+@app.route("/submit_visualisierung", methods=["GET", "POST"])
+def submit_visualisierung():
+    if request.method == "POST":
+        form_data = request.form
+
+        # Überprüfe, ob die CSV-Datei vorhanden ist
+        csv_exists = os.path.isfile("visualisierung.csv")
+
+        with open("visualisierung.csv", "a", newline="", encoding="utf-8") as csvfile:
+            writer = csv.writer(csvfile)
+
+            # Schreibe Header, falls CSV-Datei neu erstellt wurde
+            if not csv_exists:
+                writer.writerow(form_data.keys())
+
+            writer.writerow(form_data.values())
+
+        # Nachricht anzeigen und zur Startseite (index) umleiten
+    message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
+    return render_template("message.html", message=message, redirect_url="/")
+
 @app.route("/dashboard")
 def dashboard():
     return render_template("dashboard.html")
+
+@app.route("/submit_dashboard", methods=["GET", "POST"])
+def submit_dashboard():
+    if request.method == "POST":
+        form_data = request.form
+
+        # Überprüfe, ob die CSV-Datei vorhanden ist
+        csv_exists = os.path.isfile("dashboard.csv")
+
+        with open("dashboard.csv", "a", newline="", encoding="utf-8") as csvfile:
+            writer = csv.writer(csvfile)
+
+            # Schreibe Header, falls CSV-Datei neu erstellt wurde
+            if not csv_exists:
+                writer.writerow(form_data.keys())
+
+            writer.writerow(form_data.values())
+
+        # Nachricht anzeigen und zur Startseite (index) umleiten
+    message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
+    return render_template("message.html", message=message, redirect_url="/")
+
 
 ##################################################7. Auswertungen#######################################################
 
@@ -374,10 +441,6 @@ def save_feedback(form_data):
             writer.writerow(fieldnames)
         writer.writerow(feedback_data)
 
-@app.route("/end")
-def end():
-    return render_template("end.html")
-
 
 @app.route("/feedback_auswertung")
 def feedback_auswertung():
@@ -389,25 +452,31 @@ def feedback_auswertung():
 
     return render_template("feedback_auswertung.html", table_html=table_html)
 
-
-
 ##################################################Functionality#########################################################
-
-
 @app.route('/delete_all', methods=['POST'])
 def delete_all():
     open('ziele.csv', 'w').close()
     open('reifegrad.csv', 'w').close()
     open('informationsbedarf.csv', 'w').close()
     open('rahmenbedingungen.csv', 'w').close()
+    open('analysen.csv', 'w').close()
     open('datenmanagementkonzept.csv', 'w').close()
     open('etl.csv', 'w').close()
-    return redirect('/')
+    open('informationsbereitstellung.csv', 'w').close()
+    open('dashboard.csv', 'w').close()
+    open('visualisierung.csv', 'w').close()
+    return redirect('/deleted')
 
 
+@app.route("/end")
+def end():
+    return render_template("end.html")
 
 
-##############################################################################################
+@app.route("/deleted")
+def deleted():
+    return render_template("deleted.html")
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
