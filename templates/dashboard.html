@@ -1,103 +1,108 @@
 {% include "header.html" %}
-<br>
+
+<div class="container">
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width:95%;" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">95%</div>
+    </div>
+</div>
 <br>
 <div class="container">
-    <h3 class="rahmen">Qualitätskontrolle Visualisierung</h3><br>
-    <form action="/submit_qualitaetskontrolle" method="post">
+    <h3 class="rahmen">Qualitätskontrolle Dashboard</h3><br>
+    <form action="/submit_qualitaetskontrolle" metdod="post">
         <table class="table table-striped table-hover">
             <tr>
-                <th>Sind die Daten auf dem Dashboard in einer klar strukturierten und leicht verständlichen Art und Weise präsentiert?</th>
+                <td>Sind die Daten auf dem Dashboard in einer klar strukturierten und leicht verständlichen Art und Weise präsentiert?</td>
                 <td>
                     <input type="radio" name="frage1" value="ja"> Ja
                     <input type="radio" name="frage1" value="nein"> Nein
                 </td>
             </tr>
             <tr>
-                <th>Werden die Daten präzise und genau dargestellt, ohne Verzerrungen oder irreführende Darstellungen?</th>
+                <td>Werden die Daten präzise und genau dargestellt, ohne Verzerrungen oder irreführende Darstellungen?</td>
                 <td>
                     <input type="radio" name="frage2" value="ja"> Ja
                     <input type="radio" name="frage2" value="nein"> Nein
                 </td>
             </tr>
             <tr>
-                <th>Bietet das Dashboard ausreichend Kontext und Hintergrundinformationen, um die Dateninterpretation zu erleichtern?</th>
+                <td>Bietet das Dashboard ausreichend Kontext und Hintergrundinformationen, um die Dateninterpretation zu erleichtern?</td>
                 <td>
                     <input type="radio" name="frage3" value="ja"> Ja
                     <input type="radio" name="frage3" value="nein"> Nein
                 </td>
             </tr>
             <tr>
-                <th>Werden überflüssige Dekorationen, Effekte oder Verzierungen entfernt, um den Fokus auf die Daten zu legen?</th>
+                <td>Werden überflüssige Dekorationen, Effekte oder Verzierungen entfernt, um den Fokus auf die Daten zu legen?</td>
                 <td>
                     <input type="radio" name="frage4" value="ja"> Ja
                     <input type="radio" name="frage4" value="nein"> Nein
                 </td>
             </tr>
             <tr>
-                <th>Bietet das Dashboard interaktive Funktionen zur Exploration und Analyse der Daten?</th>
+                <td>Bietet das Dashboard interaktive Funktionen zur Exploration und Analyse der Daten?</td>
                 <td>
                     <input type="radio" name="frage5" value="ja"> Ja
                     <input type="radio" name="frage5" value="nein"> Nein
                 </td>
             </tr>
             <tr>
-                <th>Kann die Informationsdichte erhöht werden, um mehr Daten auf begrenztem Raum darzustellen, ohne die Klarheit zu beeinträchtigen?</th>
+                <td>Kann die Informationsdichte erhöht werden, um mehr Daten auf begrenztem Raum darzustellen, ohne die Klarheit zu beeinträchtigen?</td>
                 <td>
                     <input type="radio" name="frage6" value="ja"> Ja
                     <input type="radio" name="frage6" value="nein"> Nein
                 </td>
             </tr>
             <tr>
-                <th>Werden visuelle Hierarchien und Gruppierungen verwendet, um die Daten zu organisieren und wichtige Informationen hervorzuheben?</th>
+                <td>Werden visuelle Hierarchien und Gruppierungen verwendet, um die Daten zu organisieren und wichtige Informationen hervorzuheben?</td>
                 <td>
                     <input type="radio" name="frage7" value="ja"> Ja
                     <input type="radio" name="frage7" value="nein"> Nein
                 </td>
             </tr>
             <tr>
-                <th>Sind die Daten in verschiedenen Ansichten oder Sichten präsentiert, um unterschiedliche Perspektiven zu ermöglichen?</th>
+                <td>Sind die Daten in verschiedenen Ansichten oder Sichten präsentiert, um unterschiedliche Perspektiven zu ermöglichen?</td>
                 <td>
                     <input type="radio" name="frage8" value="ja"> Ja
                     <input type="radio" name="frage8" value="nein"> Nein
                 </td>
             </tr>
             <tr>
-                <th>Werden visuelle Hierarchien und Gruppierungen verwendet, um die Daten zu organisieren und wichtige Informationen hervorzuheben?</th>
+                <td>Werden visuelle Hierarchien und Gruppierungen verwendet, um die Daten zu organisieren und wichtige Informationen hervorzuheben?</td>
                 <td>
                     <input type="radio" name="frage9" value="ja"> Ja
                     <input type="radio" name="frage9" value="nein"> Nein
                 </td>
             </tr>
             <tr>
-                <th>Sind ausreichende Beschriftungen, Untertitel und Anmerkungen vorhanden, um den Datenkontext zu verdeutlichen?</th>
+                <td>Sind ausreichende Beschriftungen, Untertitel und Anmerkungen vorhanden, um den Datenkontext zu verdeutlichen?</td>
                 <td>
                     <input type="radio" name="frage10" value="ja"> Ja
                     <input type="radio" name="frage10" value="nein"> Nein
                 </td>
             </tr>
             <tr>
-                <th>Bietet das Dashboard Werkzeuge und Funktionen zur Navigation und Filterung der Daten?</th>
+                <td>Bietet das Dashboard Werkzeuge und Funktionen zur Navigation und Filterung der Daten?</td>
                 <td>
                     <input type="radio" name="frage11" value="ja"> Ja
                     <input type="radio" name="frage11" value="nein"> Nein
                 </td>
             </tr>
             <tr>
-                <th>Ist die Benutzeroberfläche des Dashboards klar und intuitiv gestaltet?</th>
+                <td>Ist die Benutzeroberfläche des Dashboards klar und intuitiv gestaltet?</td>
                 <td>
                     <input type="radio" name="frage12" value="ja"> Ja
                     <input type="radio" name="frage12" value="nein"> Nein
                 </td>
             </tr>
             <tr>
-                <th>Werden visuelle Elemente wie Farben, Formen und Größen sinnvoll eingesetzt, um wichtige Informationen zu betonen?</th>
+                <td>Werden visuelle Elemente wie Farben, Formen und Größen sinnvoll eingesetzt, um wichtige Informationen zu betonen?</td>
                 <td>
                     <input type="radio" name="frage13" value="ja"> Ja
                     <input type="radio" name="frage13" value="nein"> Nein
                 </td>
             </tr>
             <tr>
-                <th>Werden geeignete Diagramme und Visualisierungen verwendet, um die Daten effektiv darzustellen?</th>
+                <td>Werden geeignete Diagramme und Visualisierungen verwendet, um die Daten effektiv darzustellen?</td>
                 <td>
                     <input type="radio" name="frage14" value="ja"> Ja
                     <input type="radio" name="frage14" value="nein"> Nein
@@ -109,7 +114,12 @@
         </div>
     </form>
 </div>
-
+<br>
+<br>
+<div class="text-center">
+    <a href="/visualisierung" class="btn btn-secondary">Zurück</a>
+    <a href="/auswertungen" class="btn btn-secondary">Weiter</a>
+</div>
 
 
 {% include "footer.html" %}

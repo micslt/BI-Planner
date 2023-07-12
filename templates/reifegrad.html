@@ -1,5 +1,10 @@
 {% include "header.html" %}
-<br>
+
+<div class="container">
+    <div class="progress">
+        0%<div class="progress-bar" role="progressbar" style="width:0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Fortschritt</div>
+    </div>
+</div>
 <br>
 <div class="container">
     <h3 class="rahmen">Reifegrad</h3>
@@ -7,13 +12,13 @@
     Der folgende Fragebogen dient dazu, eine Beurteilung über den aktuellen Zustand der Business Intelligence vorzunehmen.
     <br>
     <br>
-    <form action="{{ url_for('submit_form') }}" method="POST"> <!-- Ersetze "ziel-der-formularverarbeitung" durch die tatsächliche URL, an die das Formular gesendet werden soll -->
+    <form action="{{ url_for('submit_reifegrad') }}" method="POST">
         <table class="table table-striped table-hover">
             <tr>
                 <th colspan="2" style="background-color: lightgray; text-align: center;">Organisation</th>
             </tr>
             <tr >
-                <td>1. Tragen Strategie, Kultur und Führung dazu bei, BIA zu unterstützen und zu fördern?</td>
+                <td>1. Tragen Strategie, Kultur und Führung dazu bei, Business Intelligence zu unterstützen und zu fördern?</td>
                 <td>
                     <input type="radio" name="frage1" value="ja"> ja
                     <input type="radio" name="frage1" value="nein"> nein
@@ -21,7 +26,7 @@
                 </td>
             </tr>
             <tr>
-                <td>2. Wird die BIA in der gesamten Organisation für die Entscheidungsfindung verwendet?</td>
+                <td>2. Wird die Business Intelligence in der gesamten Organisation für die Entscheidungsfindung verwendet?</td>
                 <td>
                     <input type="radio" name="frage2" value="ja"> ja
                     <input type="radio" name="frage2" value="nein"> nein
@@ -29,7 +34,7 @@
                 </td>
             </tr>
             <tr>
-                <td>3. Nutzen alle Teams des Unternehmens die BIA für ihre täglichen Entscheidungen?</td>
+                <td>3. Nutzen alle Teams des Unternehmens die Business Intelligence für ihre täglichen Entscheidungen?</td>
                 <td>
                     <input type="radio" name="frage3" value="ja"> ja
                     <input type="radio" name="frage3" value="nein"> nein
@@ -37,7 +42,7 @@
                 </td>
             </tr>
             <tr>
-                <td>4. Ist es einfach, die BIA in bestehende Prozesse einzubinden?</td>
+                <td>4. Ist es einfach, die Business Intelligence in bestehende Prozesse einzubinden?</td>
                 <td>
                     <input type="radio" name="frage4" value="ja"> ja
                     <input type="radio" name="frage4" value="nein"> nein
@@ -45,7 +50,7 @@
                 </td>
             </tr>
             <tr>
-                <td>5. Gibt es eine Kultur des Vertrauens in die BIA?</td>
+                <td>5. Gibt es eine Kultur des Vertrauens in die Business Intelligence?</td>
                 <td>
                     <input type="radio" name="frage5" value="ja"> ja
                     <input type="radio" name="frage5" value="nein"> nein
@@ -64,7 +69,7 @@
                 <th colspan="2" style="background-color: lightgray; text-align: center;">Ressourcen</th>
             </tr>
             <tr style="background-color: lightgray;">
-            <td>7. Bestehen ausreichend finanzielle Mittel für die BIA?</td>
+            <td>7. Bestehen ausreichend finanzielle Mittel für die Business Intelligence?</td>
             <td>
                 <input type="radio" name="frage7" value="ja"> ja
                 <input type="radio" name="frage7" value="nein"> nein
@@ -72,17 +77,21 @@
             </td>
             </tr>
             <tr>
-                <td>8. Wie einfach gestaltet sich die Einführung und Umsetzung der BIA auf einer Skala von 1-5 (1 = sehr schwierig, 5 = sehr einfach)?</td>
+                <td>8. Wie einfach gestaltet sich die Einführung und Umsetzung der Business Intelligence auf einer Skala von 1-5 (1 = sehr schwierig, 5 = sehr einfach)?</td>
                 <td>
-                    <input type="radio" name="frage8" value="1"> 1
-                    <input type="radio" name="frage8" value="2"> 2
-                    <input type="radio" name="frage8" value="3"> 3
-                    <input type="radio" name="frage8" value="4"> 4
-                    <input type="radio" name="frage8" value="5"> 5
+                    <input type="range" name="einfachheit" min="1" max="5" list="range-list" oninput="rangeValue.innerText = this.value" required>
+                    <datalist id="range-list">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </datalist>
+                    <span id="rangeValue"></span>
                 </td>
             </tr>
             <tr style="background-color: lightgray;">
-                <td>9. Entwickelt die Organisation Mitarbeitende im Bereich der BIA und baut Fähigkeiten im Bereich BIA auf?</td>
+                <td>9. Entwickelt die Organisation Mitarbeitende im Bereich der Business Intelligence und baut Fähigkeiten im Bereich Business Intelligence auf?</td>
                 <td>
                     <input type="radio" name="frage9" value="ja"> ja
                     <input type="radio" name="frage9" value="nein"> nein
@@ -90,7 +99,7 @@
                 </td>
             </tr>
             <tr>
-                <td>10. Verfügt das Unternehmen über die erforderlichen Talente und Fähigkeiten für BIA?</td>
+                <td>10. Verfügt das Unternehmen über die erforderlichen Talente und Fähigkeiten für Business Intelligence?</td>
                 <td>
                     <input type="radio" name="frage10" value="ja"> ja
                     <input type="radio" name="frage10" value="nein"> nein
@@ -98,7 +107,7 @@
                 </td>
             </tr>
             <tr style="background-color: lightgray;">
-                <td>11. Hat das Unternehmen Schwierigkeiten, die bestehende BIA-Infrastruktur aufrechtzuerhalten?</td>
+                <td>11. Hat das Unternehmen Schwierigkeiten, die bestehende Business Intelligence-Infrastruktur aufrechtzuerhalten?</td>
                 <td>
                     <input type="radio" name="frage11" value="ja"> ja
                     <input type="radio" name="frage11" value="nein"> nein
@@ -106,7 +115,7 @@
                 </td>
             </tr>
             <tr>
-                <td>12. Ist die bestehende BIA wartungsintensiv?</td>
+                <td>12. Ist die bestehende Business Intelligence wartungsintensiv?</td>
                 <td>
                     <input type="radio" name="frage12" value="ja"> ja
                     <input type="radio" name="frage12" value="nein"> nein
@@ -192,7 +201,7 @@
                 </td>
             </tr>
             <tr>
-                <td>22. Ist die BIA in die Geschäftsprozesse eingebettet?</td>
+                <td>22. Ist die Business Intelligence in die Geschäftsprozesse eingebettet?</td>
                 <td>
                     <input type="radio" name="frage22" value="ja"> ja
                     <input type="radio" name="frage22" value="nein"> nein
@@ -219,7 +228,7 @@
                 <th colspan="2" style="background-color: lightgray; text-align: center;">Governance/Compliance</th>
             </tr>
             <tr style="background-color: lightgray;">
-                <td>25. Ist die Data-Governance-Strategie des Unternehmens mit der eingesetzten BIA kompatibel?</td>
+                <td>25. Ist die Data-Governance-Strategie des Unternehmens mit der eingesetzten Business Intelligence kompatibel?</td>
                 <td>
                     <input type="radio" name="frage25" value="ja"> ja
                     <input type="radio" name="frage25" value="nein"> nein
@@ -227,7 +236,7 @@
                 </td>
             </tr>
             <tr>
-                <td>26. Kann das Unternehmen die BIA effektiv mit IT-Prozessen und -Richtlinien in Einklang bringen?</td>
+                <td>26. Kann das Unternehmen die Business Intelligence effektiv mit IT-Prozessen und -Richtlinien in Einklang bringen?</td>
                 <td>
                     <input type="radio" name="frage26" value="ja"> ja
                     <input type="radio" name="frage26" value="nein"> nein
@@ -305,4 +314,11 @@
 
     </form>
 </div>
+<br>
+<br>
+<div class="text-center">
+    <a href="/" class="btn btn-secondary">Zurück</a>
+    <a href="/reifegrad_auswertung" class="btn btn-secondary">Weiter</a>
+</div>
+
 {% include "footer.html" %}

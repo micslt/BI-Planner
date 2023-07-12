@@ -20,92 +20,58 @@ def reifegrad():
     return render_template("reifegrad.html")
 
 @app.route("/reifegrad_submit", methods=["POST"])
-def submit_form():
-    # Die Antworten aus dem Formular abrufen
-    frage1 = request.form.get("frage1")
-    frage2 = request.form.get("frage2")
-    frage3 = request.form.get("frage3")
-    frage4 = request.form.get("frage4")
-    frage5 = request.form.get("frage5")
-    frage6 = request.form.get("frage6")
-    frage7 = request.form.get("frage7")
-    frage8 = request.form.get("frage8")
-    frage9 = request.form.get("frage9")
-    frage10 = request.form.get("frage10")
-    frage11 = request.form.get("frage11")
-    frage12 = request.form.get("frage12")
-    frage13 = request.form.get("frage13")
-    frage14 = request.form.get("frage14")
-    frage15 = request.form.get("frage15")
-    frage16 = request.form.get("frage16")
-    frage17 = request.form.get("frage17")
-    frage18 = request.form.get("frage18")
-    frage19 = request.form.get("frage19")
-    frage20 = request.form.get("frage20")
-    frage21 = request.form.get("frage21")
-    frage22 = request.form.get("frage22")
-    frage23 = request.form.get("frage23")
-    frage24 = request.form.get("frage24")
-    frage25 = request.form.get("frage25")
-    frage26 = request.form.get("frage26")
-    frage27 = request.form.get("frage27")
-    frage28 = request.form.get("frage28")
-    frage29 = request.form.get("frage29")
-    frage30 = request.form.get("frage30")
-    frage31 = request.form.get("frage31")
-    frage32 = request.form.get("frage32")
-    frage33 = request.form.get("frage33")
-    frage34 = request.form.get("frage34")
-    frage35 = request.form.get("frage35")
-    frage36 = request.form.get("frage36")
+def submit_reifegrad():
+    if request.method == "POST":
+        form_data = request.form
 
-    # Eine Liste mit den Antworten erstellen
-    answers = [frage1, frage2, frage3, frage4, frage5, frage6, frage7, frage8, frage9,
-               frage10, frage11, frage12, frage13, frage14, frage15, frage16, frage17,
-               frage18, frage19, frage20, frage21, frage22, frage23, frage24, frage25,
-               frage26, frage27, frage28, frage29, frage30, frage31, frage32, frage33,
-               frage34, frage35, frage36]
+        # Überprüfe, ob die CSV-Datei vorhanden ist
+        csv_exists = os.path.isfile("reifegrad.csv")
 
+        with open("reifegrad.csv", "a", newline="", encoding="utf-8") as csvfile:
+            writer = csv.writer(csvfile)
 
-    # CSV-Datei öffnen und Antworten schreiben
-    filename = "reifegrad.csv"
-    with open(filename, "w", newline="") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(answers)
+            # Schreibe Header, falls CSV-Datei neu erstellt wurde
+            if not csv_exists:
+                writer.writerow(form_data.keys())
 
-    # Nachricht anzeigen und zur Startseite (index) umleiten
+            writer.writerow(form_data.values())
+
+        # Nachricht anzeigen und zur Startseite (index) umleiten
     message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
-    return render_template("message.html", message=message, redirect_url="/auswertungen")
+    return render_template("message.html", message=message, redirect_url="/reifegrad_auswertung")
 
+@app.route("/reifegrad_auswertung")
+def reifegrad_auswertung():
+    return render_template("reifegrad_auswertung.html")
 
 ##############################################2. Rahmenbedingungen######################################################
 
-@app.route("/rahmenbedingungen", methods=['GET', 'POST'])
-def rahmenbedingungen():
-    if request.method == 'POST':
-        it_betrieben = request.form.get('it_betrieben', '')
-        bia_aufbau = request.form.get('bia_aufbau', '')
-        personelle_ressourcen = request.form.get('personelle_ressourcen', '')
-        knowhow_vorhanden = request.form.get('knowhow_vorhanden', '')
-        finanzieller_bedarf = request.form.get('finanzieller_bedarf', '')
-        finanzielle_mittel = request.form.get('finanzielle_mittel', '')
-        personendaten_analyse = request.form.get('personendaten_analyse', '')
-        gesetzeslage = request.form.get('gesetzeslage', '')
-        compliance_vorgaben = request.form.getlist('compliance_vorgaben')
 
-        # Speichern der Antworten in einer CSV-Datei
-        filename = "rahmenbedingungen.csv"
-        with open(filename, "a", newline="") as csvfile:
+@app.route("/rahmenbedingungen", methods=["GET", "POST"])
+def rahmenbedingungen():
+    return render_template("rahmenbedingungen.html")
+
+@app.route("/submit_rahmenbedingungen", methods=["GET", "POST"])
+def submit_rahmenbedingungen():
+    if request.method == "POST":
+        form_data = request.form
+
+        # Überprüfe, ob die CSV-Datei vorhanden ist
+        csv_exists = os.path.isfile("rahmenbedingungen.csv")
+
+        with open("rahmenbedingungen.csv", "a", newline="", encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow([it_betrieben, bia_aufbau, personelle_ressourcen, knowhow_vorhanden,
-                             finanzieller_bedarf, finanzielle_mittel, personendaten_analyse, gesetzeslage,
-                             ', '.join(compliance_vorgaben)])
+
+            # Schreibe Header, falls CSV-Datei neu erstellt wurde
+            if not csv_exists:
+                writer.writerow(form_data.keys())
+
+            writer.writerow(form_data.values())
+
 
         # Nachricht anzeigen und zur Startseite (index) umleiten
-        message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
-        return render_template("message.html", message=message, redirect_url="/auswertungen")
-    else:
-        return render_template("rahmenbedingungen.html")
+    message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
+    return render_template("message.html", message=message, redirect_url="/rahmenbedingungen")    
 
 
 ##################################################3.Planung#############################################################
@@ -244,6 +210,10 @@ def delete_datenquelle():
 
 @app.route("/datenmanagementkonzept", methods=["GET", "POST"])
 def datenmanagementkonzept():
+    return render_template("datenmanagementkonzept.html")
+
+@app.route("/submit_datenmanagementkonzept", methods=["GET", "POST"])
+def submit_datenmanagementkonzept():
     if request.method == "POST":
         form_data = request.form
 
@@ -256,9 +226,15 @@ def datenmanagementkonzept():
             # Schreibe Header, falls CSV-Datei neu erstellt wurde
             if not csv_exists:
                 writer.writerow(form_data.keys())
+
             writer.writerow(form_data.values())
 
-    return render_template("datenmanagementkonzept.html")
+
+        # Nachricht anzeigen und zur Startseite (index) umleiten
+    message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
+    return render_template("message.html", message=message, redirect_url="/etl")
+
+
 
 @app.route("/etl", methods=["GET", "POST"])
 def etl():
