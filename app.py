@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect
 import csv
 import os
 import pandas as pd
+import biplanner
 
 app = Flask(__name__)
 
@@ -19,6 +20,9 @@ def index():
 def reifegrad():
     return render_template("reifegrad.html")
 
+import csv
+from datetime import datetime
+
 @app.route("/reifegrad_submit", methods=["POST"])
 def submit_reifegrad():
     if request.method == "POST":
@@ -32,17 +36,39 @@ def submit_reifegrad():
 
             # Schreibe Header, falls CSV-Datei neu erstellt wurde
             if not csv_exists:
-                writer.writerow(form_data.keys())
+                header = list(form_data.keys())
+                header.insert(0, "eingabe")
+                writer.writerow(header)
 
-            writer.writerow(form_data.values())
+            # Aktuelles Datum und Uhrzeit hinzufügen
+            now = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+            form_data_values = list(form_data.values())
+            form_data_values.insert(0, now)
+
+            writer.writerow(form_data_values)
+
+        biplanner.calculate_points_and_save_to_csv("reifegrad_auswertung.csv")
 
         # Nachricht anzeigen und zur Startseite (index) umleiten
-    message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
-    return render_template("message.html", message=message, redirect_url="/reifegrad_auswertung")
+        message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
+        return render_template("message.html", message=message, redirect_url="/reifegrad_auswertung")
+
+
 
 @app.route("/reifegrad_auswertung")
 def reifegrad_auswertung():
-    return render_template("reifegrad_auswertung.html")
+    all_entries = biplanner.get_all_entries()
+    selected_entry = request.args.get("key", default=biplanner.get_latest_entry())
+
+    results = []
+    with open("reifegrad_auswertung.csv", "r", newline="", encoding="utf-8") as csvfile:
+        reader = csv.reader(csvfile)
+        next(reader)  # Header-Zeile überspringen
+        for row in reader:
+            if row[0] == selected_entry:
+                results.append(row)
+
+    return render_template("reifegrad_auswertung.html", results=results, all_entries=all_entries, selected_entry=selected_entry)
 
 ##############################################2. Rahmenbedingungen######################################################
 
@@ -431,7 +457,7 @@ def feedback_auswertung():
 ##################################################Functionality#########################################################
 @app.route('/delete_all', methods=['POST'])
 def delete_all():
-    files = ['ziele.csv', 'reifegrad.csv', 'informationsbedarf.csv', 'rahmenbedingungen.csv',
+    files = ['ziele.csv', 'reifegrad.csv', 'reifegrad_auswertung.csv','informationsbedarf.csv', 'rahmenbedingungen.csv',
              'analysen.csv', 'datenmanagementkonzept.csv', 'datenquellen.csv', 'etl.csv', 'informationsbereitstellung.csv',
              'dashboard.csv', 'visualisierung.csv']
 

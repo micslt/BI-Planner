@@ -7,7 +7,45 @@
 </div>
 <br>
 <div class="container">
-    <h3 class="rahmen">Auswertungen</h3>    <br>
+    <h3 class="rahmen">Auswertungen</h3>
+    <br>
+        <form action="/reifegrad_auswertung" method="get" id="selectForm">
+            <div class="form-group">
+                <label for="keySelect">Eintrag auswählen:</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="keySelect" name="key" onchange="submitForm()">
+                    <option selected>Open this select menu</option>
+                    {% for entry in all_entries %}
+                    <option value="{{ entry }}" {% if entry == selected_entry %}selected{% endif %}>{{ entry }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- Kein Submit-Button mehr -->
+        </form>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Organisation</th>
+                <th>Ressourcen</th>
+                <th>Dateninfrastruktur</th>
+                <th>Analytik</th>
+                <th>Governance</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in results %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 
 <div class="text-center">
@@ -15,5 +53,10 @@
     <a href="/rahmenbedingungen" class="btn btn-primary">Weiter</a>
 </div>
 
+<script>
+    function submitForm() {
+        document.getElementById("selectForm").submit();
+    }
+</script>
 
 {% include "footer.html" %}
