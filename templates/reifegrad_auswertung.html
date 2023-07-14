@@ -11,9 +11,8 @@
     <br>
         <form action="/reifegrad_auswertung" method="get" id="selectForm">
             <div class="form-group">
-                <label for="keySelect">Eintrag auswählen:</label>
+                <h6><label for="keySelect">Erfassungseintrag auswählen:</label></h6>
                 <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="keySelect" name="key" onchange="submitForm()">
-                    <option selected>Open this select menu</option>
                     {% for entry in all_entries %}
                     <option value="{{ entry }}" {% if entry == selected_entry %}selected{% endif %}>{{ entry }}</option>
                     {% endfor %}
@@ -22,10 +21,10 @@
             <!-- Kein Submit-Button mehr -->
         </form>
     <br>
+    {% if results %}
     <table class="table">
         <thead>
             <tr>
-                <th>Key</th>
                 <th>Organisation</th>
                 <th>Ressourcen</th>
                 <th>Dateninfrastruktur</th>
@@ -36,16 +35,38 @@
         <tbody>
             {% for row in results %}
             <tr>
-                <td>{{ row[0] }}</td>
-                <td>{{ row[1] }}</td>
-                <td>{{ row[2] }}</td>
-                <td>{{ row[3] }}</td>
-                <td>{{ row[4] }}</td>
-                <td>{{ row[5] }}</td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: {{ row[1] }}%;" aria-valuenow="{{ row[1] }}" aria-valuemin="0" aria-valuemax="100">{{ row[1] }}%</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: {{ row[2] }}%;" aria-valuenow="{{ row[2] }}" aria-valuemin="0" aria-valuemax="100">{{ row[2] }}%</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: {{ row[3] }}%;" aria-valuenow="{{ row[3] }}" aria-valuemin="0" aria-valuemax="100">{{ row[3] }}%</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: {{ row[4] }}%;" aria-valuenow="{{ row[4] }}" aria-valuemin="0" aria-valuemax="100">{{ row[4] }}%</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: {{ row[5] }}%;" aria-valuenow="{{ row[5] }}" aria-valuemin="0" aria-valuemax="100">{{ row[5] }}%</div>
+                    </div>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    {% else %}
+    <p>Keine Daten gefunden.</p>
+    {% endif %}
 </div>
 
 <div class="text-center">

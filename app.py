@@ -57,18 +57,27 @@ def submit_reifegrad():
 
 @app.route("/reifegrad_auswertung")
 def reifegrad_auswertung():
+    csv_file = "reifegrad_auswertung.csv"
+
+    if not os.path.isfile(csv_file):
+       return redirect("/nodata")  # Wenn die Datei nicht vorhanden ist, auf "nodata" umleiten
+
+
     all_entries = biplanner.get_all_entries()
     selected_entry = request.args.get("key", default=biplanner.get_latest_entry())
 
-    results = []
-    with open("reifegrad_auswertung.csv", "r", newline="", encoding="utf-8") as csvfile:
-        reader = csv.reader(csvfile)
-        next(reader)  # Header-Zeile überspringen
-        for row in reader:
-            if row[0] == selected_entry:
-                results.append(row)
+
+    try:
+        with open(csv_file, "r", newline="", encoding="utf-8") as csvfile:
+            reader = csv.reader(csvfile)
+            next(reader)  # Header-Zeile überspringen
+            results = [row for row in reader if row[0] == selected_entry]
+    except FileNotFoundError:
+        return redirect(url_for("nodata"))  # Wenn beim Öffnen der Datei ein Fehler auftritt, auf "nodata" umleiten
 
     return render_template("reifegrad_auswertung.html", results=results, all_entries=all_entries, selected_entry=selected_entry)
+
+
 
 ##############################################2. Rahmenbedingungen######################################################
 
@@ -476,6 +485,11 @@ def end():
 @app.route("/deleted")
 def deleted():
     return render_template("deleted.html")
+
+@app.route("/nodata")
+def nodata():
+    return render_template("nodata.html")
+
 
 
 if __name__ == '__main__':
