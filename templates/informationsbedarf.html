@@ -11,8 +11,13 @@
     <br>
     <form action="/informationsbedarf" method="POST">
         <div class="input-group mb-3">
-            <input type="text" id="informationsbedarf" name="informationsbedarf" class="form-control" placeholder="Bezeichnung" aria-label="Informationsbedarf eingeben">
-            <input type="text" id="beschreibung" name="beschreibung" class="form-control" placeholder="Beschreibung" aria-label="Beschreibung">
+            <select id="betroffenes_ziel" name="betroffenes_ziel" class="form-control" placeholder="Betroffenes Ziel">
+                <option value="" selected disabled>Betroffenes Ziel</option>
+                <!-- Hier werden die Dropdown-Optionen aus der CSV-Datei eingefügt -->
+                {% for ziel in dropdown_options %}
+                    <option value="{{ ziel }}">{{ ziel }}</option>
+                {% endfor %}
+            </select>
             <input type="text" id="nutzen" name="nutzen" class="form-control" placeholder="Nutzen" aria-label="Nutzen">
             <input type="text" id="typ" name="typ" class="form-control" placeholder="Typ" aria-label="Typ">
             <input type="text" id="metrik" name="metrik" class="form-control" placeholder="Metrik" aria-label="Metrik">
@@ -23,7 +28,6 @@
                 <option value="C">C</option>
                 <option value="D">D</option>
             </select>
-
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="submit">Informationsbedarf hinzufügen</button>
             </div>
@@ -38,7 +42,6 @@
                 <tr>
                     <th>Nummer</th>
                     <th>Informationsbedarf</th>
-                    <th>Beschreibung</th>
                     <th>Nutzen</th>
                     <th>Typ</th>
                     <th>Metrik</th>
@@ -51,7 +54,6 @@
                 <tr>
                     <td>{{ nummer }}</td>
                     <td>{{ informationsbedarf[0] }}</td>
-                    <td>{{ informationsbedarf[1] }}</td>
                     <td>{{ informationsbedarf[2] }}</td>
                     <td>{{ informationsbedarf[3] }}</td>
                     <td>{{ informationsbedarf[4] }}</td>

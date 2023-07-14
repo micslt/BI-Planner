@@ -56,3 +56,12 @@ def get_all_entries():
         next(reader)  # Header-Zeile überspringen
         entries = [row[0] for row in reader]
     return entries
+
+
+def load_unternehmensziele():
+    options = []
+    with open('ziele.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            options.append(row[0])  # Annahme, dass das Ziel in der ersten Spalte steht
+    return options

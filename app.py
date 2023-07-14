@@ -3,15 +3,16 @@ import csv
 import os
 import pandas as pd
 import biplanner
+from biplanner import load_unternehmensziele
 
 app = Flask(__name__)
 
 @app.route('/')
-def home():
-    return render_template('index.html')
+def welcome():
+    return render_template('welcome.html')
 
 @app.route('/index')
-def index():
+def home():
     return render_template('index.html')
 
 ###################################1. Standortbestimmung################################################################
@@ -153,8 +154,7 @@ def delete_ziel():
 @app.route('/informationsbedarf', methods=['GET', 'POST'])
 def informationsbedarf():
     if request.method == 'POST':
-        informationsbedarf = request.form['informationsbedarf']
-        beschreibung = request.form['beschreibung']
+        betroffenes_ziel = request.form['betroffenes_ziel']
         nutzen = request.form['nutzen']
         typ = request.form['typ']
         metrik = request.form['metrik']
@@ -162,18 +162,21 @@ def informationsbedarf():
 
         with open('informationsbedarf.csv', 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow([informationsbedarf, beschreibung, nutzen, typ, metrik, prioritaet])
+            writer.writerow([betroffenes_ziel, nutzen, typ, metrik, prioritaet])
 
         return redirect('/informationsbedarf')
     else:
         try:
             with open('informationsbedarf.csv', 'r') as csvfile:
                 reader = csv.reader(csvfile)
-                # enumerate() wird verwendet, um sowohl die Informationsbedarfe als auch deren Nummern zu bekommen.
                 informationsbedarf_liste = [(i, row) for i, row in enumerate(reader, start=1)]
         except FileNotFoundError:
             informationsbedarf_liste = []
-    return render_template('informationsbedarf.html', informationsbedarf_liste=informationsbedarf_liste)
+
+    dropdown_options = load_unternehmensziele()
+
+    return render_template('informationsbedarf.html', informationsbedarf_liste=informationsbedarf_liste, dropdown_options=dropdown_options)
+
 
 
 @app.route('/informationsbedarf/delete', methods=['POST'])
