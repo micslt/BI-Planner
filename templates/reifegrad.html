@@ -128,14 +128,19 @@
             <tr>
                 <td>8. Wie einfach gestaltet sich die Einführung und Umsetzung der Business Intelligence auf einer Skala von 1-5 (1 = sehr schwierig, 5 = sehr einfach)?</td>
                 <td>
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="frage20" style="width: 165px;">
-                        <option value="" disabled selected>auswählen</option>
-                        <option value="1">-- sehr schwierig</option>
-                        <option value="2">-  schwierig</option>
-                        <option value="3">o  neutral</option>
-                        <option value="4">+  einfach</option>
-                        <option value="5">++ sehr einfach</option>
-                    </select>
+                    <div class="form-group">
+                        <div class="input-group">
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="frage8" style="width: 165px;">
+                                    <option value="" disabled selected>auswählen</option>
+                                    <option value="1">-- sehr schwierig</option>
+                                    <option value="2">-  schwierig</option>
+                                    <option value="3">o  neutral</option>
+                                    <option value="4">+  einfach</option>
+                                    <option value="5">++ sehr einfach</option>
+                                </select>
+                            <input type="hidden" name="frage8" id="frage8">
+                        </div>
+                    </div>
                 </td>
             </tr>
             <tr style="background-color: lightgray;">
@@ -312,15 +317,19 @@
             <tr>
                 <td>20. Wie werden Analyseergebnisse in der Organisation bereitgestellt?</td>
                 <td>
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="frage20" style="width: 165px;">
-                        <option value="" disabled selected>auswählen</option>
-                        <option value="3">Berichte</option>
-                        <option value="4">Dashboards</option>
-                        <option value="5">beides</option>
-                        <option value="1">keines von beiden</option>
-                    </select>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="frage20" style="width: 165px;">
+                                <option value="" disabled selected>auswählen</option>
+                                <option value="3">Berichte</option>
+                                <option value="4">Dashboards</option>
+                                <option value="5">beides</option>
+                                <option value="1">keines von beiden</option>
+                            </select>
+                            <input type="hidden" name="frage20" id="frage20">
+                            </div>
+                    </div>
                 </td>
-
             </tr>
             <tr style="background-color: lightgray;">
                 <td>21. Können Personen aus dem operativen Geschäft eigene Analysen durchführen?</td>
