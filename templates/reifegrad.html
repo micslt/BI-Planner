@@ -128,15 +128,14 @@
             <tr>
                 <td>8. Wie einfach gestaltet sich die Einführung und Umsetzung der Business Intelligence auf einer Skala von 1-5 (1 = sehr schwierig, 5 = sehr einfach)?</td>
                 <td>
-                    <input type="range" name="einfachheit" min="1" max="5" list="range-list" oninput="rangeValue.innerText = this.value" required style="width: 165px;">
-                    <datalist id="range-list">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </datalist>
-                    <span id="rangeValue"></span>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="frage20" style="width: 165px;">
+                        <option value="" disabled selected>auswählen</option>
+                        <option value="1">-- sehr schwierig</option>
+                        <option value="2">-  schwierig</option>
+                        <option value="3">o  neutral</option>
+                        <option value="4">+  einfach</option>
+                        <option value="5">++ sehr einfach</option>
+                    </select>
                 </td>
             </tr>
             <tr style="background-color: lightgray;">
@@ -315,10 +314,10 @@
                 <td>
                     <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="frage20" style="width: 165px;">
                         <option value="" disabled selected>auswählen</option>
-                        <option value="berichte">Berichte</option>
-                        <option value="dashboards">Dashboards</option>
-                        <option value="beides">beides</option>
-                        <option value="keines">keines von beiden</option>
+                        <option value="3">Berichte</option>
+                        <option value="4">Dashboards</option>
+                        <option value="5">beides</option>
+                        <option value="1">keines von beiden</option>
                     </select>
                 </td>
 
