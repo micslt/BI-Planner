@@ -13,77 +13,161 @@
     <form action="/submit_rahmenbedingungen" method="POST">
         <table class="table table-striped table-hover">
             <thead>
-                <tr>
-                    <th style="background-color: gray !important; text-align: left;">Fragen</th>
-                    <th style="background-color: gray !important; text-align: left;">Antwort</th>
-                </tr>
+            <tr>
+                <th colspan="2" style="background-color: lightgray; text-align: center;">Rahmenbedingungen</th>
+            </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Wie wird die IT betrieben?</td>
                     <td>
-                        <input type="radio" name="it_betrieben" value="intern"> intern<br>
-                        <input type="radio" name="it_betrieben" value="extern"> extern
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="betrieb" data-title="intern" style="width: 55px;" style="width: 55px;">intern</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="betrieb" data-title="extern"  style="width: 55px;">extern</a>
+                                </div>
+                                <input type="hidden" name="betrieb" id="betrieb">
+                            </div>
+                    </div>
+                </td>
+                </tr>
+                <tr>
+                    <td>Wie soll die Business Intelligence aufgebaut und betrieben werden?</td>
+                    <td>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="frage20" style="width: 180px;">
+                                <option value="" disabled selected>auswählen</option>
+                                <option value="bestehend">Einbettung in bestehende Strukturen</option>
+                                <option value="bicc">BI-Competency Center</option>
+                                <option value="extern">Externe Partner</option>
+                                <option value="unklar">noch unklar</option>
+                            </select>
+                            <input type="hidden" name="aufbau" id="aufbau">
+                            </div>
+                    </div>
+
                     </td>
                 </tr>
                 <tr>
-                    <td>Wie soll die BIA aufgebaut und betrieben werden?</td>
+                    <td>Stehen den Unternehmen genügend Personen für den Aufbau und Betrieb von Business Intelligence zur Verfügung?</td>
                     <td>
-                        <input type="radio" name="bia_aufbau" value="einbettung"> Einbettung in bestehende Strukturen<br>
-                        <input type="radio" name="bia_aufbau" value="bi-cc"> BI-Competency Center<br>
-                        <input type="radio" name="bia_aufbau" value="externe_partner"> Externe Partner<br>
-                        <input type="radio" name="bia_aufbau" value="noch_unklar"> noch unklar
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="personenressourcen" data-title="ja" style="width: 55px;" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="personenressourcen" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="personenressourcen" id="personenressourcen">
+                            </div>
+                    </div>
                     </td>
                 </tr>
                 <tr>
-                    <td>Stehen den Unternehmen genügend Personen für den Aufbau und Betrieb von BIA zur Verfügung?</td>
+                    <td>Ist das notwendige Know-how für den Aufbau und den Betrieb von Business Intelligence vorhanden?</td>
                     <td>
-                        <input type="radio" name="personelle_ressourcen" value="genuegend_personen"> ja<br>
-                        <input type="radio" name="personelle_ressourcen" value="notwendiges_knowhow"> nein
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="knowhow" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="knowhow" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="knowhow" id="knowhow">
+                            </div>
+                    </div>
                     </td>
                 </tr>
                 <tr>
-                    <td>Ist das notwendige Know-how für den Aufbau und den Betrieb von BIA vorhanden?</td>
+                    <td>Wie hoch ist der finanzielle Bedarf für den Aufbau und den Betrieb von Business Intelligence?</td>
                     <td>
-                        <input type="radio" name="knowhow_vorhanden" value="ja"> ja<br>
-                        <input type="radio" name="knowhow_vorhanden" value="nein"> nein
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="bedarf" data-title="bekannt" >bekannt</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="bedarf" data-title="unbekannt">unbekannt</a>
+                                </div>
+                                <input type="hidden" name="bedarf" id="bedarf">
+                            </div>
+                    </div>
                     </td>
                 </tr>
                 <tr>
-                    <td>Wie hoch ist der finanzielle Bedarf für den Aufbau und den Betrieb von BIA?</td>
+                    <td>Werden die benötigten finanziellen Mittel für Aufbau und den Betrieb der geplanten Business Intelligence bereitgestellt?</td>
                     <td>
-                        <input type="radio" name="finanzieller_bedarf" value="bekannt"> bekannt<br>
-                        <input type="radio" name="finanzieller_bedarf" value="unbekannt"> unbekannt
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="mittel" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="mittel" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="mittel" id="mittel">
+                            </div>
+                    </div>
                     </td>
                 </tr>
                 <tr>
-                    <td>Werden die benötigten finanziellen Mittel für Aufbau und den Betrieb der geplanten BIA bereitgestellt?</td>
+                    <td>Ist beabsichtigt, Personendaten im Rahmen der Business Intelligence zu analysieren?</td>
                     <td>
-                        <input type="radio" name="finanzielle_mittel" value="ja"> ja<br>
-                        <input type="radio" name="finanzielle_mittel" value="nein"> nein
-                    </td>
-                </tr>
-                <tr>
-                    <td>Ist beabsichtigt, Personendaten im Rahmen der BIA zu analysieren?</td>
-                    <td>
-                        <input type="radio" name="personendaten_analyse" value="ja"> ja<br>
-                        <input type="radio" name="personendaten_analyse" value="nein"> nein
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="personendaten" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="personendaten" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="personendaten" id="personendaten">
+                            </div>
+                    </div>
                     </td>
                 </tr>
                 <tr>
                     <td>Ermöglicht die Gesetzeslage die Bearbeitung von Personendaten für analytische Zwecke?</td>
                     <td>
-                        <input type="radio" name="gesetzeslage" value="ja"> ja<br>
-                        <input type="radio" name="gesetzeslage" value="nein"> nein
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="gesetzeslage" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="gesetzeslage" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="gesetzeslage" id="gesetzeslage">
+                            </div>
+                    </div>
                     </td>
                 </tr>
                 <tr>
-                    <td>Welche Vorgaben, Gesetze und Normen müssen innerhalb der BIA berücksichtigt werden?</td>
+                    <td>Welche Vorgaben, Gesetze und Normen müssen innerhalb der Business Intelligence berücksichtigt werden?</td>
                     <td>
-                        <input type="checkbox" name="compliance_vorgaben" value="dsg"> DSG<br>
-                        <input type="checkbox" name="compliance_vorgaben" value="dsgvo"> DSGVO<br>
-                        <input type="checkbox" name="compliance_vorgaben" value="normen"> Normen<br>
-                        <input type="checkbox" name="compliance_vorgaben" value="interne_richtlinien"> Interne Richtlinien
+<table>
+  <tr>
+    <td>
+      <div class="input-group">
+        <input type="checkbox" id="dsg" name="dsg" value="dsg" tabindex="1">
+        <label for="dsg">DSG</label>
+      </div>
+    </td>
+    <td>
+      <div class="input-group">
+        <input type="checkbox" id="dsgvo" name="dsgvo" value="dsgvo" tabindex="2">
+        <label for="dsgvo">DSGVO</label>
+      </div>
+    </td>
+    <td>
+      <div class="input-group">
+        <label for="normen">Normen:</label><br>
+        <input type="text" id="normen_text" name="normen_text" placeholder="welche?" tabindex="3">
+      </div>
+    </td>
+    <td>
+      <div class="input-group">
+        <label for="richtlinien">Richtlinien:</label><br>
+        <input type="text" id="richtlinien_text" name="richtlinien_text" placeholder="welche?" tabindex="4">
+      </div>
+    </td>
+  </tr>
+</table>
+
+
+
                     </td>
                 </tr>
             </tbody>
@@ -99,5 +183,16 @@
     <a href="/reifegrad" class="btn btn-secondary">Zurück</a>
     <a href="/unternehmensziele" class="btn btn-secondary">Weiter</a>
 </div>
+<script>
+    $(function () {
+        $('#radioBtn a').on('click', function () {
+            var sel = $(this).data('title');
+            var tog = $(this).data('toggle');
+            $('#' + tog).prop('value', sel);
 
+            $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
+            $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
+        });
+    });
+</script>
 {% include "footer.html" %}
