@@ -106,7 +106,7 @@ def submit_rahmenbedingungen():
 
         # Nachricht anzeigen und zur Startseite (index) umleiten
     message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
-    return render_template("message.html", message=message, redirect_url="/rahmenbedingungen")    
+    return render_template("message.html", message=message, redirect_url="/unternehmensziele")
 
 
 ##################################################3.Planung#############################################################
@@ -295,7 +295,7 @@ def submit_etl():
 
         # Nachricht anzeigen und zur Startseite (index) umleiten
     message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
-    return render_template("message.html", message=message, redirect_url="/etl")
+    return render_template("message.html", message=message, redirect_url="/analysen")
 ##################################################5. Informationsgenerierung############################################
 
 @app.route("/analysen", methods=['GET', 'POST'])
@@ -368,7 +368,7 @@ def submit_informationsbereitstellung():
 
         # Nachricht anzeigen und zur Startseite (index) umleiten
     message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
-    return render_template("message.html", message=message, redirect_url="/")
+    return render_template("message.html", message=message, redirect_url="/visualisierung")
 
 @app.route("/visualisierung")
 def visualisierung():

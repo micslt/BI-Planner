@@ -3,100 +3,286 @@
 <div class="container">
     <h3 class="rahmen">Evaluationsbogen für den Business Intelligence-Prozess</h3>
     <form action="/submit_feedback" method="post">
-        <table class="table table-striped table-hover">
-            <tr>
-                <th><strong>Effektivität</strong></th>
-                (1: nicht erreicht, 5: vollständig erreicht)
-            </tr>
-            <tr>
-                <td>Inwieweit wurden die definierten Ziele des Business Intelligence-Prozesses erreicht?</td>
-                <td>
-                    <input type="range" name="ziel-erreicht" min="1" max="5" required>
-                                    </td>
-            </tr>
-            <tr>
-                <td>Wie genau sind die analysierten Daten und generierten Berichte?</td>
-                <td>
-                    <input type="range" name="daten-genauigkeit" min="1" max="5" required>
-                </td>
-            </tr>
-            <tr>
-                <td>Wie zufrieden sind die Nutzer mit den bereitgestellten Informationen und Ergebnissen?</td>
-                <td>
-                    <input type="range" name="nutzer-zufriedenheit" min="1" max="5" required>
-                </td>
-            </tr>
 
-            <tr>
-                <th><strong>Effizienz</strong></th>
-            </tr>
-            <tr>
-                <td>Wie lange dauert die Bearbeitung von Datenanfragen im Business Intelligence-Prozess?</td>
-                <td>
-                    <input type="range" name="datenbearbeitungszeit" min="1" max="5" required>
-                </td>
-            </tr>
-            <tr>
-                <td>Wie hoch sind die Kosten für den Betrieb des Business Intelligence-Prozesses im Verhältnis zu den erzielten Ergebnissen?</td>
-                <td>
-                    <input type="range" name="kosten-effizienz" min="1" max="5" required>
-                </td>
-            </tr>
-            <tr>
-                <td>Wie gut ist der Ressourcenverbrauch (z.B. CPU-Auslastung, Speicherbedarf) im Business Intelligence-Prozess optimiert?</td>
-                <td>
-                    <input type="range" name="ressourcenoptimierung" min="1" max="5" required>
-                </td>
-            </tr>
+    <table class="likert-table">
+  <br>
+        <br>
+      <tr>
+        <td>Vor-/Nachname (oder Initialen):</td>
+        <td><input type="text" name="name" required></td>
+      </tr>
+      <tr>
+        <td>Branche:</td>
+        <td><input type="text" name="industry" required></td>
+      </tr>
+        <td>Unternehmensgröße:</td>
+        <td>
+          <select name="company_size" required>
+            <option value="">Bitte auswählen</option>
+            <option value="0-10">0-10 Mitarbeitende</option>
+            <option value="10-50">10-50 Mitarbeitende</option>
+            <option value="50-300">50-300 Mitarbeitende</option>
+            <option value="300+">>300 Mitarbeitende</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+      <br>
+      <br>
+     <div class="wrap">
+      <form action="">
+        <label class="statement">Inwieweit wurden die definierten Ziele des Business Intelligence-Prozesses erreicht?</label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="ziele_erreicht" value="0">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="ziele_erreicht" value="1">
+            <label>Stimme nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="ziele_erreicht" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="ziele_erreicht" value="4">
+            <label>Stimme zu</label>
+          </li>
+          <li>
+            <input type="radio" name="ziele_erreicht" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
 
-            <tr>
-                <td>Wie flexibel ist der Business Intelligence-Prozess, um sich an veränderte Geschäftsanforderungen anzupassen?</td>
-                <td>
-                    <input type="range" name="anpassungsfähigkeit" min="1" max="5" list="range-list" oninput="rangeValue.innerText = this.value" required>
-                    <datalist id="range-list">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </datalist>
-                    <span id="rangeValue"></span>
-                </td>
-            </tr>
-            <tr>
-                <td>Wie gut können neue Datenquellen in den Business Intelligence-Prozess integriert werden?</td>
-                <td>
-                    <input type="range" name="datenquellen-integration" min="1" max="5" required>
-                </td>
-            </tr>
-            <tr>
-                <td>Inwieweit berücksichtigt der Business Intelligence-Prozess neue technologische Entwicklungen und Trends?</td>
-                <td>
-                    <input type="range" name="technologie-berücksichtigung" min="1" max="5" required>
-                </td>
-            </tr>
+        <label class="statement">Wie genau sind die analysierten Daten und generierten Berichte?</label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="likert2" value="0">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert2" value="1">
+            <label>Stimme nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert2" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="likert2" value="4">
+            <label>Stimme zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert2" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
 
-            <tr>
-                <th><strong>Gesamtbewertung</strong></th>
-            </tr>
-            <tr>
-                <td>Wie zufrieden sind Sie insgesamt mit dem entwickelten Business Intelligence-Prozess?</td>
-                <td>
-                    <input type="range" name="gesamtzufriedenheit" min="1" max="5" required>
-                </td>
-            </tr>
-            <tr>
-                <td>Welche Verbesserungsvorschläge haben Sie für den Business Intelligence-Prozess?</td>
-                <td>
-                    <textarea name="verbesserungsvorschläge" rows="3" cols="30" required></textarea>
-                </td>
-            </tr>
-        </table>
+        <label class="statement">Wie zufrieden sind die Nutzer mit den bereitgestellten Informationen und Ergebnissen?</label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="likert3" value="0">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert3" value="1">
+            <label>Stimme nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert3" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="likert3" value="4">
+            <label>Stimme zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert3" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
+
+        <label class="statement">Wie lange dauert die Bearbeitung von Datenanfragen im Business Intelligence-Prozess?</label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="likert4" value="0">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert4" value="1">
+            <label>Stimme nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert4" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="likert4" value="4">
+            <label>Stimme zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert4" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
+
+        <label class="statement">Wie hoch sind die Kosten für den Betrieb des Business Intelligence-Prozesses im Verhältnis zu den erzielten Ergebnissen?</label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="likert5" value="0">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert5" value="1">
+            <label>Stimme nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert5" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="likert5" value="4">
+            <label>Stimme zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert5" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
+
+        <label class="statement">Wie gut ist der Ressourcenverbrauch (z.B. CPU-Auslastung, Speicherbedarf) im Business Intelligence-Prozess optimiert?</label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="likert6" value="0">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert6" value="1">
+            <label>Stimme nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert6" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="likert6" value="4">
+            <label>Stimme zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert6" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
+
+        <label class="statement">Wie flexibel ist der Business Intelligence-Prozess, um sich an veränderte Geschäftsanforderungen anzupassen?</label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="likert7" value="0">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert7" value="1">
+            <label>Stimme nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert7" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="likert7" value="4">
+            <label>Stimme zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert7" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
+
+        <label class="statement">Wie gut können neue Datenquellen in den Business Intelligence-Prozess integriert werden?</label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="likert8" value="0">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert8" value="1">
+            <label>Stimme nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert8" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="likert8" value="4">
+            <label>Stimme zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert8" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
+
+        <label class="statement">Inwieweit berücksichtigt der Business Intelligence-Prozess neue technologische Entwicklungen und Trends?</label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="likert9" value="0">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert9" value="1">
+            <label>Stimme nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert9" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="likert9" value="4">
+            <label>Stimme zu</label>
+          </li>
+          <li>
+            <input type="radio" name="likert9" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
+
+        <label class="statement">Wie zufrieden sind Sie insgesamt mit dem entwickelten Business Intelligence-Prozess?</label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="ziele_erreicht0" value="0">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="ziele_erreicht0" value="1">
+            <label>Stimme nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="ziele_erreicht0" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="ziele_erreicht0" value="4">
+            <label>Stimme zu</label>
+          </li>
+          <li>
+            <input type="radio" name="ziele_erreicht0" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
+
+        <label class="statement">Welche Verbesserungsvorschläge haben Sie für den Business Intelligence-Prozess?</label>
+       <div class="text-center"> <textarea name="improvements" rows="4" cols="195"></textarea>
+       </div>
+             <br>
+              <br>
         <div class="text-center">
-            <input type="submit" value="Absenden" class="btn btn-primary btn-lg">
+            <input type="submit" value="Feedback einreichen" class="btn btn-primary btn-lg">
+            <br>
+            <br>
         </div>
-    </form>
-</div>
+      </form>
+    </div>
 
 
 
