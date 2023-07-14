@@ -431,16 +431,14 @@ def feedback_auswertung():
 ##################################################Functionality#########################################################
 @app.route('/delete_all', methods=['POST'])
 def delete_all():
-    open('ziele.csv', 'w').close()
-    open('reifegrad.csv', 'w').close()
-    open('informationsbedarf.csv', 'w').close()
-    open('rahmenbedingungen.csv', 'w').close()
-    open('analysen.csv', 'w').close()
-    open('datenmanagementkonzept.csv', 'w').close()
-    open('etl.csv', 'w').close()
-    open('informationsbereitstellung.csv', 'w').close()
-    open('dashboard.csv', 'w').close()
-    open('visualisierung.csv', 'w').close()
+    files = ['ziele.csv', 'reifegrad.csv', 'informationsbedarf.csv', 'rahmenbedingungen.csv',
+             'analysen.csv', 'datenmanagementkonzept.csv', 'datenquellen.csv', 'etl.csv', 'informationsbereitstellung.csv',
+             'dashboard.csv', 'visualisierung.csv']
+
+    for file in files:
+        if os.path.exists(file):
+            os.remove(file)
+
     return redirect('/deleted')
 
 

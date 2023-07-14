@@ -79,3 +79,7 @@ h1 {
   color: white;
 }
 
+#radioBtn .notActive{
+    color: #3276b1;
+    background-color: #fff;
+}
