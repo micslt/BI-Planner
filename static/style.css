@@ -57,3 +57,25 @@ h1 {
     </tr>
   </tbody>
 </table>
+
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 10px;
+  background-color: white;
+  color: black;
+}
+
+.grid-item {
+  border: 1px solid black;
+  padding: 20px;
+  text-align: center;
+}
+
+.blue-bg {
+  background-color: blue;
+  color: white;
+}
+
