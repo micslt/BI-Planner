@@ -3,7 +3,6 @@ import csv
 import os
 import pandas as pd
 import biplanner
-import pdfkit
 
 app = Flask(__name__)
 
