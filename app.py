@@ -3,6 +3,7 @@ import csv
 import os
 import pandas as pd
 import biplanner
+import pdfkit
 
 app = Flask(__name__)
 
@@ -449,7 +450,25 @@ def submit_dashboard():
 
 @app.route("/auswertungen")
 def auswertungen():
-    return render_template("auswertungen.html")
+    csv_file = "reifegrad_auswertung.csv"
+
+    if not os.path.isfile(csv_file):
+       return redirect("/nodata")  # Wenn die Datei nicht vorhanden ist, auf "nodata" umleiten
+
+
+    all_entries = biplanner.get_all_entries()
+    selected_entry = request.args.get("key", default=biplanner.get_latest_entry())
+
+
+    try:
+        with open(csv_file, "r", newline="", encoding="utf-8") as csvfile:
+            reader = csv.reader(csvfile)
+            next(reader)  # Header-Zeile überspringen
+            results = [row for row in reader if row[0] == selected_entry]
+    except FileNotFoundError:
+        return redirect(url_for("nodata"))  # Wenn beim Öffnen der Datei ein Fehler auftritt, auf "nodata" umleiten
+
+    return render_template("auswertungen.html", results=results, all_entries=all_entries, selected_entry=selected_entry)
 
 ##################################################8. Feedback### #######################################################
 @app.route("/feedback")

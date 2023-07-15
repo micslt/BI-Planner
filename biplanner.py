@@ -28,7 +28,7 @@ def calculate_points_and_save_to_csv(csv_file):
             dateninfrastruktur.append(int(sum([1 if answer == "ja" else 0 for answer in row[13:19]])/6*100))
             analytik.append(int(sum([1 if answer == "ja" else 1 if answer == "5" else 0.75 if answer == "4" else 0.5 if answer == "3" else 0.25 if answer == "2" else 0 for answer in row[19:25]])/6*100))
             governance.append(int(sum([1 if answer == "ja" else 0 for answer in row[25:35]])/10*100))
-            total.append(int(sum([1 if answer == "ja" else 1 if answer =="5" else 0.75 if answer == "4" else 0.5 if answer == "3" else 0.25 if answer == "2" else 0 for answer in row[1:35]]) / 35 * 100))
+            total.append(int(sum([1 if answer == "ja" else 1 if answer =="5" else 0.75 if answer == "4" else 0.5 if answer == "3" else 0.25 if answer == "2" else 0 for answer in row[1:35]]) / 34 * 100))
             comment_organisation.append("Aus Sicht der Organisation erreicht " if organisation[0]>80 else "kacke")
 
     # Die Punkte in die CSV-Datei schreiben
