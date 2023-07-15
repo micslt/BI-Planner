@@ -162,15 +162,13 @@ def informationsbedarf():
        return redirect("/nodata")  # Wenn die Datei nicht vorhanden ist, auf "nodata" umleiten
 
     if request.method == 'POST':
+        bezeichnung = request.form['bezeichnung']
         betroffenes_ziel = request.form['betroffenes_ziel']
-        nutzen = request.form['nutzen']
-        typ = request.form['typ']
-        metrik = request.form['metrik']
         prioritaet = request.form.get('prioritaet', '-')  # Standardwert "-" verwenden, falls nicht angegeben
 
         with open('informationsbedarf.csv', 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow([betroffenes_ziel, nutzen, typ, metrik, prioritaet])
+            writer.writerow([bezeichnung, betroffenes_ziel, prioritaet])
 
         return redirect('/informationsbedarf')
     else:
@@ -211,7 +209,7 @@ def delete_informationsbedarf():
 @app.route("/datenquellen", methods=['GET', 'POST'])
 def datenquellen():
     if request.method == 'POST':
-        anwendung = request.form['anwendung']
+        anwendung = request.form['datenquelle']
         inhalt = request.form['inhalt']
 
         with open('datenquellen.csv', 'a', newline='') as csvfile:
@@ -284,6 +282,11 @@ def submit_datenmanagementkonzept():
 
 @app.route("/etl", methods=["GET", "POST"])
 def etl():
+    csv_file = "datenquellen.csv"
+
+    if not os.path.isfile(csv_file):
+       return redirect("/nodata")  # Wenn die Datei nicht vorhanden ist, auf "nodata" umleiten
+
     dropdown_options = biplanner.load_datenquellen()
 
     return render_template("etl.html", dropdown_options=dropdown_options)
@@ -313,15 +316,20 @@ def submit_etl():
 
 @app.route("/analysen", methods=['GET', 'POST'])
 def analysen():
+    csv_file = "informationsbedarf.csv"
+
+    if not os.path.isfile(csv_file):
+       return redirect("/nodata")  # Wenn die Datei nicht vorhanden ist, auf "nodata" umleiten
+
     if request.method == 'POST':
         analyse = request.form['informationsbedarf']
         messzahl = request.form['messzahl']
-        art = request.form['art']
         berechnung = request.form['berechnung']
+        art = request.form['art']
 
         with open('analysen.csv', 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow([analyse, messzahl, art, berechnung])
+            writer.writerow([analyse, messzahl, berechnung, art])
 
         return redirect('/analysen')  # Änderung hier, um zur Startseite zurückzukehren
     else:
@@ -333,7 +341,10 @@ def analysen():
         except FileNotFoundError:
             analysen = []
 
-    return render_template('analysen.html', analysen=analysen)
+    dropdown_options = biplanner.load_informationsbedarf()
+
+    return render_template('analysen.html', analysen=analysen, dropdown_options=dropdown_options)
+
 
 
 @app.route('/analysen/delete', methods=['POST'])

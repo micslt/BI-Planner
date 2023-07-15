@@ -11,6 +11,17 @@
     <form action="/submit_dashboard" method="post">
         <table class="table table-striped table-hover">
             <tr>
+                <td><h6>Bezeichnung des Dashboards</h6></td>
+                <td>
+                    <div class="form-group">
+                            <div class="input-group">
+                                      <input type="text" name="textfeld" placeholder="Bezeichnung eingeben" style="width: 250px;">
+                                <input type="hidden" name="bezeichnung" id="bezeichnung">
+                            </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
                 <td>Sind die Daten auf dem Dashboard in einer klar strukturierten und leicht verständlichen Art und Weise präsentiert?</td>
                 <td>
                     <div class="form-group">
@@ -201,7 +212,7 @@
                                     <a class="btn btn-primary btn-sm notActive" data-toggle="frage14" data-title="ja" style="width: 55px;">ja</a>
                                     <a class="btn btn-primary btn-sm notActive" data-toggle="frage14" data-title="nein"  style="width: 55px;">nein</a>
                                 </div>
-                                <input type="hidden" name="frage13" id="frage14">
+                                <input type="hidden" name="frage14" id="frage14">
                             </div>
                     </div>
                 </td>

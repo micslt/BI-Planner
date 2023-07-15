@@ -9,18 +9,26 @@
 <div class="container">
     <h4 class="rahmen">Informationsbedarf</h4>
     <br>
-    <form action="/informationsbedarf" method="POST">
+        <p style="text-align: justify;">
+        Sie haben im vorherigen Schritt die Unternehmensziele aufgelistet. Diese können Sie nun im Feld «betroffenes Ziel»
+        abrufen. Überlegen Sie sich nun, was Sie in Erfahrung bringen müssen, um die Erreichung Ihres Unternehmensziels
+        zu überprüfen. Haben Sie beispielsweise als Ziel, den Umsatz um 10% pro Jahr zu steigern, brauchen Sie dafür
+        den jährlichen Umsatz Ihres Unternehmens. Wählen Sie also eine kurze und nachvollziehbare Beschreibung
+            (bspw. Umsatzentwicklung pro Jahr), wählen Sie das betroffene Ziel aus der Liste und vergeben Sie eine Priorität.
+        Später kann unter Umständen nicht für jeden Informationsbedarf eine Messzahl kreiert werden. Die Priorität dient also
+        dazu, dass der Fokus auf die wichtigen Messungen gelegt werden kann. Hinweis: Pro betroffenem Ziel können mehrere
+        Einträge erfolgen. So kann etwa der Informationsbedarf für ein theoretisches Ziel «hohe Kundenzufriedenheit»
+        mit der Reklamationsquote als auch mit Online-Bewertungen gemessen werden.</p>
+    <form action="/informationsbedarf" method="POST"><br>
         <div class="input-group mb-3">
-            <select id="betroffenes_ziel" name="betroffenes_ziel" class="form-control" placeholder="Betroffenes Ziel">
-                <option value="" selected disabled>Betroffenes Ziel</option>
+            <select id="betroffenes_ziel" name="betroffenes_ziel" class="form-control" placeholder="betroffenes Ziel">
+                <option value="" selected disabled>betroffenes Ziel</option>
                 <!-- Hier werden die Dropdown-Optionen aus der CSV-Datei eingefügt -->
                 {% for ziel in dropdown_options %}
                     <option value="{{ ziel }}">{{ ziel }}</option>
                 {% endfor %}
             </select>
-            <input type="text" id="nutzen" name="nutzen" class="form-control" placeholder="Nutzen" aria-label="Nutzen">
-            <input type="text" id="typ" name="typ" class="form-control" placeholder="Typ" aria-label="Typ">
-            <input type="text" id="metrik" name="metrik" class="form-control" placeholder="Metrik" aria-label="Metrik">
+            <input type="text" id="bezeichnung" name="bezeichnung" class="form-control" placeholder="Beschreibung Informationsbedarf" aria-label="Bezeichnung">
             <select id="prioritaet" name="prioritaet" class="form-control" placeholder="Priorität">
                 <option value="0" selected disabled>Priorität</option>
                 <option value="A">A</option>
@@ -40,10 +48,8 @@
             <thead>
                 <tr>
                     <th>Nummer</th>
+                    <th>Bezeichnung</th>
                     <th>Informationsbedarf</th>
-                    <th>Nutzen</th>
-                    <th>Typ</th>
-                    <th>Metrik</th>
                     <th>Priorität</th>
                     <th></th>
                 </tr>
@@ -53,11 +59,9 @@
                 <tr>
                     <td>{{ nummer }}</td>
                     <td>{{ informationsbedarf[0] }}</td>
+                    <td>{{ informationsbedarf[1] }}</td>
                     <td>{{ informationsbedarf[2] }}</td>
-                    <td>{{ informationsbedarf[3] }}</td>
-                    <td>{{ informationsbedarf[4] }}</td>
-                    <td>{{ informationsbedarf[5] }}</td>
-                    <td>
+                     <td>
                         <form action="/informationsbedarf/delete" method="POST">
                             <input type="hidden" name="informationsbedarf_nummer" value="{{ nummer }}">
                             <input type="submit" value="Löschen">

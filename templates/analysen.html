@@ -8,13 +8,27 @@
 <br>
 <div class="container">
     <h4 class="rahmen">Analysen</h4>    <br>
+        <p style="text-align: justify;">
+        Analyse</p>
     <br>
     <form action="/analysen" method="POST">
         <div class="input-group mb-3">
-            <input type="text" id="informationsbedarf" name="informationsbedarf" class="form-control" placeholder="Informationsbedarf" aria-label="Informationsbedarf eingeben">
-            <input type="text" id="messzahl" name="messzahl" class="form-control" placeholder="Messzahl " aria-label="Messzahl eingeben">
-            <input type="text" id="art" name="art" class="form-control" placeholder="Art " aria-label="Art eingeben">
-            <input type="text" id="berechnung" name="berechnung" class="form-control" placeholder="Berechnung " aria-label="Berechnung eingeben">
+            <select id="informationsbedarf" name="informationsbedarf" class="form-control" placeholder="Informationsbedarf">
+                <option value="" selected disabled>Informationsbedarf wählen</option>
+                <!-- Hier werden die Dropdown-Optionen aus der CSV-Datei eingefügt -->
+                {% for bedarf in dropdown_options %}
+                    <option value="{{ bedarf }}">{{ bedarf }}</option>
+                {% endfor %}
+            </select>
+            <input type="text" id="messzahl" name="messzahl" class="form-control" placeholder="Beschreibung der Messzahl" aria-label="Beschreibung der Messzahl">
+            <input type="text" id="berechnung" name="berechnung" class="form-control" placeholder="Berechnung der Messzahl" aria-label="Berechnung der Messzahl">
+            <select id="art" name="art" class="form-control" placeholder="Darstellungsart">
+                <option value="0" selected disabled>Darstellungsart wählen</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+            </select>
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="submit">Informationsbedarf hinzufügen</button>
             </div>
@@ -28,9 +42,9 @@
                 <tr>
                     <th>Nummer</th>
                     <th>Informationsbedarf</th>
-                    <th>Messzahl</th>
-                    <th>Art</th>
+                    <th>Beschreibung</th>
                     <th>Berechnung</th>
+                    <th>Darstellungsart</th>
                     <th></th>
                 </tr>
             </thead>

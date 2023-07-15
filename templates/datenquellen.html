@@ -6,12 +6,20 @@
     </div>
 </div>
 <br>
+
 <div class="container">
     <h4 class="rahmen">Datenquellen</h4>    <br>
-    <br>
+        <p style="text-align: justify;">
+        Im vorherigen Schritt haben Sie Ihren Informationsbedarf beschrieben. Damit die gesuchte Information generiert
+        werden kann, dient in der Regel als Grundlage ein Datensatz, in dem sich die Daten für die Berechnung finden.
+        Möchten Sie etwa die Umsatzrendite ermitteln, werden die Daten aus der Finanzbuchhaltungssoftware benötigt.
+        Überlegen Sie sich, in welchen Systemen Ihres Unternehmens Sie Daten finden, die für die Business Intelligence
+        relevant sind. Hierbei kann es sich auch um Webapplikationen wie Google Analytics handeln oder um Datensätze
+        ohne direkten Unternehmensbezug, wie die Statistiken des Bundesamtes für Statistik. Listen Sie möglichst alle
+        Datenquellen auf die Ihnen für Ihr Unternehmen in den Sinn kommen und klicken Sie danach auf «Weiter».</p>    <br>
     <form action="/datenquellen" method="POST">
         <div class="input-group mb-3">
-            <input type="text" id="anwendung" name="anwendung" class="form-control" placeholder="Name der Anwendung" aria-label="Name der Anwendung eingeben">
+            <input type="text" id="datenquelle" name="datenquelle" class="form-control" placeholder="Name der Anwendung/Datenquelle" aria-label="Name der Anwendung eingeben">
             <input type="text" id="inhalt" name="inhalt" class="form-control" placeholder="Zweck beschreiben" aria-label="Inhalt eingeben">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="submit">Datenquelle hinzufügen</button>
