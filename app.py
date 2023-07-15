@@ -3,7 +3,6 @@ import csv
 import os
 import pandas as pd
 import biplanner
-from biplanner import load_unternehmensziele
 
 app = Flask(__name__)
 
@@ -14,6 +13,10 @@ def welcome():
 @app.route('/index')
 def home():
     return render_template('index.html')
+
+@app.route('/einfuehrung')
+def einfuehrung():
+    return render_template('einfuehrung.html')
 
 ###################################1. Standortbestimmung################################################################
 
@@ -153,6 +156,11 @@ def delete_ziel():
 
 @app.route('/informationsbedarf', methods=['GET', 'POST'])
 def informationsbedarf():
+    csv_file = "ziele.csv"
+
+    if not os.path.isfile(csv_file):
+       return redirect("/nodata")  # Wenn die Datei nicht vorhanden ist, auf "nodata" umleiten
+
     if request.method == 'POST':
         betroffenes_ziel = request.form['betroffenes_ziel']
         nutzen = request.form['nutzen']
@@ -173,7 +181,7 @@ def informationsbedarf():
         except FileNotFoundError:
             informationsbedarf_liste = []
 
-    dropdown_options = load_unternehmensziele()
+    dropdown_options = biplanner.load_unternehmensziele()
 
     return render_template('informationsbedarf.html', informationsbedarf_liste=informationsbedarf_liste, dropdown_options=dropdown_options)
 
@@ -276,7 +284,9 @@ def submit_datenmanagementkonzept():
 
 @app.route("/etl", methods=["GET", "POST"])
 def etl():
-    return render_template("etl.html")
+    dropdown_options = biplanner.load_datenquellen()
+
+    return render_template("etl.html", dropdown_options=dropdown_options)
 
 @app.route("/submit_etl", methods=["GET", "POST"])
 def submit_etl():
@@ -396,7 +406,7 @@ def submit_visualisierung():
 
         # Nachricht anzeigen und zur Startseite (index) umleiten
     message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
-    return render_template("message.html", message=message, redirect_url="/")
+    return render_template("message.html", message=message, redirect_url="/visualisierung")
 
 @app.route("/dashboard")
 def dashboard():
@@ -421,7 +431,7 @@ def submit_dashboard():
 
         # Nachricht anzeigen und zur Startseite (index) umleiten
     message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
-    return render_template("message.html", message=message, redirect_url="/")
+    return render_template("message.html", message=message, redirect_url="/dashboard")
 
 
 ##################################################7. Auswertungen#######################################################

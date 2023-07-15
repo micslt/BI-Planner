@@ -7,7 +7,7 @@
 </div>
 <br>
 <div class="container">
-    <h3 class="rahmen">Informationsbereitstellung planen</h3>
+    <h4 class="rahmen">Informationsbereitstellung planen</h4>
     <form action="/submit_informationsbereitstellung" method="post">
         <table class="table table-striped">
             <tr>
@@ -16,8 +16,15 @@
             <tr>
                 <td>Art der Bereitstellung</td>
                 <td>
-                    <label><input type="checkbox" name="bereitstellung" value="bericht"> Bericht</label>
-                    <label><input type="checkbox" name="bereitstellung" value="dashboard"> Dashboard</label>
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Bericht" data-title="Bericht">Bericht</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Dashboard" data-title="Dashboard" >Dashboard</a>
+                                </div>
+                                <input type="hidden" name="Bereitstellungsart" id="Bereitstellungsart">
+                            </div>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -60,6 +67,17 @@
     <a href="/visualisierung" class="btn btn-secondary">Weiter</a>
 </div>
 
+<script>
+    $(function () {
+        $('#radioBtn a').on('click', function () {
+            var sel = $(this).data('title');
+            var tog = $(this).data('toggle');
+            $('#' + tog).prop('value', sel);
 
+            $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
+            $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
+        });
+    });
+</script>
 
 {% include "footer.html" %}

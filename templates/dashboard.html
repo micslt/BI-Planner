@@ -7,105 +7,203 @@
 </div>
 <br>
 <div class="container">
-    <h3 class="rahmen">Qualitätskontrolle Dashboard</h3><br>
-    <form action="/submit_qualitaetskontrolle" metdod="post">
+    <h4 class="rahmen">Qualitätskontrolle Dashboard</h4><br>
+    <form action="/submit_dashboard" method="post">
         <table class="table table-striped table-hover">
             <tr>
                 <td>Sind die Daten auf dem Dashboard in einer klar strukturierten und leicht verständlichen Art und Weise präsentiert?</td>
                 <td>
-                    <input type="radio" name="frage1" value="ja"> Ja
-                    <input type="radio" name="frage1" value="nein"> Nein
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage1" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage1" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="frage1" id="frage1">
+                            </div>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>Werden die Daten präzise und genau dargestellt, ohne Verzerrungen oder irreführende Darstellungen?</td>
                 <td>
-                    <input type="radio" name="frage2" value="ja"> Ja
-                    <input type="radio" name="frage2" value="nein"> Nein
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage2" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage2" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="frage2" id="frage2">
+                            </div>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>Bietet das Dashboard ausreichend Kontext und Hintergrundinformationen, um die Dateninterpretation zu erleichtern?</td>
                 <td>
-                    <input type="radio" name="frage3" value="ja"> Ja
-                    <input type="radio" name="frage3" value="nein"> Nein
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage3" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage3" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="frage3" id="frage3">
+                            </div>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>Werden überflüssige Dekorationen, Effekte oder Verzierungen entfernt, um den Fokus auf die Daten zu legen?</td>
                 <td>
-                    <input type="radio" name="frage4" value="ja"> Ja
-                    <input type="radio" name="frage4" value="nein"> Nein
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage4" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage4" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="frage4" id="frage4">
+                            </div>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>Bietet das Dashboard interaktive Funktionen zur Exploration und Analyse der Daten?</td>
                 <td>
-                    <input type="radio" name="frage5" value="ja"> Ja
-                    <input type="radio" name="frage5" value="nein"> Nein
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage5" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage5" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="frage5" id="frage5">
+                            </div>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>Kann die Informationsdichte erhöht werden, um mehr Daten auf begrenztem Raum darzustellen, ohne die Klarheit zu beeinträchtigen?</td>
                 <td>
-                    <input type="radio" name="frage6" value="ja"> Ja
-                    <input type="radio" name="frage6" value="nein"> Nein
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage6" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage6" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="frage6" id="frage6">
+                            </div>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>Werden visuelle Hierarchien und Gruppierungen verwendet, um die Daten zu organisieren und wichtige Informationen hervorzuheben?</td>
                 <td>
-                    <input type="radio" name="frage7" value="ja"> Ja
-                    <input type="radio" name="frage7" value="nein"> Nein
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage7" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage7" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="frage7" id="frage7">
+                            </div>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>Sind die Daten in verschiedenen Ansichten oder Sichten präsentiert, um unterschiedliche Perspektiven zu ermöglichen?</td>
                 <td>
-                    <input type="radio" name="frage8" value="ja"> Ja
-                    <input type="radio" name="frage8" value="nein"> Nein
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage8" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage8" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="frage8" id="frage8">
+                            </div>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>Werden visuelle Hierarchien und Gruppierungen verwendet, um die Daten zu organisieren und wichtige Informationen hervorzuheben?</td>
                 <td>
-                    <input type="radio" name="frage9" value="ja"> Ja
-                    <input type="radio" name="frage9" value="nein"> Nein
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage9" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage9" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="frage9" id="frage9">
+                            </div>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>Sind ausreichende Beschriftungen, Untertitel und Anmerkungen vorhanden, um den Datenkontext zu verdeutlichen?</td>
                 <td>
-                    <input type="radio" name="frage10" value="ja"> Ja
-                    <input type="radio" name="frage10" value="nein"> Nein
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage10" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage10" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="frage10" id="frage10">
+                            </div>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>Bietet das Dashboard Werkzeuge und Funktionen zur Navigation und Filterung der Daten?</td>
                 <td>
-                    <input type="radio" name="frage11" value="ja"> Ja
-                    <input type="radio" name="frage11" value="nein"> Nein
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage11" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage11" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="frage11" id="frage11">
+                            </div>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>Ist die Benutzeroberfläche des Dashboards klar und intuitiv gestaltet?</td>
                 <td>
-                    <input type="radio" name="frage12" value="ja"> Ja
-                    <input type="radio" name="frage12" value="nein"> Nein
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage12" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage12" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="frage12" id="frage12">
+                            </div>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>Werden visuelle Elemente wie Farben, Formen und Größen sinnvoll eingesetzt, um wichtige Informationen zu betonen?</td>
                 <td>
-                    <input type="radio" name="frage13" value="ja"> Ja
-                    <input type="radio" name="frage13" value="nein"> Nein
+                     <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage13" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage13" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="frage13" id="frage13">
+                            </div>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>Werden geeignete Diagramme und Visualisierungen verwendet, um die Daten effektiv darzustellen?</td>
                 <td>
-                    <input type="radio" name="frage14" value="ja"> Ja
-                    <input type="radio" name="frage14" value="nein"> Nein
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage14" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage14" data-title="nein"  style="width: 55px;">nein</a>
+                                </div>
+                                <input type="hidden" name="frage13" id="frage14">
+                            </div>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -121,5 +219,17 @@
     <a href="/auswertungen" class="btn btn-secondary">Weiter</a>
 </div>
 
+<script>
+    $(function () {
+        $('#radioBtn a').on('click', function () {
+            var sel = $(this).data('title');
+            var tog = $(this).data('toggle');
+            $('#' + tog).prop('value', sel);
+
+            $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
+            $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
+        });
+    });
+</script>
 
 {% include "footer.html" %}

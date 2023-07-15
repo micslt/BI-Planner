@@ -27,6 +27,10 @@ h1 {
   border-radius: 5px;
 }
 
+.container1 {
+  background-color: #FFFFFF;
+}
+
 <table class="table table-dark">
   <thead>
     <tr>

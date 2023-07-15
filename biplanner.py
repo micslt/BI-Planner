@@ -63,5 +63,13 @@ def load_unternehmensziele():
     with open('ziele.csv', 'r') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
-            options.append(row[0])  # Annahme, dass das Ziel in der ersten Spalte steht
+            options.append(row[0])
+    return options
+
+def load_datenquellen():
+    options = []
+    with open('datenquellen.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            options.append(row[0])
     return options

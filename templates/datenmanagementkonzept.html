@@ -6,30 +6,48 @@
 </div>
 <br>
 <div class="container">
-    <h3 class="rahmen">Datenmangementkonzept</h3> <br>
+    <h4 class="rahmen">Datenmangementkonzept</h4> <br>
     <form action="/submit_datenmanagementkonzept" method="POST">
         <table class="table table-striped table-hover">
             <tr>
-                <th><strong>Datenmanagementkonzept</strong></th>
+                <th colspan="2">Datenmanagementkonzept</th>
             </tr>
             <tr>
                 <td>Konzeption</td>
                 <td>
-                    <input type="radio" name="konzeption" value="intern">intern<br>
-                    <input type="radio" name="konzeption" value="externe Partner">externe Partner
+                    <div class="form-group">
+                            <div class="input-group">
+                                <div id="radioBtn" class="btn-group">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="betrieb" data-title="intern" >intern</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="betrieb" data-title="externe Partner" >externe Partner</a>
+                                </div>
+                                <input type="hidden" name="konzeption" id="konzeption">
+                            </div>
+                    </div>
                 </td>
             </tr>
             <tr>
-                <th><strong>Architektur</strong></th>
+                <th colspan="2">Architektur</th>
             </tr>
             <tr>
                 <td>Architektur</td>
                 <td>
-                    <input type="radio" name="architektur" value="Stove Pipe Ansatz">Stove Pipe Ansatz<br>
-                    <input type="radio" name="architektur" value="Abgestimmte Data Marts">Abgestimmte Data Marts<br>
-                    <input type="radio" name="architektur" value="Core Date Warehouse">Core Date Warehouse<br>
-                    <input type="radio" name="architektur" value="Hub-and-Spoke-Architektur">Hub-and-Spoke-Architektur<br>
-                    <input type="radio" name="architektur" value="Architekturmix">Architekturmix
+                    <div class="form-group">
+                        <div class="input-group">
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="architektur">
+                                <option value="" disabled selected>auswählen</option>
+                                <option value="stove_pipe">Stove Pipe Ansatz</option>
+                                <option value="data_marts">Abgestimmte Data Marts</option>
+                                <option value="cdw">Core Data Warehouse</option>
+                                <option value="hub-and-spoke">Hub-and-Spoke-Architektur</option>
+                                <option value="data-lake">Data Lake</option>
+                                 <option value="mix">Architekturmix</option>
+                                <option value="extern">durch externen Partner zu bestimmen</option>
+                                <option value="unklar">noch unklar</option>
+                            </select>
+                            <input type="hidden" name="architektur" id="architektur">
+                            </div>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -49,5 +67,18 @@
     <a href="/datenquellen" class="btn btn-secondary">Zurück</a>
     <a href="/etl" class="btn btn-secondary">Weiter</a>
 </div>
+
+<script>
+    $(function () {
+        $('#radioBtn a').on('click', function () {
+            var sel = $(this).data('title');
+            var tog = $(this).data('toggle');
+            $('#' + tog).prop('value', sel);
+
+            $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
+            $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
+        });
+    });
+</script>
 
 {% include "footer.html" %}
