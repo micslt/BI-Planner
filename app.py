@@ -86,31 +86,57 @@ def reifegrad_auswertung():
 ##############################################2. Rahmenbedingungen######################################################
 
 
-@app.route("/rahmenbedingungen", methods=["GET", "POST"])
+@app.route('/rahmenbedingungen', methods=['GET', 'POST'])
 def rahmenbedingungen():
-    return render_template("rahmenbedingungen.html")
+    if request.method == 'POST':
+        betrieb = request.form["betrieb"]
+        aufbau = request.form["aufbau"]
+        personenressourcen = request.form["personenressourcen"]
+        knowhow = request.form["knowhow"]
+        bedarf = request.form["bedarf"]
+        mittel = request.form["mittel"]
+        personendaten = request.form["personendaten"]
+        gesetzeslage = request.form["gesetzeslage"]
+        gesetz = request.form["gesetz"]
 
-@app.route("/submit_rahmenbedingungen", methods=["GET", "POST"])
-def submit_rahmenbedingungen():
-    if request.method == "POST":
-        form_data = request.form
-
-        # Überprüfe, ob die CSV-Datei vorhanden ist
-        csv_exists = os.path.isfile("rahmenbedingungen.csv")
-
-        with open("rahmenbedingungen.csv", "a", newline="", encoding="utf-8") as csvfile:
+        with open('rahmenbedingungen.csv', 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
+            writer.writerow([betrieb, aufbau, personenressourcen, knowhow, bedarf, mittel, personendaten, gesetzeslage, gesetz])
 
-            # Schreibe Header, falls CSV-Datei neu erstellt wurde
-            if not csv_exists:
-                writer.writerow(form_data.keys())
+        return redirect('/rahmenbedingungen')  # Zurück zur Startseite umleiten
+    else:
+        try:
+            with open('rahmenbedingungen.csv', 'r') as csvfile:
+                reader = csv.reader(csvfile)
+                # enumerate() wird verwendet, um sowohl die Rahmenbedingungen als auch deren Nummern zu bekommen.
+                rahmenbedingungen = [(i, row) for i, row in enumerate(reader, start=1)]
+        except FileNotFoundError:
+            rahmenbedingungen = []
 
-            writer.writerow(form_data.values())
+    return render_template('rahmenbedingungen.html', rahmenbedingungen=rahmenbedingungen)
 
 
-        # Nachricht anzeigen und zur Startseite (index) umleiten
-    message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
-    return render_template("message.html", message=message, redirect_url="/unternehmensziele")
+@app.route('/rahmenbedingungen/delete', methods=['POST'])
+def delete_rahmenbedingung():
+    rahmenbedingung_nummer = request.form['rahmenbedingung_nummer']
+
+    # Lesen Sie alle rahmenbedingungen
+    with open('rahmenbedingungen.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        rahmenbedingungen = [row[0] for row in reader]
+
+    # Löschen Sie das ausgewählte Ziel
+    del rahmenbedingungen[int(rahmenbedingung_nummer) - 1]
+
+    # Überschreiben Sie die CSV-Datei mit den verbleibenden rahmenbedingungenn
+    with open('rahmenbedingungen.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        for rahmenbedingung in rahmenbedingungen:
+            writer.writerow([rahmenbedingung])
+
+    return redirect('/rahmenbedingungen')
+
+
 
 
 ##################################################3.Planung#############################################################
@@ -484,9 +510,60 @@ def auswertungen():
             next(reader)  # Header-Zeile überspringen
             results = [row for row in reader if row[0] == selected_entry]
     except FileNotFoundError:
-        return redirect(url_for("nodata"))  # Wenn beim Öffnen der Datei ein Fehler auftritt, auf "nodata" umleiten
+        reifegrad_auswertung.csv =[]
 
-    return render_template("auswertungen.html", results=results, all_entries=all_entries, selected_entry=selected_entry)
+    try:
+        with open('ziele.csv', 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            # enumerate() wird verwendet, um sowohl die Ziele als auch deren Nummern zu bekommen.
+            ziele = [(i, row[0]) for i, row in enumerate(reader, start=1)]
+    except FileNotFoundError:
+        ziele = []
+
+    try:
+        with open('informationsbedarf.csv', 'r') as csvfile:
+                reader = csv.reader(csvfile)
+                informationsbedarf_liste = [(i, row) for i, row in enumerate(reader, start=1)]
+    except FileNotFoundError:
+        informationsbedarf_liste = []
+
+    try:
+        with open('datenquellen.csv', 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            # enumerate() wird verwendet, um sowohl die Datenquellen als auch deren Nummern zu bekommen.
+            datenquellen = [(i, row) for i, row in enumerate(reader, start=1)]
+    except FileNotFoundError:
+        datenquellen = []
+
+    try:
+        with open('analysen.csv', 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            # enumerate() wird verwendet, um sowohl die analysen als auch deren Nummern zu bekommen.
+            analysen = [(i, row) for i, row in enumerate(reader, start=1)]
+    except FileNotFoundError:
+        analysen = []
+
+
+    try:
+        with open('datenmanagementkonzept.csv', 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            # enumerate() wird verwendet, um sowohl die datenmanagementkonzept als auch deren Nummern zu bekommen.
+            datenmanagementkonzept = [(i, row) for i, row in enumerate(reader, start=1)]
+    except FileNotFoundError:
+        datenmanagementkonzept = []
+
+    try:
+        with open('rahmenbedingungen.csv', 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            # enumerate() wird verwendet, um sowohl die Rahmenbedingungen als auch deren Nummern zu bekommen.
+            rahmenbedingungen = [(i, row) for i, row in enumerate(reader, start=1)]
+    except FileNotFoundError:
+        rahmenbedingungen = []
+
+    return render_template("auswertungen.html", results=results, all_entries=all_entries, selected_entry=selected_entry,
+                           ziele=ziele, informationsbedarf_liste=informationsbedarf_liste, datenquellen=datenquellen,
+                           analysen=analysen, datenmanagementkonzept=datenmanagementkonzept, rahmenbedingungen=rahmenbedingungen)
+
 
 ##################################################8. Feedback### #######################################################
 @app.route("/feedback")
