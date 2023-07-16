@@ -252,31 +252,50 @@ def delete_datenquelle():
 ##################################################4. Datenbereitstellung################################################
 
 
-@app.route("/datenmanagementkonzept", methods=["GET", "POST"])
+@app.route("/datenmanagementkonzept", methods=['GET', 'POST'])
 def datenmanagementkonzept():
-    return render_template("datenmanagementkonzept.html")
+    if request.method == 'POST':
+        konzeption = request.form['konzeption']
+        architektur = request.form['architektur']
+        applikation = request.form['applikation']
 
-@app.route("/submit_datenmanagementkonzept", methods=["GET", "POST"])
-def submit_datenmanagementkonzept():
-    if request.method == "POST":
-        form_data = request.form
-
-        # Überprüfe, ob die CSV-Datei vorhanden ist
-        csv_exists = os.path.isfile("datenmanagementkonzept.csv")
-
-        with open("datenmanagementkonzept.csv", "a", newline="", encoding="utf-8") as csvfile:
+        with open('datenmanagementkonzept.csv', 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
+            writer.writerow([konzeption, architektur, applikation])
 
-            # Schreibe Header, falls CSV-Datei neu erstellt wurde
-            if not csv_exists:
-                writer.writerow(form_data.keys())
+        return redirect('/datenmanagementkonzept')  # Änderung hier, um zur Startseite zurückzukehren
+    else:
+        try:
+            with open('datenmanagementkonzept.csv', 'r') as csvfile:
+                reader = csv.reader(csvfile)
+                # enumerate() wird verwendet, um sowohl die datenmanagementkonzept als auch deren Nummern zu bekommen.
+                datenmanagementkonzept = [(i, row) for i, row in enumerate(reader, start=1)]
+        except FileNotFoundError:
+            datenmanagementkonzept = []
 
-            writer.writerow(form_data.values())
+    return render_template('datenmanagementkonzept.html', datenmanagementkonzept=datenmanagementkonzept)
 
 
-        # Nachricht anzeigen und zur Startseite (index) umleiten
-    message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
-    return render_template("message.html", message=message, redirect_url="/etl")
+@app.route('/datenmanagementkonzept/delete', methods=['POST'])
+def delete_datenmanagementkonzept():
+    datenmanagement_nummer = request.form['datenmanagement_nummer']
+
+    # Lesen Sie alle datenmanagementkonzept
+    with open('datenmanagementkonzept.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        datenmanagementkonzept = [row for row in reader]
+
+    # Löschen Sie die ausgewählte Datenquelle
+    del datenmanagementkonzept[int(datenmanagement_nummer) - 1]
+
+    # Überschreiben Sie die CSV-Datei mit den verbleibenden datenmanagementkonzept
+    with open('datenmanagementkonzept.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        for datenmanagement in datenmanagementkonzept:
+            writer.writerow(datenmanagement)
+
+    return redirect('/datenmanagementkonzept')
+
 
 
 
