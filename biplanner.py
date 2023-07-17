@@ -81,3 +81,19 @@ def load_informationsbedarf():
         for row in reader:
             options.append(row[0])
     return options
+
+def load_informationsbereitstellung():
+    options = []
+    with open('informationsbereitstellung.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            options.append(row[0])
+    return options
+
+def load_analysen():
+    options = []
+    with open('analysen.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            options.append(row[1])
+    return options

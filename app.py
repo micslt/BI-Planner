@@ -61,26 +61,38 @@ def submit_reifegrad():
 
 @app.route("/reifegrad_auswertung")
 def reifegrad_auswertung():
-    csv_file = "reifegrad_auswertung.csv"
-
-    if not os.path.isfile(csv_file):
-       return redirect("/nodata")  # Wenn die Datei nicht vorhanden ist, auf "nodata" umleiten
-
-
-    all_entries = biplanner.get_all_entries()
-    selected_entry = request.args.get("key", default=biplanner.get_latest_entry())
-
-
     try:
-        with open(csv_file, "r", newline="", encoding="utf-8") as csvfile:
+        with open('reifegrad_auswertung.csv', "r", newline="", encoding="utf-8") as csvfile:
             reader = csv.reader(csvfile)
             next(reader)  # Header-Zeile überspringen
+            all_entries = biplanner.get_all_entries()
+            selected_entry = request.args.get("key", default=biplanner.get_latest_entry())
             results = [row for row in reader if row[0] == selected_entry]
     except FileNotFoundError:
-        return redirect(url_for("nodata"))  # Wenn beim Öffnen der Datei ein Fehler auftritt, auf "nodata" umleiten
+        reifegrad_auswertung.csv =[]
 
     return render_template("reifegrad_auswertung.html", results=results, all_entries=all_entries, selected_entry=selected_entry)
 
+
+"""@app.route('/reifegrad_auswertung/delete', methods=['POST'])
+def delete_reifegrad_auswertung():
+    reifegrad_nummer = request.form['reifegrad_auswertung_nummer']
+
+    # Lesen Sie alle reifegrad_auswertungen
+    with open('reifegrad_auswertung.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        reifegrad_auswertung = [row for row in reader]
+
+    # Löschen Sie das ausgewählte Ziel
+    del reifegrad_auswertung[int(reifegrad_nummer) - 1]
+
+    # Überschreiben Sie die CSV-Datei mit den verbleibenden reifegrad_auswertungen
+    with open('reifegrad_auswertung.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        for reifegrad in reifegrad_auswertung:
+            writer.writerow([reifegrad])
+
+    return redirect('/reifegrad_auswertung')"""
 
 
 ##############################################2. Rahmenbedingungen######################################################
@@ -414,34 +426,64 @@ def delete_analyse():
 
 ##################################################6. Informationsbereitstellung#########################################
 
-@app.route("/informationsbereitstellung")
+@app.route("/informationsbereitstellung", methods=['GET', 'POST'])
 def informationsbereitstellung():
-    return render_template("informationsbereitstellung.html")
+    csv_file = "informationsbedarf.csv"
 
-@app.route("/submit_informationsbereitstellung", methods=["GET", "POST"])
-def submit_informationsbereitstellung():
-    if request.method == "POST":
-        form_data = request.form
+    if not os.path.isfile(csv_file):
+       return redirect("/nodata")  # Wenn die Datei nicht vorhanden ist, auf "nodata" umleiten
 
-        # Überprüfe, ob die CSV-Datei vorhanden ist
-        csv_exists = os.path.isfile("informationsbereitstellung.csv")
+    if request.method == 'POST':
+        bezeichnung = request.form['bezeichnung']
+        bereitstellungsart = request.form['bereitstellungsart']
+        berechtigte_empfaenger = request.form['berechtigte_empfaenger']
+        messung1 = request.form.getlist('messung1[]')
 
-        with open("informationsbereitstellung.csv", "a", newline="", encoding="utf-8") as csvfile:
+        with open('informationsbereitstellung.csv', 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
+            writer.writerow([bezeichnung, bereitstellungsart, berechtigte_empfaenger, messung1])
 
-            # Schreibe Header, falls CSV-Datei neu erstellt wurde
-            if not csv_exists:
-                writer.writerow(form_data.keys())
+        return redirect('/informationsbereitstellung')  # Änderung hier, um zur Startseite zurückzukehren
+    else:
+        try:
+            with open('informationsbereitstellung.csv', 'r') as csvfile:
+                reader = csv.reader(csvfile)
+                # enumerate() wird verwendet, um sowohl die informationsbereitstellung als auch deren Nummern zu bekommen.
+                informationsbereitstellung = [(i, row) for i, row in enumerate(reader, start=1)]
+        except FileNotFoundError:
+            informationsbereitstellung = []
 
-            writer.writerow(form_data.values())
+    dropdown_options = biplanner.load_analysen()
 
-        # Nachricht anzeigen und zur Startseite (index) umleiten
-    message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
-    return render_template("message.html", message=message, redirect_url="/visualisierung")
+
+    return render_template('informationsbereitstellung.html', informationsbereitstellung=informationsbereitstellung, dropdown_options=dropdown_options)
+
+
+@app.route('/informationsbereitstellung/delete', methods=['POST'])
+def delete_information():
+    information_nummer = request.form['information_nummer']
+
+    # Lesen Sie alle informationsbereitstellung
+    with open('informationsbereitstellung.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        informationsbereitstellung = [row for row in reader]
+
+    # Löschen Sie die ausgewählte information
+    del informationsbereitstellung[int(information_nummer) - 1]
+
+    # Überschreiben Sie die CSV-Datei mit den verbleibenden informationsbereitstellung
+    with open('informationsbereitstellung.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        for information in informationsbereitstellung:
+            writer.writerow(information)
+
+    return redirect('/informationsbereitstellung')
+
 
 @app.route("/visualisierung")
 def visualisierung():
     return render_template("visualisierung.html")
+
 
 @app.route("/submit_visualisierung", methods=["GET", "POST"])
 def submit_visualisierung():
@@ -464,9 +506,13 @@ def submit_visualisierung():
     message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
     return render_template("message.html", message=message, redirect_url="/visualisierung")
 
+
 @app.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html")
+    dropdown_options = biplanner.load_informationsbereitstellung()
+
+    return render_template("dashboard.html", dropdown_options=dropdown_options)
+
 
 @app.route("/submit_dashboard", methods=["GET", "POST"])
 def submit_dashboard():
@@ -494,20 +540,12 @@ def submit_dashboard():
 
 @app.route("/auswertungen")
 def auswertungen():
-    csv_file = "reifegrad_auswertung.csv"
-
-    if not os.path.isfile(csv_file):
-       return redirect("/nodata")  # Wenn die Datei nicht vorhanden ist, auf "nodata" umleiten
-
-
-    all_entries = biplanner.get_all_entries()
-    selected_entry = request.args.get("key", default=biplanner.get_latest_entry())
-
-
     try:
-        with open(csv_file, "r", newline="", encoding="utf-8") as csvfile:
+        with open('reifegrad_auswertung.csv', "r", newline="", encoding="utf-8") as csvfile:
             reader = csv.reader(csvfile)
             next(reader)  # Header-Zeile überspringen
+            all_entries = biplanner.get_all_entries()
+            selected_entry = request.args.get("key", default=biplanner.get_latest_entry())
             results = [row for row in reader if row[0] == selected_entry]
     except FileNotFoundError:
         reifegrad_auswertung.csv =[]
@@ -560,9 +598,19 @@ def auswertungen():
     except FileNotFoundError:
         rahmenbedingungen = []
 
+
+    try:
+        with open('informationsbereitstellung.csv', 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            # enumerate() wird verwendet, um sowohl die informationsbereitstellung als auch deren Nummern zu bekommen.
+            informationsbereitstellung = [(i, row) for i, row in enumerate(reader, start=1)]
+    except FileNotFoundError:
+        informationsbereitstellung = []
+
     return render_template("auswertungen.html", results=results, all_entries=all_entries, selected_entry=selected_entry,
                            ziele=ziele, informationsbedarf_liste=informationsbedarf_liste, datenquellen=datenquellen,
-                           analysen=analysen, datenmanagementkonzept=datenmanagementkonzept, rahmenbedingungen=rahmenbedingungen)
+                           analysen=analysen, datenmanagementkonzept=datenmanagementkonzept,
+                           rahmenbedingungen=rahmenbedingungen, informationsbereitstellung=informationsbereitstellung)
 
 
 ##################################################8. Feedback### #######################################################

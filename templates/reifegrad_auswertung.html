@@ -9,17 +9,20 @@
 <div class="container">
     <h4 class="rahmen">Auswertungen</h4>
     <br>
-        <form action="/reifegrad_auswertung" method="get" id="selectForm">
-            <div class="form-group">
-                <h6><label for="keySelect">Erfassungseintrag auswählen:</label></h6>
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="keySelect" name="key" onchange="submitForm()">
-                    {% for entry in all_entries %}
-                    <option value="{{ entry }}" {% if entry == selected_entry %}selected{% endif %}>{{ entry }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <!-- Kein Submit-Button mehr -->
-        </form>
+    <form action="/reifegrad_auswertung" method="get" id="selectForm">
+        <div class="form-group">
+            <h6><label for="keySelect">Erfassungseintrag auswählen:</label></h6>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="keySelect" name="key" onchange="submitForm()">
+                {% for entry in all_entries %}
+                <option value="{{ entry }}" {% if entry == selected_entry %}selected{% endif %}>{{ entry }}</option>
+                {% endfor %}
+            </select>
+        </div>
+<!--        <form action="/reifegrad_auswertung/delete" method="POST">
+            <input type="hidden" name="reifegrad_auswertung_nummer" value="{{ nummer }}">
+            <input type="submit" value="Löschen">
+        </form> --!>
+    </form>
     <br>
     {% if results %}
     <table class="table">
@@ -84,6 +87,18 @@
     function submitForm() {
         document.getElementById("selectForm").submit();
     }
+
+    $(function () {
+        $('#radioBtn a').on('click', function () {
+            var sel = $(this).data('title');
+            var tog = $(this).data('toggle');
+            $('#' + tog).prop('value', sel);
+
+            $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
+            $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
+        });
+    });
 </script>
+
 
 {% include "footer.html" %}

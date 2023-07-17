@@ -69,7 +69,7 @@
     {% endif %}
 
     <br>
-    <h6><label>Rahmenbedingungen:</label></h6>
+    <h6><label>Rahmenbedingungen</label></h6>
     <div class="table-container" style="display: inline-block;">
         <table class="table table-striped table-hover">
             <thead>
@@ -104,7 +104,7 @@
     </div>
 
     <br>
-    <h6><label>Unternehmensziele:</label></h6>
+    <h6><label>Unternehmensziele</label></h6>
     <div class="table-container" style="display: inline-block;">
                 <table class="table table-striped table-hover">
                     <thead>
@@ -124,7 +124,7 @@
                 </table>
             </div>
     <br>
-    <h6><label>Informationsbedarf:</label></h6>
+    <h6><label>Informationsbedarf</label></h6>
     <div class="table-container" style="display: inline-block;">
             <table class="table table-striped table-hover">
                 <thead>
@@ -148,7 +148,7 @@
                 </tbody>
             </table>
         </div>
-    <h6><label>Datenquellen:</label></h6>
+    <h6><label>Datenquellen</label></h6>
     <div class="table-container" style="display: inline-block;">
         <table class="table table-striped table-hover">
             <thead>
@@ -197,7 +197,7 @@
 
     <h6><label>ETL-Prozesse</label></h6><br>
 
-    <h6><label>Analysen:</label></h6>
+    <h6><label>Analysen</label></h6>
         <div class="table-container" style="display: inline-block;">
         <table class="table table-striped table-hover">
             <thead>
@@ -223,7 +223,31 @@
         </table>
     </div>
 
-    <h6><label>Dashboards und Berichte</label></h6><br>
+    <h6><label>Dashboards und Berichte</label></h6>
+            <div class="table-container" style="display: inline-block;">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Nummer</th>
+                    <th>Bezeichnung</th>
+                    <th>Art</th>
+                    <th>Empfänger</th>
+                    <th>beinhaltete Messungen</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for nummer, information in informationsbereitstellung %}
+                <tr>
+                    <td>{{ nummer }}</td>
+                    <td>{{ information[0] }}</td>
+                    <td>{{ information[1] }}</td>
+                    <td>{{ information[2] }}</td>
+                    <td>{{ information[3] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     <h6><label>Qualitätskontrollen Visualisierungen und Dashboards</label></h6><br>
 </div>
