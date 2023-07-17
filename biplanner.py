@@ -97,3 +97,12 @@ def load_analysen():
         for row in reader:
             options.append(row[1])
     return options
+
+def load_visualisierung():
+    summe = 0
+    with open('analysen.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            summe += sum(map(int, row[1:13]))
+    return summe
+

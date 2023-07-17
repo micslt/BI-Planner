@@ -482,7 +482,9 @@ def delete_information():
 
 @app.route("/visualisierung")
 def visualisierung():
-    return render_template("visualisierung.html")
+    dropdown_options = biplanner.load_analysen()
+
+    return render_template("visualisierung.html", dropdown_options=dropdown_options)
 
 
 @app.route("/submit_visualisierung", methods=["GET", "POST"])

@@ -13,11 +13,11 @@
             <tr>
                 <td><h6>Bezeichnung des Dashboards</h6></td>
                 <td>
-                        <select id="Applikation" name="Applikation" class="form-control" placeholder="Applikation">
-                            <option value="" selected disabled>Applikation wählen</option>
+                        <select id="Applikation" name="Applikation" class="form-control" placeholder="Dashboard wählen">
+                            <option value="" selected disabled>Dashboard wählen</option>
                             <!-- Hier werden die Dropdown-Optionen aus der CSV-Datei eingefügt -->
-                            {% for datenquelle in dropdown_options %}
-                                <option value="{{ datenquelle }}">{{ datenquelle }}</option>
+                            {% for dashboard in dropdown_options %}
+                                <option value="{{ dashboard }}">{{ dashboard }}</option>
                             {% endfor %}
                         </select>
                 </td>
