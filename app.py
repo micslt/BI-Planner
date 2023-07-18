@@ -480,7 +480,7 @@ def delete_information():
     return redirect('/informationsbereitstellung')
 
 
-@app.route("/visualisierung")
+""""@app.route("/visualisierung")
 def visualisierung():
     dropdown_options = biplanner.load_analysen()
 
@@ -507,35 +507,100 @@ def submit_visualisierung():
         # Nachricht anzeigen und zur Startseite (index) umleiten
     message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
     return render_template("message.html", message=message, redirect_url="/visualisierung")
+"""
+
+@app.route("/visualisierung", methods=['GET', 'POST'])
+def visualisierung():
+    if request.method == 'POST':
+        Visualisierung = request.form['Visualisierung']
+        qualitaet = request.form['summe']
+
+        with open('visualisierung.csv', 'a', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow([Visualisierung, qualitaet])
+
+        return redirect('/visualisierung')  # Änderung hier, um zur Startseite zurückzukehren
+    else:
+        try:
+            with open('visualisierung.csv', 'r') as csvfile:
+                reader = csv.reader(csvfile)
+                # enumerate() wird verwendet, um sowohl die visualisierung als auch deren Nummern zu bekommen.
+                visualisierung = [(i, row) for i, row in enumerate(reader, start=1)]
+        except FileNotFoundError:
+            visualisierung = []
+
+    dropdown_options = biplanner.load_analysen()
+
+    return render_template('visualisierung.html', visualisierung=visualisierung, dropdown_options=dropdown_options)
 
 
-@app.route("/dashboard")
+@app.route('/visualisierung/delete', methods=['POST'])
+def delete_visual():
+    visual_nummer = request.form['visual_nummer']
+
+    # Lesen Sie alle visualisierung
+    with open('visualisierung.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        visualisierung = [row for row in reader]
+
+    # Löschen Sie die ausgewählte visual
+    del visualisierung[int(visual_nummer) - 1]
+
+    # Überschreiben Sie die CSV-Datei mit den verbleibenden visualisierung
+    with open('visualisierung.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        for visual in visualisierung:
+            writer.writerow(visual)
+
+    return redirect('/visualisierung')
+
+
+
+
+@app.route("/dashboard", methods=['GET', 'POST'])
 def dashboard():
+    if request.method == 'POST':
+        dashboard = request.form['dashboard']
+        qualitaet = request.form['summe']
+
+        with open('dashboard.csv', 'a', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow([dashboard, qualitaet])
+
+        return redirect('/dashboard')  # Änderung hier, um zur Startseite zurückzukehren
+    else:
+        try:
+            with open('dashboard.csv', 'r') as csvfile:
+                reader = csv.reader(csvfile)
+                # enumerate() wird verwendet, um sowohl die dashboard als auch deren Nummern zu bekommen.
+                dashboard = [(i, row) for i, row in enumerate(reader, start=1)]
+        except FileNotFoundError:
+            dashboard = []
+
     dropdown_options = biplanner.load_informationsbereitstellung()
 
-    return render_template("dashboard.html", dropdown_options=dropdown_options)
+    return render_template('dashboard.html', dashboard=dashboard, dropdown_options=dropdown_options)
 
 
-@app.route("/submit_dashboard", methods=["GET", "POST"])
-def submit_dashboard():
-    if request.method == "POST":
-        form_data = request.form
+@app.route('/dashboard/delete', methods=['POST'])
+def delete_dash():
+    dash_nummer = request.form['dash_nummer']
 
-        # Überprüfe, ob die CSV-Datei vorhanden ist
-        csv_exists = os.path.isfile("dashboard.csv")
+    # Lesen Sie alle dashboard
+    with open('dashboard.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        dashboard = [row for row in reader]
 
-        with open("dashboard.csv", "a", newline="", encoding="utf-8") as csvfile:
-            writer = csv.writer(csvfile)
+    # Löschen Sie die ausgewählte dash
+    del dashboard[int(dash_nummer) - 1]
 
-            # Schreibe Header, falls CSV-Datei neu erstellt wurde
-            if not csv_exists:
-                writer.writerow(form_data.keys())
+    # Überschreiben Sie die CSV-Datei mit den verbleibenden dashboard
+    with open('dashboard.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        for dash in dashboard:
+            writer.writerow(dash)
 
-            writer.writerow(form_data.values())
-
-        # Nachricht anzeigen und zur Startseite (index) umleiten
-    message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
-    return render_template("message.html", message=message, redirect_url="/dashboard")
+    return redirect('/dashboard')
 
 
 ##################################################7. Auswertungen#######################################################

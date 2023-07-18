@@ -10,13 +10,13 @@
     <h4 class="rahmen">Qualitätskontrolle Visualisierungen</h4>    <br>
 </div>
 <div class="container">
-    <form action="/submit_visualisierung" method="post">
+    <form action="/visualisierung" method="post">
         <table class="table table-striped table-hover">
             <tr>
                 <td><h6>Bezeichnung des visuellen Elements</h6></td>
                 <td>
                         <select id="Visualisierung" name="Visualisierung" class="form-control" placeholder="Element wählen">
-                            <option value="" selected disabled>Element wählen</option>
+                            <option value="Fehlende Angabe" selected >Element wählen</option>
                             <!-- Hier werden die Dropdown-Optionen aus der CSV-Datei eingefügt -->
                             {% for datenquelle in dropdown_options %}
                                 <option value="{{ datenquelle }}">{{ datenquelle }}</option>
@@ -192,8 +192,7 @@
                     </div>
                 </td>
             </tr>
-                                            <input type="hidden" name="summe" id="summe">
-
+    <input type="hidden" name="summe" id="summe">
         </table>
         <div class="text-center">
             <input type="submit" value="Speichern" class="btn btn-primary btn-lg">
@@ -219,7 +218,7 @@
                     <td>{{ visual[1] }}</td>
                     <td>
                         <form action="/visualisierung/delete" method="POST">
-                            <input type="hidden" name="analyse_nummer" value="{{ nummer }}">
+                            <input type="hidden" name="visual_nummer" value="{{ nummer }}">
                             <input type="submit" value="Löschen">
                         </form>
                     </td>
@@ -246,13 +245,11 @@
             // Hier erfolgt die Berechnung der Summe
             var summe = 0;
             for (var i = 1; i <= 12; i++) {
-                var frage = $('#frage' + i).prop('checked');
-                if (frage) {
-                    summe += 1;
-                }
+                var frageWert = parseInt($('#frage' + i).val());
+                summe += frageWert;
             }
-            var prozent = (summe / 12) * 100; // Ergebnis in Prozent berechnen
-            $('#summe').val(prozent.toFixed(2) + '%'); // Ergebnis in das versteckte Eingabefeld setzen
+            var prozent = Math.round((summe / 12) * 100); // Ergebnis in Prozent berechnen und auf ganze Zahl runden
+            $('#summe').val(prozent + '%'); // Ergebnis in das versteckte Eingabefeld setzen
 
             $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
             $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
@@ -260,4 +257,6 @@
     });
 
 </script>
+
+
 {% include "footer.html" %}
