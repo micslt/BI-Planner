@@ -674,11 +674,27 @@ def auswertungen():
     except FileNotFoundError:
         informationsbereitstellung = []
 
+    try:
+        with open('visualisierung.csv', 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            # enumerate() wird verwendet, um sowohl die visualisierung als auch deren Nummern zu bekommen.
+            visualisierung = [(i, row) for i, row in enumerate(reader, start=1)]
+    except FileNotFoundError:
+        visualisierung = []
+
+    try:
+        with open('dashboard.csv', 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            # enumerate() wird verwendet, um sowohl die visualisierung als auch deren Nummern zu bekommen.
+            dashboard = [(i, row) for i, row in enumerate(reader, start=1)]
+    except FileNotFoundError:
+        dashboard = []
+
     return render_template("auswertungen.html", results=results, all_entries=all_entries, selected_entry=selected_entry,
                            ziele=ziele, informationsbedarf_liste=informationsbedarf_liste, datenquellen=datenquellen,
                            analysen=analysen, datenmanagementkonzept=datenmanagementkonzept,
-                           rahmenbedingungen=rahmenbedingungen, informationsbereitstellung=informationsbereitstellung)
-
+                           rahmenbedingungen=rahmenbedingungen, informationsbereitstellung=informationsbereitstellung,
+                           visualisierung=visualisierung, dashboard=dashboard)
 
 ##################################################8. Feedback### #######################################################
 @app.route("/feedback")

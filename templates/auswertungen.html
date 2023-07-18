@@ -249,7 +249,56 @@
         </table>
     </div>
 
-    <h6><label>Qualitätskontrollen Visualisierungen und Dashboards</label></h6><br>
+    <h6><label>Qualitätskontrollen Visualisierungen und Dashboards</label></h6>
+    <table>
+  <tr>
+    <td class="left-column"><h7>Qualitätskontrollen Visualisierungen</h7></td>
+    <td><h7>Qualitätskontrollen Dashboards</h7></td>
+  </tr>
+  <tr>
+    <td class="left-column">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Nummer</th>
+                    <th>Element</th>
+                    <th>Qualität</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for nummer, visual in visualisierung %}
+                <tr>
+                    <td>{{ nummer }}</td>
+                    <td>{{ visual[0] }}</td>
+                    <td>{{ visual[1] }}</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </td>
+    <td><table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Nummer</th>
+                    <th>Element</th>
+                    <th>Qualität</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for nummer, dash in dashboard %}
+                <tr>
+                    <td>{{ nummer }}</td>
+                    <td>{{ dash[0] }}</td>
+                    <td>{{ dash[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table></td>
+  </tr>
+</table>
+<br>
+<br>
 </div>
 
 
