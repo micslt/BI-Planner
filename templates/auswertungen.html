@@ -9,7 +9,7 @@
 </div>
 <br>
 <div class="container">
-    <h4 class="rahmen">Auswertungen</h4>    <br>
+    <h4 class="rahmen">Auswertung</h4>    <br>
 </div>
 
 
@@ -101,12 +101,18 @@
                 {% endfor %}
             </tbody>
         </table>
-    </div>
+    </div><br>
 
-    <br>
-    <h6><label>Unternehmensziele</label></h6>
-    <div class="table-container" style="display: inline-block;">
-                <table class="table table-striped table-hover">
+    <div>
+    <table><br>
+  <tr>
+      <td class="left-column"><h6><label>Unternehmensziele</label></h6></td>
+    <td class="left-column"><h6><label>Informationsbedarf</label></h6></td>
+      <td class="left-column"><h6><label>Datenquellen</label></h6></td>
+  </tr>
+  <tr>
+       <td class="left-column">
+             <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th>Nr.</th>
@@ -122,11 +128,8 @@
                         {% endfor %}
                     </tbody>
                 </table>
-            </div>
-    <br>
-    <h6><label>Informationsbedarf</label></h6>
-    <div class="table-container" style="display: inline-block;">
-            <table class="table table-striped table-hover">
+       </td>
+      <td class="left-column"><table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Nr.</th>
@@ -146,11 +149,9 @@
                     </tr>
                     {% endfor %}
                 </tbody>
-            </table>
-        </div>
-    <h6><label>Datenquellen</label></h6>
-    <div class="table-container" style="display: inline-block;">
-        <table class="table table-striped table-hover">
+      </table></td>
+      <td class="left-column">
+          <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th>Nr.</th>
@@ -168,8 +169,11 @@
                 {% endfor %}
             </tbody>
         </table>
-    </div>
-
+      </td>
+  </tr>
+    </table>
+      </div>
+    <br>
     <h6><label>Datenmanagementkonzept</label></h6>
         <div class="table-container" style="display: inline-block;">
         <table class="table table-striped table-hover">
@@ -248,12 +252,10 @@
             </tbody>
         </table>
     </div>
-
-    <h6><label>Qualitätskontrollen Visualisierungen und Dashboards</label></h6>
     <table>
   <tr>
-    <td class="left-column"><h7>Qualitätskontrollen Visualisierungen</h7></td>
-    <td><h7>Qualitätskontrollen Dashboards</h7></td>
+      <td class="left-column"><h6><label>Qualitätskontrollen Visualisierungen</label></h6></td>
+    <td><h6><label>Qualitätskontrollen Dashboards</label></h6></td>
   </tr>
   <tr>
     <td class="left-column">

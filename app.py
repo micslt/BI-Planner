@@ -74,27 +74,6 @@ def reifegrad_auswertung():
     return render_template("reifegrad_auswertung.html", results=results, all_entries=all_entries, selected_entry=selected_entry)
 
 
-"""@app.route('/reifegrad_auswertung/delete', methods=['POST'])
-def delete_reifegrad_auswertung():
-    reifegrad_nummer = request.form['reifegrad_auswertung_nummer']
-
-    # Lesen Sie alle reifegrad_auswertungen
-    with open('reifegrad_auswertung.csv', 'r') as csvfile:
-        reader = csv.reader(csvfile)
-        reifegrad_auswertung = [row for row in reader]
-
-    # Löschen Sie das ausgewählte Ziel
-    del reifegrad_auswertung[int(reifegrad_nummer) - 1]
-
-    # Überschreiben Sie die CSV-Datei mit den verbleibenden reifegrad_auswertungen
-    with open('reifegrad_auswertung.csv', 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        for reifegrad in reifegrad_auswertung:
-            writer.writerow([reifegrad])
-
-    return redirect('/reifegrad_auswertung')"""
-
-
 ##############################################2. Rahmenbedingungen######################################################
 
 
@@ -480,35 +459,6 @@ def delete_information():
     return redirect('/informationsbereitstellung')
 
 
-""""@app.route("/visualisierung")
-def visualisierung():
-    dropdown_options = biplanner.load_analysen()
-
-    return render_template("visualisierung.html", dropdown_options=dropdown_options)
-
-
-@app.route("/submit_visualisierung", methods=["GET", "POST"])
-def submit_visualisierung():
-    if request.method == "POST":
-        form_data = request.form
-
-        # Überprüfe, ob die CSV-Datei vorhanden ist
-        csv_exists = os.path.isfile("visualisierung.csv")
-
-        with open("visualisierung.csv", "a", newline="", encoding="utf-8") as csvfile:
-            writer = csv.writer(csvfile)
-
-            # Schreibe Header, falls CSV-Datei neu erstellt wurde
-            if not csv_exists:
-                writer.writerow(form_data.keys())
-
-            writer.writerow(form_data.values())
-
-        # Nachricht anzeigen und zur Startseite (index) umleiten
-    message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
-    return render_template("message.html", message=message, redirect_url="/visualisierung")
-"""
-
 @app.route("/visualisierung", methods=['GET', 'POST'])
 def visualisierung():
     if request.method == 'POST':
@@ -553,8 +503,6 @@ def delete_visual():
             writer.writerow(visual)
 
     return redirect('/visualisierung')
-
-
 
 
 @app.route("/dashboard", methods=['GET', 'POST'])
@@ -648,7 +596,6 @@ def auswertungen():
     except FileNotFoundError:
         analysen = []
 
-
     try:
         with open('datenmanagementkonzept.csv', 'r') as csvfile:
             reader = csv.reader(csvfile)
@@ -664,7 +611,6 @@ def auswertungen():
             rahmenbedingungen = [(i, row) for i, row in enumerate(reader, start=1)]
     except FileNotFoundError:
         rahmenbedingungen = []
-
 
     try:
         with open('informationsbereitstellung.csv', 'r') as csvfile:
@@ -758,7 +704,6 @@ def deleted():
 @app.route("/nodata")
 def nodata():
     return render_template("nodata.html")
-
 
 
 if __name__ == '__main__':

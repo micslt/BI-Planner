@@ -156,3 +156,7 @@ form .buttons .submit:hover {background-color: #14892c;}
 .left-column {
   padding-right: 100px; /* Passe den Wert an, um den gewünschten Abstand zu erreichen */
 }
+
+.left-column-wide {
+  padding-right: 200px; /* Passe den Wert an, um den gewünschten Abstand zu erreichen */
+}
