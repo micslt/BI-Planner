@@ -13,7 +13,7 @@
 
 
 <div class="container">
-    <form action="/submit_etl" method="POST"><br>
+    <form action="/etl" method="POST"><br>
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -27,8 +27,8 @@
                 <tr style="background-color: lightgray;">
                     <td>Name der Datenquelle</td>
                     <td>
-                        <select id="Applikation" name="Applikation" class="form-control" placeholder="Applikation">
-                            <option value="" selected disabled>Applikation wählen</option>
+                        <select id="Datenquelle" name="Datenquelle" class="form-control" placeholder="Applikation">
+                            <option value="" selected >Applikation wählen</option>
                             <!-- Hier werden die Dropdown-Optionen aus der CSV-Datei eingefügt -->
                             {% for datenquelle in dropdown_options %}
                                 <option value="{{ datenquelle }}">{{ datenquelle }}</option>
@@ -40,8 +40,8 @@
                     <td>
                         <div class="form-group">
                             <div class="input-group">
-                                <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="architektur">
-                                    <option value="" disabled selected>auswählen</option>
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="Datenart">
+                                    <option value="" selected>auswählen</option>
                                     <option alue="operative Geschäftsdaten">operative Geschäftsdaten</option>
                                     <option value="Personaldaten">Personaldaten</option>
                                     <option value="finanzielle Geschäftsdaten">finanzielle Geschäftsdaten</option>
@@ -54,46 +54,25 @@
                         </div>
                     </td>
                 </tr>
-                <tr style="background-color: lightgray;">
-                    <td colspan="2"><strong>Modus</strong></td>
-                </tr>
-                    <td>Expertenmodus </td>
-                    <td>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div id="radioBtn" class="btn-group">
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="expertenmodus" data-title="ja" style="width: 55px;">ja</a>
-                                    <a class="btn btn-primary btn-sm Active" data-toggle="expertenmodus" data-title="nein"  style="width: 55px;">nein</a>
-                                </div>
-                                <input type="hidden" name="abfragezeit" id="abfragezeit">
-                            </div>
-                    </div>
-                    </td>
                 <tr style="background-color: gray;">
                     <td colspan="2"><strong>Zeitliche Abfragesteuerung</strong></td>
                 </tr>
-                <tr style="background-color: lightgray;">
-                    <td>Abfragen außerhalb der operativen Nutzungszeiten möglich?</td>
-                    <td>
-                    <div class="form-group">
-                            <div class="input-group">
-                                <div id="radioBtn" class="btn-group">
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="abfragezeit" data-title="ja" style="width: 55px;">ja</a>
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="abfragezeit" data-title="nein"  style="width: 55px;">nein</a>
-                                </div>
-                                <input type="hidden" name="abfragezeit" id="abfragezeit">
-                            </div>
-                    </div>
-                    </td>
-                </tr>
                 <tr style="background-color: silver;">
-                    <td>Geplanter Zeitpunkt Frequenz</td>
+                    <td>Geplanter Zeitpunkt und Frequenz</td>
                     <td>
-                        <input type="text" name="geplanter_zeitpunkt" placeholder="geplante Uhrzeit eingeben" style="width: 250px">
+                        <input type="text" name="Abfragezeit" placeholder="Abfragezeit">
                         <br>
-                        <input type="checkbox" name="frequenz" value="täglich"> täglich
-                        <input type="checkbox" name="frequenz" value="wöchentlich"> wöchentlich
-                        <input type="checkbox" name="frequenz" value="monatlich"> monatlich
+                        <div class="form-group">
+                            <div class="input-group">
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="Abfragefrequenz">
+                                    <option value="" selected>auswählen</option>
+                                    <option value="täglich">täglich</option>
+                                    <option value="wöchentlich">wöchentlich</option>
+                                    <option value="monatlich">monatlich</option>
+                                    <option value="jährlich">jährlich</option>
+                                </select>
+                                <input type="hidden" name="Abfragefrequenz" id="Abfragefrequenz">
+                            </d
                     </td>
                 </tr>
                 <tr style="background-color: lightgray;">
@@ -102,10 +81,10 @@
                     <div class="form-group">
                             <div class="input-group">
                                 <div id="radioBtn" class="btn-group">
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="abfragezeit2" data-title="ja" style="width: 55px;">ja</a>
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="abfragezeit2" data-title="nein"  style="width: 55px;">nein</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="ausserhalb" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="ausserhalb" data-title="nein"  style="width: 55px;">nein</a>
                                 </div>
-                                <input type="hidden" name="abfragezeit2" id="abfragezeit2">
+                                <input type="hidden" name="ausserhalb" id="ausserhalb">
                             </div>
                     </div>
                     </td>
@@ -116,9 +95,18 @@
                 <tr style="background-color: lightgray;">
                     <td>Abfrageart</td>
                     <td>
-                        <input type="radio" name="abfrageart" value="Direkt auf Datenbank"> Direkt auf Datenbank<br>
-                        <input type="radio" name="abfrageart" value="REST API"> REST API<br>
-                        <input type="radio" name="abfrageart" value="Andere"> Andere: <input type="text" name="andere_abfrageart">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="Abfrageart">
+                                    <option value="" selected>auswählen</option>
+                                    <option value="Direkt auf Datenbank">Direkt auf Datenbank</option>
+                                    <option value="REST API">REST API</option>
+                                    <option value="andere Lösung">andere Lösung</option>
+                                    <option value="unklar">unklar</option>
+                                </select>
+                                <input type="hidden" name="Abfrageart" id="Abfrageart">
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 <tr style="background-color: silver;">
@@ -133,14 +121,14 @@
                     <td>
                     <div class="form-group">
                             <div class="input-group">
-                                <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="architektur">
-                                    <option value="" disabled selected>auswählen</option>
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="Verfahren">
+                                    <option value="" selected>auswählen</option>
                                     <option value="komplett">komplett</option>
                                     <option value="Änderungen">Änderungen</option>
                                     <option value="Trigger">Trigger</option>
                                     <option value="Log Sniffing">Log Sniffing</option>
                                 </select>
-                                <input type="hidden" name="verfahren" id="verfahren">
+                                <input type="hidden" name="Verfahren" id="Verfahren">
                             </div>
                     </div>
                     </td>
@@ -154,10 +142,10 @@
                     <div class="form-group">
                             <div class="input-group">
                                 <div id="radioBtn" class="btn-group">
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="komprimierung" data-title="ja" style="width: 55px;">ja</a>
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="komprimierung" data-title="nein"  style="width: 55px;">nein</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Komprimierung" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Komprimierung" data-title="nein"  style="width: 55px;">nein</a>
                                 </div>
-                                <input type="hidden" name="komprimierung" id="komprimierung">
+                                <input type="hidden" name="Komprimierung" id="Komprimierung">
                             </div>
                     </div>
                     </td>
@@ -168,10 +156,10 @@
                     <div class="form-group">
                             <div class="input-group">
                                 <div id="radioBtn" class="btn-group">
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="verschluesselung" data-title="ja" style="width: 55px;">ja</a>
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="verschluesselung" data-title="nein"  style="width: 55px;">nein</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Verschlüsselung" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Verschlüsselung" data-title="nein"  style="width: 55px;">nein</a>
                                 </div>
-                                <input type="hidden" name="verschluesselung" id="verschluesselung">
+                                <input type="hidden" name="Verschlüsselung" id="Verschlüsselung">
                             </div>
                     </div>
                     </td>
@@ -184,13 +172,13 @@
                     <td>
                         <div class="form-group">
                             <div class="input-group">
-                                <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="architektur">
-                                    <option value="" disabled selected>auswählen</option>
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="Personendaten">
+                                    <option value="" selected>auswählen</option>
                                     <option value="erkennbar">erkennbar</option>
                                     <option value="pseudonymisiert">pseudonymisiert</option>
                                     <option value="anonymisiert">anonymisiert</option>
                                   </select>
-                                <input type="hidden" name="personendaten_handling" id="personendaten_handling">
+                                <input type="hidden" name="Personendaten" id="Personendaten">
                             </div>
                         </div>
                     </td>
@@ -209,29 +197,29 @@
                     <td colspan="2"><strong>Schema</strong></td>
                 </tr>
                 <tr style="background-color: lightgray;">
-                    <td>Namenskonflikte</td>
+                    <td>Namenskonflikte bereinigt</td>
                     <td>
                     <div class="form-group">
                             <div class="input-group">
                                 <div id="radioBtn" class="btn-group">
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="namenskonflikte" data-title="ja" style="width: 55px;">ja</a>
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="namenskonflikte" data-title="nein" style="width: 55px;" >nein</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Namenskonflikte" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Namenskonflikte" data-title="nein" style="width: 55px;" >nein</a>
                                 </div>
-                                <input type="hidden" name="namenskonflikte" id="namenskonflikte">
+                                <input type="hidden" name="Namenskonflikte" id="Namenskonflikte">
                             </div>
                     </div>
                     </td>
                 </tr>
                 <tr style="background-color: silver;">
-                    <td>Strukturelle Konflikte</td>
+                    <td>Strukturelle Konflikte bereinigt</td>
                     <td>
                     <div class="form-group">
                             <div class="input-group">
                                 <div id="radioBtn" class="btn-group">
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="strukturelle_konflikte" data-title="ja" style="width: 55px;">ja</a>
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="strukturelle_konflikte" data-title="nein"  style="width: 55px;">nein</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Strukturelle" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Strukturelle" data-title="nein"  style="width: 55px;">nein</a>
                                 </div>
-                                <input type="hidden" name="strukturelle_konflikte" id="strukturelle_konflikte">
+                                <input type="hidden" name="Strukturelle" id="Strukturelle">
                             </div>
                     </div>
                     </td>
@@ -240,29 +228,29 @@
                     <td colspan="2"><strong>Aufzeichnungsebene</strong></td>
                 </tr>
                 <tr style="background-color: lightgray;">
-                    <td>Duplizierte oder widersprüchliche Werte</td>
+                    <td>Duplizierte oder widersprüchliche Werte bereinigt</td>
                     <td>
                     <div class="form-group">
                             <div class="input-group">
                                 <div id="radioBtn" class="btn-group">
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="duplizierte_werte" data-title="ja" style="width: 55px;">ja</a>
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="duplizierte_werte" data-title="nein" style="width: 55px;" >nein</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Duplizierte" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Duplizierte" data-title="nein" style="width: 55px;" >nein</a>
                                 </div>
-                                <input type="hidden" name="duplizierte_werte" id="duplizierte_werte">
+                                <input type="hidden" name="Duplizierte" id="Duplizierte">
                             </div>
                     </div>
                     </td>
                 </tr>
                 <tr style="background-color: silver;">
-                    <td>Inkonsistenzen</td>
+                    <td>Inkonsistenzen bereinigt</td>
                     <td>
                       <div class="form-group">
                             <div class="input-group">
                                 <div id="radioBtn" class="btn-group">
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="inkonsistenzen" data-title="ja" style="width: 55px;">ja</a>
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="inkonsistenzen" data-title="nein" style="width: 55px;" >nein</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Inkonsistenzen" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Inkonsistenzen" data-title="nein" style="width: 55px;" >nein</a>
                                 </div>
-                                <input type="hidden" name="inkonsistenzen" id="inkonsistenzen">
+                                <input type="hidden" name="Inkonsistenzen" id="Inkonsistenzen">
                             </div>
                     </div>
                     </td>
@@ -271,59 +259,45 @@
                     <td colspan="2"><strong>Wertebene</strong></td>
                 </tr>
                 <tr style="background-color: lightgray;">
-                    <td>Datumsformate</td>
+                    <td>Datumsformate bereinigt</td>
                     <td>
                         <div class="form-group">
                             <div class="input-group">
                                 <div id="radioBtn" class="btn-group">
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="datumsformate" data-title="stimmig" >stimmig</a>
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="datumsformate" data-title="unterschiedlich" >unterschiedlich</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Datumsformate" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Datumsformate" data-title="nein" style="width: 55px;">nein</a>
                                 </div>
-                                <input type="hidden" name="datumsformate" id="datumsformate">
+                                <input type="hidden" name="Datumsformate" id="Datumsformate">
                             </div>
                         </div>
                       </td>
                 </tr>
                 <tr style="background-color: silver;">
-                    <td>Kommastellen</td>
+                    <td>Kommastellen bereinigt</td>
                     <td>
                         <div class="form-group">
                             <div class="input-group">
                                 <div id="radioBtn" class="btn-group">
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="kommastellen" data-title="stimmig" >stimmig</a>
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="kommastellen" data-title="unterschiedlich" >unterschiedlich</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Kommastellen" data-title="ja" style="width: 55px;" >ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Kommastellen" data-title="nein" style="width: 55px;" >nein</a>
                                 </div>
-                                <input type="hidden" name="kommastellen" id="kommastellen">
+                                <input type="hidden" name="Kommastellen" id="Kommastellen">
                             </div>
                         </div>
                     </td>
                 </tr>
                 <tr style="background-color: lightgray;">
-                    <td>Fehlende Werte</td>
+                    <td>Fehlende Werte bereinigt</td>
                     <td>
                    <div class="form-group">
                             <div class="input-group">
                                 <div id="radioBtn" class="btn-group">
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="fehlende_werte" data-title="stimmig" >stimmig</a>
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="fehlende_werte" data-title="unterschiedlich" >unterschiedlich</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Fehlende_Werte" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Fehlende_Werte" data-title="nein" style="width: 55px;">nein</a>
                                 </div>
-                                <input type="hidden" name="fehlende_werte" id="fehlende_werte">
+                                <input type="hidden" name="Fehlende_Werte" id="Fehlende_Werte">
                             </div>
                         </div>
-                    </td>
-                </tr>
-                <tr style="background-color: silver;">
-                    <td>Verwendung von SQL-Operatoren</td>
-                    <td>
-                      <div class="form-group">
-                            <div class="input-group">
-                                <div id="radioBtn" class="btn-group">
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="operatoren" data-title="ja" style="width: 55px;">ja</a>
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="operatoren" data-title="nein" style="width: 55px;" >nein</a>
-                                </div>
-                                <input type="hidden" name="operatoren" id="operatoren">
-                            </div>
-                    </div>
                     </td>
                 </tr>
                 <tr style="background-color: gray;">
@@ -335,10 +309,10 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div id="radioBtn" class="btn-group">
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="primaerschluessel" data-title="ja" style="width: 55px;">ja</a>
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="primaerschluessel" data-title="nein" style="width: 55px;" >nein</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="schluessel" data-title="ja" style="width: 55px;">ja</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="schluessel" data-title="nein" style="width: 55px;" >nein</a>
                                 </div>
-                                <input type="hidden" name="primaerschluessel" id="primaerschluessel">
+                                <input type="hidden" name="schluessel" id="schluessel">
                             </div>
                         </div>
                     </td>
@@ -363,21 +337,21 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div id="radioBtn" class="btn-group">
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="ladevorgang" data-title="komplett" >komplett</a>
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="ladevorgang" data-title="inkrementell" >inkrementell</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Ladevorgang" data-title="komplett" >komplett</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="Ladevorgang" data-title="inkrementell" >inkrementell</a>
                                 </div>
-                                <input type="hidden" name="ladevorgang" id="ladevorgang">
+                                <input type="hidden" name="Ladevorgang" id="Ladevorgang">
                             </div>
                         </div>
                     </td>
                 </tr>
                 <tr style="background-color: silver;">
                     <td>Zielort</td>
-                    <td><input type="text" name="zielort" placeholder="Datenbankbezeichnung"></td>
+                    <td><input type="text" name="Zielort" placeholder="Datenbankbezeichnung"></td>
                 </tr>
                 <tr style="background-color: lightgray;">
                     <td>Name der Datentabelle</td>
-                    <td><input type="text" name="datentabellenname" placeholder="Tabellennamen definieren"></td>
+                    <td><input type="text" name="Datentabellenname" placeholder="Tabellennamen definieren"></td>
                 </tr>
             </tbody>
         </table>
@@ -385,40 +359,133 @@
         <div class="text-center">
             <input type="submit" value="Speichern" class="btn btn-primary btn-lg">
         </div>
-    </form>
-
-            </form><br>
-            <h5>Gespeicherte Ziele:</h5>
+    </form><br><br>
+            <h5>Gespeicherte ETL-Prozesse:</h5><br>
             <div class="table-container" style="display: inline-block;">
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>Nummer</th>
-                            <th>Ziel</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for nummer, ziel in ziele %}
-                        <tr>
-                            <td>{{ nummer }}</td>
-                            <td>{{ ziel }}</td>
-                            <td>
-                                <form action="/unternehmensziele/delete" method="POST">
-                                    <input type="hidden" name="ziel_nummer" value="{{ nummer }}">
-                                    <input type="submit" value="Löschen">
-                                </form>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                <h6>Extraktionen</h6>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Datenquelle</th>
+                        <th>Datenart</th>
+                        <th>Abfragezeit</th>
+                        <th>Abfragefreq.</th>
+                        <th>ausserhalb op. Nutzungszeit</th>
+                        <th>Abfrageart</th>
+                        <th>Kommentare</th>
+                        <th>Verfahren</th>
+                        <th>Kompr.</th>
+                        <th>Verschl.</th>
+                        <th>Personendaten</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for nummer, etl_angabe in etl%}
+                    <tr>
+                        <td>{{ etl_angabe[0] }}</td>
+                        <td>{{ etl_angabe[1] }}</td>
+                        <td>{{ etl_angabe[2] }}</td>
+                        <td>{{ etl_angabe[3] }}</td>
+                        <td>{{ etl_angabe[4] }}</td>
+                        <td>{{ etl_angabe[5] }}</td>
+                        <td>{{ etl_angabe[6] }}</td>
+                        <td>{{ etl_angabe[7] }}</td>
+                        <td>{{ etl_angabe[8] }}</td>
+                        <td>{{ etl_angabe[9] }}</td>
+                        <td>{{ etl_angabe[10] }}</td>
+                        <td>
+                            <form action="/etl/delete" method="POST">
+                                <input type="hidden" name="etl_angabe_nummer" value="{{ nummer }}">
+                                <input type="submit" value="Löschen">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
+
+                <div class="table-container" style="display: inline-block;">
+            <table class="table table-striped table-hover">
+                <h6>Transformationen</h6>
+                <thead>
+                    <tr>
+                        <th>Datenquelle</th>
+                        <th>Namenskonflikte bereinigt</th>
+                        <th>Strukturelle Konflikte bereinigt</th>
+                        <th>Duplizierte Werte bereinigt</th>
+                        <th>Inkonsistenzen bereinigt</th>
+                        <th>Datumsformate bereinigt</th>
+                        <th>Kommastellen bereinigt</th>
+                        <th>Fehlende Werte bereinigt</th>
+                        <th>Schlüssel einheitlich</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for nummer, etl_angabe in etl%}
+                    <tr>
+                        <td>{{ etl_angabe[0] }}</td>
+                        <td>{{ etl_angabe[11] }}</td>
+                        <td>{{ etl_angabe[12] }}</td>
+                        <td>{{ etl_angabe[13] }}</td>
+                        <td>{{ etl_angabe[14] }}</td>
+                        <td>{{ etl_angabe[15] }}</td>
+                        <td>{{ etl_angabe[16] }}</td>
+                        <td>{{ etl_angabe[17] }}</td>
+                        <td>{{ etl_angabe[18] }}</td>
+                        <th></th>
+                        <td>
+                            <form action="/etl/delete" method="POST">
+                                <input type="hidden" name="etl_angabe_nummer" value="{{ nummer }}">
+                                <input type="submit" value="Löschen">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+                    <div class="table-container" style="display: inline-block;">
+            <table class="table table-striped table-hover">
+                                <h6>Laden</h6>
+                <thead>
+                    <tr>
+                        <th>Datenquelle</th>
+                        <th>Ladevorgang</th>
+                        <th>Zielort</th>
+                        <th>Datentabellenname</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for nummer, etl_angabe in etl%}
+                    <tr>
+                        <td>{{ etl_angabe[0] }}</td>
+                        <td>{{ etl_angabe[19] }}</td>
+                        <td>{{ etl_angabe[20] }}</td>
+                        <td>{{ etl_angabe[21] }}</td>
+                        <td>
+                            <form action="/etl/delete" method="POST">
+                                <input type="hidden" name="etl_angabe_nummer" value="{{ nummer }}">
+                                <input type="submit" value="Löschen">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+</div>
 </div>
 <br>
 <br>
-<div class="text-center">
+<br>
+        <div class="text-center">
     <a href="/datenmanagementkonzept" class="btn btn-secondary">Zurück</a>
     <a href="/analysen" class="btn btn-secondary">Weiter</a>
 </div>
@@ -434,9 +501,7 @@
             $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
         });
     });
-</script>
 
-<script>
     function toggleFields() {
         const expertenmodus = document.querySelector('[data-toggle="expertenmodus"].Active').getAttribute('data-title');
         const zeitlicheAbfrageSteuerungRow = document.getElementById('zeitliche-abfragesteuerung-row');

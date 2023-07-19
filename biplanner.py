@@ -1,5 +1,6 @@
 import csv
 import os
+import pandas as pd
 
 def calculate_points_and_save_to_csv(csv_file):
     # Überprüfen, ob die CSV-Datei vorhanden ist
@@ -105,4 +106,13 @@ def load_visualisierung():
         for row in reader:
             summe += sum(map(int, row[1:13]))
     return summe
+
+def etl_auflistung():
+    # Datei einlesen und DataFrame erstellen
+    df = pd.read_csv('etl.csv')
+
+    # DataFrame um 90 Grad drehen
+    df_transposed = df.transpose()
+
+    return df_transposed
 

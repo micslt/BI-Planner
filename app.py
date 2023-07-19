@@ -90,14 +90,14 @@ def rahmenbedingungen():
         gesetzeslage = request.form["gesetzeslage"]
         gesetz = request.form["gesetz"]
 
-        with open('rahmenbedingungen.csv', 'a', newline='') as csvfile:
+        with open('rahmenbedingungen.csv', 'a', newline='', encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow([betrieb, aufbau, personenressourcen, knowhow, bedarf, mittel, personendaten, gesetzeslage, gesetz])
 
         return redirect('/rahmenbedingungen')  # Zurück zur Startseite umleiten
     else:
         try:
-            with open('rahmenbedingungen.csv', 'r') as csvfile:
+            with open('rahmenbedingungen.csv','r', encoding="utf-8") as csvfile:
                 reader = csv.reader(csvfile)
                 # enumerate() wird verwendet, um sowohl die Rahmenbedingungen als auch deren Nummern zu bekommen.
                 rahmenbedingungen = [(i, row) for i, row in enumerate(reader, start=1)]
@@ -112,7 +112,7 @@ def delete_rahmenbedingung():
     rahmenbedingung_nummer = request.form['rahmenbedingung_nummer']
 
     # Lesen Sie alle rahmenbedingungen
-    with open('rahmenbedingungen.csv', 'r') as csvfile:
+    with open('rahmenbedingungen.csv','r', encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
         rahmenbedingungen = [row[0] for row in reader]
 
@@ -120,7 +120,7 @@ def delete_rahmenbedingung():
     del rahmenbedingungen[int(rahmenbedingung_nummer) - 1]
 
     # Überschreiben Sie die CSV-Datei mit den verbleibenden rahmenbedingungenn
-    with open('rahmenbedingungen.csv', 'w', newline='') as csvfile:
+    with open('rahmenbedingungen.csv', 'w', newline='', encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile)
         for rahmenbedingung in rahmenbedingungen:
             writer.writerow([rahmenbedingung])
@@ -136,13 +136,13 @@ def delete_rahmenbedingung():
 def unternehmensziele():
     if request.method == 'POST':
         ziel = request.form['ziel']
-        with open('ziele.csv', 'a', newline='') as csvfile:
+        with open('ziele.csv', 'a', newline='', encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow([ziel])
         return redirect('/unternehmensziele')  # Änderung hier, um zur Startseite zurückzukehren
     else:
         try:
-            with open('ziele.csv', 'r') as csvfile:
+            with open('ziele.csv','r', encoding="utf-8") as csvfile:
                 reader = csv.reader(csvfile)
                 # enumerate() wird verwendet, um sowohl die Ziele als auch deren Nummern zu bekommen.
                 ziele = [(i, row[0]) for i, row in enumerate(reader, start=1)]
@@ -155,7 +155,7 @@ def delete_ziel():
     ziel_nummer = request.form['ziel_nummer']
 
     # Lesen Sie alle Ziele
-    with open('ziele.csv', 'r') as csvfile:
+    with open('ziele.csv','r', encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
         ziele = [row[0] for row in reader]
 
@@ -163,7 +163,7 @@ def delete_ziel():
     del ziele[int(ziel_nummer) - 1]
 
     # Überschreiben Sie die CSV-Datei mit den verbleibenden Zielen
-    with open('ziele.csv', 'w', newline='') as csvfile:
+    with open('ziele.csv', 'w', newline='', encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile)
         for ziel in ziele:
             writer.writerow([ziel])
@@ -183,14 +183,14 @@ def informationsbedarf():
         betroffenes_ziel = request.form['betroffenes_ziel']
         prioritaet = request.form.get('prioritaet', '-')  # Standardwert "-" verwenden, falls nicht angegeben
 
-        with open('informationsbedarf.csv', 'a', newline='') as csvfile:
+        with open('informationsbedarf.csv', 'a', newline='', encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow([bezeichnung, betroffenes_ziel, prioritaet])
 
         return redirect('/informationsbedarf')
     else:
         try:
-            with open('informationsbedarf.csv', 'r') as csvfile:
+            with open('informationsbedarf.csv','r', encoding="utf-8") as csvfile:
                 reader = csv.reader(csvfile)
                 informationsbedarf_liste = [(i, row) for i, row in enumerate(reader, start=1)]
         except FileNotFoundError:
@@ -207,7 +207,7 @@ def delete_informationsbedarf():
     informationsbedarf_nummer = request.form['informationsbedarf_nummer']
 
     # Lesen Sie alle Informationsbedarfe
-    with open('informationsbedarf.csv', 'r') as csvfile:
+    with open('informationsbedarf.csv','r', encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
         informationsbedarf = [row[0] for row in reader]
 
@@ -215,7 +215,7 @@ def delete_informationsbedarf():
     del informationsbedarf[int(informationsbedarf_nummer) - 1]
 
     # Überschreiben Sie die CSV-Datei mit den verbleibenden Informationsbedarfen
-    with open('informationsbedarf.csv', 'w', newline='') as csvfile:
+    with open('informationsbedarf.csv', 'w', newline='', encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile)
         for informationsbedarf in informationsbedarf:
             writer.writerow([informationsbedarf])
@@ -229,14 +229,14 @@ def datenquellen():
         anwendung = request.form['datenquelle']
         inhalt = request.form['inhalt']
 
-        with open('datenquellen.csv', 'a', newline='') as csvfile:
+        with open('datenquellen.csv', 'a', newline='', encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow([anwendung, inhalt])
 
         return redirect('/datenquellen')  # Änderung hier, um zur Startseite zurückzukehren
     else:
         try:
-            with open('datenquellen.csv', 'r') as csvfile:
+            with open('datenquellen.csv','r', encoding="utf-8") as csvfile:
                 reader = csv.reader(csvfile)
                 # enumerate() wird verwendet, um sowohl die Datenquellen als auch deren Nummern zu bekommen.
                 datenquellen = [(i, row) for i, row in enumerate(reader, start=1)]
@@ -251,7 +251,7 @@ def delete_datenquelle():
     datenquelle_nummer = request.form['datenquelle_nummer']
 
     # Lesen Sie alle Datenquellen
-    with open('datenquellen.csv', 'r') as csvfile:
+    with open('datenquellen.csv','r', encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
         datenquellen = [row for row in reader]
 
@@ -259,7 +259,7 @@ def delete_datenquelle():
     del datenquellen[int(datenquelle_nummer) - 1]
 
     # Überschreiben Sie die CSV-Datei mit den verbleibenden Datenquellen
-    with open('datenquellen.csv', 'w', newline='') as csvfile:
+    with open('datenquellen.csv', 'w', newline='', encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile)
         for datenquelle in datenquellen:
             writer.writerow(datenquelle)
@@ -276,14 +276,14 @@ def datenmanagementkonzept():
         architektur = request.form['architektur']
         applikation = request.form['applikation']
 
-        with open('datenmanagementkonzept.csv', 'a', newline='') as csvfile:
+        with open('datenmanagementkonzept.csv', 'a', newline='', encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow([konzeption, architektur, applikation])
 
         return redirect('/datenmanagementkonzept')  # Änderung hier, um zur Startseite zurückzukehren
     else:
         try:
-            with open('datenmanagementkonzept.csv', 'r') as csvfile:
+            with open('datenmanagementkonzept.csv','r', encoding="utf-8") as csvfile:
                 reader = csv.reader(csvfile)
                 # enumerate() wird verwendet, um sowohl die datenmanagementkonzept als auch deren Nummern zu bekommen.
                 datenmanagementkonzept = [(i, row) for i, row in enumerate(reader, start=1)]
@@ -298,7 +298,7 @@ def delete_datenmanagementkonzept():
     datenmanagement_nummer = request.form['datenmanagement_nummer']
 
     # Lesen Sie alle datenmanagementkonzept
-    with open('datenmanagementkonzept.csv', 'r') as csvfile:
+    with open('datenmanagementkonzept.csv','r', encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
         datenmanagementkonzept = [row for row in reader]
 
@@ -306,7 +306,7 @@ def delete_datenmanagementkonzept():
     del datenmanagementkonzept[int(datenmanagement_nummer) - 1]
 
     # Überschreiben Sie die CSV-Datei mit den verbleibenden datenmanagementkonzept
-    with open('datenmanagementkonzept.csv', 'w', newline='') as csvfile:
+    with open('datenmanagementkonzept.csv', 'w', newline='', encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile)
         for datenmanagement in datenmanagementkonzept:
             writer.writerow(datenmanagement)
@@ -315,39 +315,102 @@ def delete_datenmanagementkonzept():
 
 
 
-
-@app.route("/etl", methods=["GET", "POST"])
+@app.route("/etl", methods=['GET', 'POST'])
 def etl():
-    csv_file = "datenquellen.csv"
+    csv_file = "informationsbedarf.csv"
 
     if not os.path.isfile(csv_file):
        return redirect("/nodata")  # Wenn die Datei nicht vorhanden ist, auf "nodata" umleiten
 
+    if request.method == 'POST':
+        datenquelle = request.form['Datenquelle']
+        datenart = request.form['Datenart']
+        abfragezeit = request.form['Abfragezeit']
+        abfragefrequenz = request.form['Abfragefrequenz']
+        ausserhalb_nutzungszeit = request.form['ausserhalb']
+        abfrageart = request.form['Abfrageart']
+        konfigurationsbeschreibung = request.form['konfigurationsbeschreibung']
+        verfahren = request.form['Verfahren']
+        komprimierung = request.form['Komprimierung']
+        verschluesselung = request.form['Verschlüsselung']
+        personendaten = request.form['Personendaten']
+        namenskonflikte_bereinigt = request.form['Namenskonflikte']
+        strukturelle_konflikte_bereinigt = request.form['Strukturelle']
+        duplizierte_werte_bereinigt = request.form['Duplizierte']
+        inkonsistenzen_bereinigt = request.form['Inkonsistenzen']
+        datumsformate_bereinigt = request.form['Datumsformate']
+        kommastellen_bereinigt = request.form['Kommastellen']
+        fehlende_werte_bereinigt = request.form['Fehlende_Werte']
+        schluessel_einheitlich = request.form['schluessel']
+        ladevorgang = request.form['Ladevorgang']
+        zielort = request.form['Zielort']
+        datentabellenname = request.form['Datentabellenname']
+
+        with open('etl.csv', 'a', newline='', encoding="utf-8") as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow([datenquelle,
+                    datenart,
+                    abfragezeit,
+                    abfragefrequenz,
+                    ausserhalb_nutzungszeit,
+                    abfrageart,
+                    konfigurationsbeschreibung,
+                    verfahren,
+                    komprimierung,
+                    verschluesselung,
+                    personendaten,
+                    namenskonflikte_bereinigt,
+                    strukturelle_konflikte_bereinigt,
+                    duplizierte_werte_bereinigt,
+                    inkonsistenzen_bereinigt,
+                    datumsformate_bereinigt,
+                    kommastellen_bereinigt,
+                    fehlende_werte_bereinigt,
+                    schluessel_einheitlich,
+                    ladevorgang,
+                    zielort,
+                    datentabellenname])
+
+        return redirect('/etl')  # Änderung hier, um zur Startseite zurückzukehren
+    else:
+        try:
+            with open('etl.csv', 'r', encoding="utf-8") as csvfile:
+                reader = csv.reader(csvfile)
+                # enumerate() wird verwendet, um sowohl die etl als auch deren Nummern zu bekommen.
+                etl = [(i, row) for i, row in enumerate(reader, start=1)]
+        except FileNotFoundError:
+            etl = []
+
     dropdown_options = biplanner.load_datenquellen()
 
-    return render_template("etl.html", dropdown_options=dropdown_options)
-
-@app.route("/submit_etl", methods=["GET", "POST"])
-def submit_etl():
-    if request.method == "POST":
-        form_data = request.form
-
-        # Überprüfe, ob die CSV-Datei vorhanden ist
-        csv_exists = os.path.isfile("etl.csv")
-
-        with open("etl.csv", "a", newline="", encoding="utf-8") as csvfile:
-            writer = csv.writer(csvfile)
-
-            # Schreibe Header, falls CSV-Datei neu erstellt wurde
-            if not csv_exists:
-                writer.writerow(form_data.keys())
-
-            writer.writerow(form_data.values())
+    return render_template('etl.html', etl=etl, dropdown_options=dropdown_options)
 
 
-        # Nachricht anzeigen und zur Startseite (index) umleiten
-    message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
-    return render_template("message.html", message=message, redirect_url="/analysen")
+
+@app.route('/etl/delete', methods=['POST'])
+def delete_etl_angabe():
+    etl_angabe_nummer = request.form['etl_angabe_nummer']
+
+    # Lesen Sie alle etl
+    with open('etl.csv','r', encoding="utf-8") as csvfile:
+        reader = csv.reader(csvfile)
+        etl = [row for row in reader]
+
+    # Löschen Sie die ausgewählte etl_angaben
+    del etl[int(etl_angabe_nummer) - 1]
+
+    # Überschreiben Sie die CSV-Datei mit den verbleibenden etl
+    with open('etl.csv', 'w', newline='', encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        for etl_angabe in etl:
+            writer.writerow(etl_angabe)
+
+    return redirect('/etl')
+
+
+
+
+
 ##################################################5. Informationsgenerierung############################################
 
 @app.route("/analysen", methods=['GET', 'POST'])
@@ -363,14 +426,14 @@ def analysen():
         berechnung = request.form['berechnung']
         art = request.form['art']
 
-        with open('analysen.csv', 'a', newline='') as csvfile:
+        with open('analysen.csv', 'a', newline='', encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow([analyse, messzahl, berechnung, art])
 
         return redirect('/analysen')  # Änderung hier, um zur Startseite zurückzukehren
     else:
         try:
-            with open('analysen.csv', 'r') as csvfile:
+            with open('analysen.csv','r', encoding="utf-8") as csvfile:
                 reader = csv.reader(csvfile)
                 # enumerate() wird verwendet, um sowohl die analysen als auch deren Nummern zu bekommen.
                 analysen = [(i, row) for i, row in enumerate(reader, start=1)]
@@ -388,7 +451,7 @@ def delete_analyse():
     analyse_nummer = request.form['analyse_nummer']
 
     # Lesen Sie alle analysen
-    with open('analysen.csv', 'r') as csvfile:
+    with open('analysen.csv','r', encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
         analysen = [row for row in reader]
 
@@ -396,7 +459,7 @@ def delete_analyse():
     del analysen[int(analyse_nummer) - 1]
 
     # Überschreiben Sie die CSV-Datei mit den verbleibenden analysen
-    with open('analysen.csv', 'w', newline='') as csvfile:
+    with open('analysen.csv', 'w', newline='', encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile)
         for analyse in analysen:
             writer.writerow(analyse)
@@ -418,14 +481,14 @@ def informationsbereitstellung():
         berechtigte_empfaenger = request.form['berechtigte_empfaenger']
         messung1 = request.form.getlist('messung1[]')
 
-        with open('informationsbereitstellung.csv', 'a', newline='') as csvfile:
+        with open('informationsbereitstellung.csv', 'a', newline='', encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow([bezeichnung, bereitstellungsart, berechtigte_empfaenger, messung1])
 
         return redirect('/informationsbereitstellung')  # Änderung hier, um zur Startseite zurückzukehren
     else:
         try:
-            with open('informationsbereitstellung.csv', 'r') as csvfile:
+            with open('informationsbereitstellung.csv','r', encoding="utf-8") as csvfile:
                 reader = csv.reader(csvfile)
                 # enumerate() wird verwendet, um sowohl die informationsbereitstellung als auch deren Nummern zu bekommen.
                 informationsbereitstellung = [(i, row) for i, row in enumerate(reader, start=1)]
@@ -443,7 +506,7 @@ def delete_information():
     information_nummer = request.form['information_nummer']
 
     # Lesen Sie alle informationsbereitstellung
-    with open('informationsbereitstellung.csv', 'r') as csvfile:
+    with open('informationsbereitstellung.csv','r', encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
         informationsbereitstellung = [row for row in reader]
 
@@ -451,7 +514,7 @@ def delete_information():
     del informationsbereitstellung[int(information_nummer) - 1]
 
     # Überschreiben Sie die CSV-Datei mit den verbleibenden informationsbereitstellung
-    with open('informationsbereitstellung.csv', 'w', newline='') as csvfile:
+    with open('informationsbereitstellung.csv', 'w', newline='', encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile)
         for information in informationsbereitstellung:
             writer.writerow(information)
@@ -465,14 +528,14 @@ def visualisierung():
         Visualisierung = request.form['Visualisierung']
         qualitaet = request.form['summe']
 
-        with open('visualisierung.csv', 'a', newline='') as csvfile:
+        with open('visualisierung.csv', 'a', newline='', encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow([Visualisierung, qualitaet])
 
         return redirect('/visualisierung')  # Änderung hier, um zur Startseite zurückzukehren
     else:
         try:
-            with open('visualisierung.csv', 'r') as csvfile:
+            with open('visualisierung.csv','r', encoding="utf-8") as csvfile:
                 reader = csv.reader(csvfile)
                 # enumerate() wird verwendet, um sowohl die visualisierung als auch deren Nummern zu bekommen.
                 visualisierung = [(i, row) for i, row in enumerate(reader, start=1)]
@@ -489,7 +552,7 @@ def delete_visual():
     visual_nummer = request.form['visual_nummer']
 
     # Lesen Sie alle visualisierung
-    with open('visualisierung.csv', 'r') as csvfile:
+    with open('visualisierung.csv','r', encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
         visualisierung = [row for row in reader]
 
@@ -497,7 +560,7 @@ def delete_visual():
     del visualisierung[int(visual_nummer) - 1]
 
     # Überschreiben Sie die CSV-Datei mit den verbleibenden visualisierung
-    with open('visualisierung.csv', 'w', newline='') as csvfile:
+    with open('visualisierung.csv', 'w', newline='', encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile)
         for visual in visualisierung:
             writer.writerow(visual)
@@ -511,14 +574,14 @@ def dashboard():
         dashboard = request.form['dashboard']
         qualitaet = request.form['summe']
 
-        with open('dashboard.csv', 'a', newline='') as csvfile:
+        with open('dashboard.csv', 'a', newline='', encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow([dashboard, qualitaet])
 
         return redirect('/dashboard')  # Änderung hier, um zur Startseite zurückzukehren
     else:
         try:
-            with open('dashboard.csv', 'r') as csvfile:
+            with open('dashboard.csv','r', encoding="utf-8") as csvfile:
                 reader = csv.reader(csvfile)
                 # enumerate() wird verwendet, um sowohl die dashboard als auch deren Nummern zu bekommen.
                 dashboard = [(i, row) for i, row in enumerate(reader, start=1)]
@@ -535,7 +598,7 @@ def delete_dash():
     dash_nummer = request.form['dash_nummer']
 
     # Lesen Sie alle dashboard
-    with open('dashboard.csv', 'r') as csvfile:
+    with open('dashboard.csv','r', encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
         dashboard = [row for row in reader]
 
@@ -543,7 +606,7 @@ def delete_dash():
     del dashboard[int(dash_nummer) - 1]
 
     # Überschreiben Sie die CSV-Datei mit den verbleibenden dashboard
-    with open('dashboard.csv', 'w', newline='') as csvfile:
+    with open('dashboard.csv', 'w', newline='', encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile)
         for dash in dashboard:
             writer.writerow(dash)
@@ -566,7 +629,7 @@ def auswertungen():
         reifegrad_auswertung.csv =[]
 
     try:
-        with open('ziele.csv', 'r') as csvfile:
+        with open('ziele.csv','r', encoding="utf-8") as csvfile:
             reader = csv.reader(csvfile)
             # enumerate() wird verwendet, um sowohl die Ziele als auch deren Nummern zu bekommen.
             ziele = [(i, row[0]) for i, row in enumerate(reader, start=1)]
@@ -574,14 +637,14 @@ def auswertungen():
         ziele = []
 
     try:
-        with open('informationsbedarf.csv', 'r') as csvfile:
+        with open('informationsbedarf.csv','r', encoding="utf-8") as csvfile:
                 reader = csv.reader(csvfile)
                 informationsbedarf_liste = [(i, row) for i, row in enumerate(reader, start=1)]
     except FileNotFoundError:
         informationsbedarf_liste = []
 
     try:
-        with open('datenquellen.csv', 'r') as csvfile:
+        with open('datenquellen.csv','r', encoding="utf-8") as csvfile:
             reader = csv.reader(csvfile)
             # enumerate() wird verwendet, um sowohl die Datenquellen als auch deren Nummern zu bekommen.
             datenquellen = [(i, row) for i, row in enumerate(reader, start=1)]
@@ -589,7 +652,7 @@ def auswertungen():
         datenquellen = []
 
     try:
-        with open('analysen.csv', 'r') as csvfile:
+        with open('analysen.csv','r', encoding="utf-8") as csvfile:
             reader = csv.reader(csvfile)
             # enumerate() wird verwendet, um sowohl die analysen als auch deren Nummern zu bekommen.
             analysen = [(i, row) for i, row in enumerate(reader, start=1)]
@@ -597,7 +660,15 @@ def auswertungen():
         analysen = []
 
     try:
-        with open('datenmanagementkonzept.csv', 'r') as csvfile:
+        with open('etl.csv','r', encoding="utf-8") as csvfile:
+            reader = csv.reader(csvfile)
+            # enumerate() wird verwendet, um sowohl die etl als auch deren Nummern zu bekommen.
+            etl = [(i, row) for i, row in enumerate(reader, start=1)]
+    except FileNotFoundError:
+        etl = []
+
+    try:
+        with open('datenmanagementkonzept.csv','r', encoding="utf-8") as csvfile:
             reader = csv.reader(csvfile)
             # enumerate() wird verwendet, um sowohl die datenmanagementkonzept als auch deren Nummern zu bekommen.
             datenmanagementkonzept = [(i, row) for i, row in enumerate(reader, start=1)]
@@ -605,7 +676,7 @@ def auswertungen():
         datenmanagementkonzept = []
 
     try:
-        with open('rahmenbedingungen.csv', 'r') as csvfile:
+        with open('rahmenbedingungen.csv','r', encoding="utf-8") as csvfile:
             reader = csv.reader(csvfile)
             # enumerate() wird verwendet, um sowohl die Rahmenbedingungen als auch deren Nummern zu bekommen.
             rahmenbedingungen = [(i, row) for i, row in enumerate(reader, start=1)]
@@ -613,7 +684,7 @@ def auswertungen():
         rahmenbedingungen = []
 
     try:
-        with open('informationsbereitstellung.csv', 'r') as csvfile:
+        with open('informationsbereitstellung.csv','r', encoding="utf-8") as csvfile:
             reader = csv.reader(csvfile)
             # enumerate() wird verwendet, um sowohl die informationsbereitstellung als auch deren Nummern zu bekommen.
             informationsbereitstellung = [(i, row) for i, row in enumerate(reader, start=1)]
@@ -621,7 +692,7 @@ def auswertungen():
         informationsbereitstellung = []
 
     try:
-        with open('visualisierung.csv', 'r') as csvfile:
+        with open('visualisierung.csv','r', encoding="utf-8") as csvfile:
             reader = csv.reader(csvfile)
             # enumerate() wird verwendet, um sowohl die visualisierung als auch deren Nummern zu bekommen.
             visualisierung = [(i, row) for i, row in enumerate(reader, start=1)]
@@ -629,7 +700,7 @@ def auswertungen():
         visualisierung = []
 
     try:
-        with open('dashboard.csv', 'r') as csvfile:
+        with open('dashboard.csv','r', encoding="utf-8") as csvfile:
             reader = csv.reader(csvfile)
             # enumerate() wird verwendet, um sowohl die visualisierung als auch deren Nummern zu bekommen.
             dashboard = [(i, row) for i, row in enumerate(reader, start=1)]
@@ -640,7 +711,7 @@ def auswertungen():
                            ziele=ziele, informationsbedarf_liste=informationsbedarf_liste, datenquellen=datenquellen,
                            analysen=analysen, datenmanagementkonzept=datenmanagementkonzept,
                            rahmenbedingungen=rahmenbedingungen, informationsbereitstellung=informationsbereitstellung,
-                           visualisierung=visualisierung, dashboard=dashboard)
+                           visualisierung=visualisierung, dashboard=dashboard, etl=etl)
 
 ##################################################8. Feedback### #######################################################
 @app.route("/feedback")
@@ -704,6 +775,10 @@ def deleted():
 @app.route("/nodata")
 def nodata():
     return render_template("nodata.html")
+
+@app.errorhandler(UnboundLocalError)
+def handle_unbound_local_error(error):
+    return redirect('/nodata')
 
 
 if __name__ == '__main__':

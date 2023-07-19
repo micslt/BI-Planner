@@ -195,11 +195,111 @@
                  </tr>
                 {% endfor %}
             </tbody>
-        </table>
+        </table><br>
     </div>
 
 
-    <h6><label>ETL-Prozesse</label></h6><br>
+    <h6><label>ETL-Prozesse</label></h6>
+                <div class="table-container" style="display: inline-block;">
+                <h7>Extraktionen</h7>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Datenquelle</th>
+                        <th>Datenart</th>
+                        <th>Abfragezeit</th>
+                        <th>Abfragefreq.</th>
+                        <th>ausserhalb op. Nutzungszeit</th>
+                        <th>Abfrageart</th>
+                        <th>Kommentare</th>
+                        <th>Verfahren</th>
+                        <th>Kompr.</th>
+                        <th>Verschl.</th>
+                        <th>Personendaten</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for nummer, etl_angabe in etl%}
+                    <tr>
+                        <td>{{ etl_angabe[0] }}</td>
+                        <td>{{ etl_angabe[1] }}</td>
+                        <td>{{ etl_angabe[2] }}</td>
+                        <td>{{ etl_angabe[3] }}</td>
+                        <td>{{ etl_angabe[4] }}</td>
+                        <td>{{ etl_angabe[5] }}</td>
+                        <td>{{ etl_angabe[6] }}</td>
+                        <td>{{ etl_angabe[7] }}</td>
+                        <td>{{ etl_angabe[8] }}</td>
+                        <td>{{ etl_angabe[9] }}</td>
+                        <td>{{ etl_angabe[10] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+                <div class="table-container" style="display: inline-block;">
+            <table class="table table-striped table-hover">
+                <h7>Transformationen</h7>
+                <thead>
+                    <tr>
+                        <th>Datenquelle</th>
+                        <th>Namenskonflikte bereinigt</th>
+                        <th>Strukturelle Konflikte bereinigt</th>
+                        <th>Duplizierte Werte bereinigt</th>
+                        <th>Inkonsistenzen bereinigt</th>
+                        <th>Datumsformate bereinigt</th>
+                        <th>Kommastellen bereinigt</th>
+                        <th>Fehlende Werte bereinigt</th>
+                        <th>Schlüssel einheitlich</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for nummer, etl_angabe in etl%}
+                    <tr>
+                        <td>{{ etl_angabe[0] }}</td>
+                        <td>{{ etl_angabe[11] }}</td>
+                        <td>{{ etl_angabe[12] }}</td>
+                        <td>{{ etl_angabe[13] }}</td>
+                        <td>{{ etl_angabe[14] }}</td>
+                        <td>{{ etl_angabe[15] }}</td>
+                        <td>{{ etl_angabe[16] }}</td>
+                        <td>{{ etl_angabe[17] }}</td>
+                        <td>{{ etl_angabe[18] }}</td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+                    <div class="table-container" style="display: inline-block;">
+            <table class="table table-striped table-hover">
+                <h7>Laden</h7>
+                <thead>
+                    <tr>
+                        <th>Datenquelle</th>
+                        <th>Ladevorgang</th>
+                        <th>Zielort</th>
+                        <th>Datentabellenname</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for nummer, etl_angabe in etl%}
+                    <tr>
+                        <td>{{ etl_angabe[0] }}</td>
+                        <td>{{ etl_angabe[19] }}</td>
+                        <td>{{ etl_angabe[20] }}</td>
+                        <td>{{ etl_angabe[21] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table><br>
+        </div>
+
+
 
     <h6><label>Analysen</label></h6>
         <div class="table-container" style="display: inline-block;">
@@ -224,7 +324,7 @@
                 </tr>
                 {% endfor %}
             </tbody>
-        </table>
+        </table><br>
     </div>
 
     <h6><label>Dashboards und Berichte</label></h6>
@@ -252,6 +352,7 @@
             </tbody>
         </table>
     </div>
+
     <table>
   <tr>
       <td class="left-column"><h6><label>Qualitätskontrollen Visualisierungen</label></h6></td>
