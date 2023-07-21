@@ -1,6 +1,7 @@
 import csv
 import os
 import pandas as pd
+import numpy as np
 
 def calculate_points_and_save_to_csv(csv_file):
     # Überprüfen, ob die CSV-Datei vorhanden ist
@@ -118,5 +119,16 @@ def etl_auflistung():
 
 
 def berechne_deskriptive_statistiken(dataframe):
-    deskriptive_stats = dataframe.describe()
+    # Wähle nur die numerischen Spalten aus
+    numerische_spalten = dataframe.select_dtypes(include=[np.number])
+
+    # Berechne die deskriptiven Statistiken für die numerischen Spalten
+    deskriptive_stats = numerische_spalten.describe().round(2)
+
+    # Berechne die Varianz für jede Spalte und füge sie den deskriptiven Statistiken hinzu
+    varianz = numerische_spalten.var().round(2)
+    deskriptive_stats.loc['var'] = varianz
+
     return deskriptive_stats
+
+
