@@ -7,7 +7,14 @@
 </div>
 <br>
 <div class="container">
-    <h4 class="rahmen">Qualitätskontrolle Dashboard</h4><br>
+    <h4 class="rahmen">Qualitätskontrolle Dashboard</h4>
+    <br>
+         <p style="text-align: justify;"> Sofern Sie Dashboards im Einsatz haben, können Sie bei diesen ebenfalls eine
+             Qualitätskontrolle durchführen. Wählen das Dashboard aus der Liste Ihrer Informationsmittel und beantworten Sie
+         die Fragen. Im Optimalfall können Sie alle Fragen mit Ja beantworten. Sie erhalten nach dem Speichern einen
+         Qualitätswert in Prozent für das Dashboard. Die Qualitätskontrolle lässt sich beliebig oft wiederholen.
+         Klicken Sie auf «Weiter» sobald Sie alle Qualitätskontrollen durchgeführt haben.
+    </p>
     <form action="/dashboard" method="post">
         <table class="table table-striped table-hover">
             <tr>
@@ -93,7 +100,8 @@
                 </td>
             </tr>
             <tr>
-                <td>Kann die Informationsdichte erhöht werden, um mehr Daten auf begrenztem Raum darzustellen, ohne die Klarheit zu beeinträchtigen?</td>
+                <td> Wird der zur Verfügung stehende Platz gut ausgenutzt, ohne dass die Klarheit und das Verständnis der Auswertungen
+                    beeinträchtigt wird?</td>
                 <td>
                     <div class="form-group">
                             <div class="input-group">
@@ -107,7 +115,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Werden visuelle Hierarchien und Gruppierungen verwendet, um die Daten zu organisieren und wichtige Informationen hervorzuheben?</td>
+                <td>Werden visuelle Hierarchien und Gruppierungen verwendet, um die Daten zu organisieren und wichtige Daten hervorzuheben?</td>
                 <td>
                     <div class="form-group">
                             <div class="input-group">
@@ -121,7 +129,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Sind die Daten in verschiedenen Ansichten oder Sichten präsentiert, um unterschiedliche Perspektiven zu ermöglichen?</td>
+                <td>Sind die Daten in verschiedenen Elementen oder Sichten präsentiert, um unterschiedliche Perspektiven zu ermöglichen?</td>
                 <td>
                     <div class="form-group">
                             <div class="input-group">
@@ -135,7 +143,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Werden visuelle Hierarchien und Gruppierungen verwendet, um die Daten zu organisieren und wichtige Informationen hervorzuheben?</td>
+                <td>Sind ausreichende Beschriftungen, Untertitel und Anmerkungen vorhanden, um den Datenkontext zu verdeutlichen?</td>
                 <td>
                     <div class="form-group">
                             <div class="input-group">
@@ -149,7 +157,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Sind ausreichende Beschriftungen, Untertitel und Anmerkungen vorhanden, um den Datenkontext zu verdeutlichen?</td>
+                <td>Bietet das Dashboard Werkzeuge und Funktionen zur Navigation und Filterung der Daten?</td>
                 <td>
                     <div class="form-group">
                             <div class="input-group">
@@ -163,7 +171,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Bietet das Dashboard Werkzeuge und Funktionen zur Navigation und Filterung der Daten?</td>
+                <td>Ist die Benutzeroberfläche des Dashboards klar und intuitiv gestaltet?</td>
                 <td>
                     <div class="form-group">
                             <div class="input-group">
@@ -177,9 +185,9 @@
                 </td>
             </tr>
             <tr>
-                <td>Ist die Benutzeroberfläche des Dashboards klar und intuitiv gestaltet?</td>
+                <td>Werden visuelle Elemente wie Farben, Formen und Größen sinnvoll eingesetzt, um wichtige Informationen zu betonen?</td>
                 <td>
-                    <div class="form-group">
+                     <div class="form-group">
                             <div class="input-group">
                                 <div id="radioBtn" class="btn-group">
                                     <a class="btn btn-primary btn-sm notActive" data-toggle="frage12" data-title="1" style="width: 55px;">ja</a>
@@ -191,29 +199,15 @@
                 </td>
             </tr>
             <tr>
-                <td>Werden visuelle Elemente wie Farben, Formen und Größen sinnvoll eingesetzt, um wichtige Informationen zu betonen?</td>
+                <td>Werden geeignete Diagramme und Visualisierungen verwendet, um die Daten effektiv darzustellen?</td>
                 <td>
-                     <div class="form-group">
+                    <div class="form-group">
                             <div class="input-group">
                                 <div id="radioBtn" class="btn-group">
                                     <a class="btn btn-primary btn-sm notActive" data-toggle="frage13" data-title="1" style="width: 55px;">ja</a>
                                     <a class="btn btn-primary btn-sm notActive" data-toggle="frage13" data-title="0"  style="width: 55px;">nein</a>
                                 </div>
                                 <input type="hidden" name="frage13" id="frage13">
-                            </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Werden geeignete Diagramme und Visualisierungen verwendet, um die Daten effektiv darzustellen?</td>
-                <td>
-                    <div class="form-group">
-                            <div class="input-group">
-                                <div id="radioBtn" class="btn-group">
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage14" data-title="1" style="width: 55px;">ja</a>
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="frage14" data-title="0"  style="width: 55px;">nein</a>
-                                </div>
-                                <input type="hidden" name="frage14" id="frage14">
                             </div>
                     </div>
                 </td>
@@ -269,11 +263,11 @@
 
             // Hier erfolgt die Berechnung der Summe
             var summe = 0;
-            for (var i = 1; i <= 14; i++) {
+            for (var i = 1; i <= 13; i++) {
                 var frageWert = parseInt($('#frage' + i).val());
                 summe += frageWert;
             }
-            var prozent = Math.round((summe / 14) * 100); // Ergebnis in Prozent berechnen und auf ganze Zahl runden
+            var prozent = Math.round((summe / 13) * 100); // Ergebnis in Prozent berechnen und auf ganze Zahl runden
             $('#summe').val(prozent + '%'); // Ergebnis in das versteckte Eingabefeld setzen
 
             $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
@@ -282,7 +276,6 @@
     });
 
 </script>
-
 
 
 

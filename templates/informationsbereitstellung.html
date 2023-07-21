@@ -8,7 +8,10 @@
 <br>
 <div class="container">
     <h4 class="rahmen">Informationsbereitstellung planen</h4>
-     <p style="text-align: justify;">Text definieren, Text definieren, Text definieren, Text definieren,
+    <br>
+     <p style="text-align: justify;">Die Analysen, die Sie im vorherigen Schritt definiert haben, können Sie nun in Form
+         eines Berichts oder eines Dashboards den entscheidungstragenden Personen zur Verfügung Stellen. Füllen Sie
+         das Formular aus und erstellen Sie so viele Informationsmittel wie notwendig. Klicken Sie danach auf «Weiter».
     </p>
     <form action="/informationsbereitstellung" method="post">
         <table class="table table-striped">
@@ -16,7 +19,7 @@
                 <th colspan="2" class="bg-gray">Bezeichnung</th>
             </tr>
             <tr>
-                <td>Bezeichnung des visuellen Elements</td>
+                <td>Bezeichnung des Informationsmittels</td>
                 <td>
                     <div class="form-group">
                             <div class="input-group">
@@ -57,7 +60,6 @@
                 <td>Geplante beinhaltete Analysen</td>
             <td>
                 <div class="form-group">
-                    <label for="messung1">Informationsbedarf wählen:</label>
                     {% for bedarf in dropdown_options %}
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="messung1[]" value="{{ bedarf }}" id="bedarf-{{ loop.index }}">
@@ -110,7 +112,7 @@
 <br>
 <div class="text-center">
     <a href="/analysen" class="btn btn-secondary">Zurück</a>
-    <a href="/visualisierung" class="btn btn-secondary">Weiter</a>
+    <a href="/visualisierung" class="btn btn-primary">Weiter</a>
 </div>
 
 <script>
