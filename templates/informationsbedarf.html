@@ -22,7 +22,7 @@
     <form action="/informationsbedarf" method="POST"><br>
         <div class="input-group mb-3">
             <select id="betroffenes_ziel" name="betroffenes_ziel" class="form-control" placeholder="betroffenes Ziel">
-                <option value="" selected disabled>betroffenes Ziel</option>
+                <option value="Angabe fehelt" selected>Betroffenes Ziel</option>
                 <!-- Hier werden die Dropdown-Optionen aus der CSV-Datei eingefügt -->
                 {% for ziel in dropdown_options %}
                     <option value="{{ ziel }}">{{ ziel }}</option>
@@ -30,7 +30,7 @@
             </select>
             <input type="text" id="bezeichnung" name="bezeichnung" class="form-control" placeholder="Beschreibung Informationsbedarf" aria-label="Bezeichnung">
             <select id="prioritaet" name="prioritaet" class="form-control" placeholder="Priorität">
-                <option value="0" selected disabled>Priorität</option>
+                <option value="" selected>Priorität</option>
                 <option value="A">A</option>
                 <option value="B">B</option>
                 <option value="C">C</option>
@@ -44,7 +44,7 @@
     <br>
     <h5>Liste Informationsbedarf:</h5>
     <div class="table-container" style="display: inline-block;">
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover" border="1">
             <thead>
                 <tr>
                     <th>Nummer</th>

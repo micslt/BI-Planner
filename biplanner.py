@@ -116,3 +116,7 @@ def etl_auflistung():
 
     return df_transposed
 
+
+def berechne_deskriptive_statistiken(dataframe):
+    deskriptive_stats = dataframe.describe()
+    return deskriptive_stats

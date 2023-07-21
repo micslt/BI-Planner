@@ -160,3 +160,7 @@ form .buttons .submit:hover {background-color: #14892c;}
 .left-column-wide {
   padding-right: 200px; /* Passe den Wert an, um den gewünschten Abstand zu erreichen */
 }
+
+.table-top {
+    vertical-align: top;
+}

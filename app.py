@@ -745,9 +745,13 @@ def feedback_auswertung():
     df = pd.read_csv("feedback.csv", encoding="utf-8")
 
     # Daten als HTML-Tabelle rendern
-    table_html = df.to_html(index=False)
+    table_html = df.to_html(classes="table table-striped table-hover border=1")
 
-    return render_template("feedback_auswertung.html", table_html=table_html)
+    # Berechne deskriptive Statistiken
+    deskriptive_statistiken = biplanner.berechne_deskriptive_statistiken(df)
+
+    return render_template("feedback_auswertung.html", deskriptive_statistiken=deskriptive_statistiken,
+                           table_html=table_html)
 
 ##################################################Functionality#########################################################
 @app.route('/delete_all', methods=['POST'])
