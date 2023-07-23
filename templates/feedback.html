@@ -20,17 +20,17 @@
         <td>
           <select class="form-select form-select-sm" name="company_size" required>
             <option value="">Bitte auswählen</option>
-            <option value="1-9">1-9 Mitarbeitende</option>
-            <option value="10-49">10-49 Mitarbeitende</option>
-            <option value="50-249">50-249 Mitarbeitende</option>
-            <option value=">249+">>249 Mitarbeitende</option>
+            <option value="1-9 MA">1-9 Mitarbeitende</option>
+            <option value="10-49 MA">10-49 Mitarbeitende</option>
+            <option value="50-249 MA">50-249 Mitarbeitende</option>
+            <option value=">249+ MA">>249 Mitarbeitende</option>
           </select>
         </td>
       </tr>
       <tr>
         <td>Einschätzung der eigenen BI-Kenntnisse: </td>
         <td>
-          <select class="form-select form-select-sm" name="company_size" required>
+          <select class="form-select form-select-sm" name="knowledge" required>
             <option value="">Bitte auswählen</option>
             <option value="0">Keine Kenntnisse</option>
             <option value="1">Grundkenntnisse</option>
@@ -43,249 +43,255 @@
       <br>
       <br>
      <div class="wrap">
+        <label class="statement">Das Tool ist einfach zu bedienen.</label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="bedienung" value="1">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="bedienung" value="2">
+            <label>Stimme eher nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="bedienung" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="bedienung" value="4">
+            <label>Stimme eher zu</label>
+          </li>
+          <li>
+            <input type="radio" name="bedienung" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
+
+        <label class="statement">Das Tool ist logisch und umfassend aufgebaut.</label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="aufbau" value="1">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="aufbau" value="2">
+            <label>Stimme eher nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="aufbau" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="aufbau" value="4">
+            <label>Stimme eher zu</label>
+          </li>
+          <li>
+            <input type="radio" name="aufbau" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
+
+        <label class="statement">Bei der Bedienung treten keine Fehler auf.</label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="stabilitaet" value="1">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="stabilitaet" value="2">
+            <label>Stimme eher nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="stabilitaet" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="stabilitaet" value="4">
+            <label>Stimme eher zu</label>
+          </li>
+          <li>
+            <input type="radio" name="stabilitaet" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
+
+        <label class="statement">Ziele und Zweck der beinhalteten Formulare waren mir klar.</label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="klarheit" value="1">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="klarheit" value="2">
+            <label>Stimme eher nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="klarheit" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="klarheit" value="4">
+            <label>Stimme eher zu</label>
+          </li>
+          <li>
+            <input type="radio" name="klarheit" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
+
+        <label class="statement">Das Tool hat mir geholfen, die Systematik beim Aufbau der Business Intelligence besser zu
+        verstehen.</label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="verstaendnishilfe" value="1">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="verstaendnishilfe" value="2">
+            <label>Stimme eher nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="verstaendnishilfe" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="verstaendnishilfe" value="4">
+            <label>Stimme eher zu</label>
+          </li>
+          <li>
+            <input type="radio" name="verstaendnishilfe" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
+
+        <label class="statement">Durch das Tool habe ich Neues über den Aufbau der Business Intelligence erfahren und gelernt.</label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="lerneffekt" value="1">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="lerneffekt" value="2">
+            <label>Stimme eher nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="lerneffekt" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="lerneffekt" value="4">
+            <label>Stimme eher zu</label>
+          </li>
+          <li>
+            <input type="radio" name="lerneffekt" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
+
+        <label class="statement">Ich wurde gut durch das Tool geleitet und bekam Anweisungen, wo ich was einfüllen muss.</label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="anleitung" value="1">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="anleitung" value="2">
+            <label>Stimme eher nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="anleitung" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="anleitung" value="4">
+            <label>Stimme eher zu</label>
+          </li>
+          <li>
+            <input type="radio" name="anleitung" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
+
+        <label class="statement">Das Tool hat mir geholfen zu erkennen, ob und wo in meinem Unternehmen BI-Optimierungspotenzial
+        vorhanden ist.</label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="optimierungspotenzial" value="1">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="optimierungspotenzial" value="2">
+            <label>Stimme eher nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="optimierungspotenzial" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="optimierungspotenzial" value="4">
+            <label>Stimme eher zu</label>
+          </li>
+          <li>
+            <input type="radio" name="optimierungspotenzial" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
+
+        <label class="statement">Das Tool bietet einen Mehrwert für Personen, die keine
+        Experten der Business Intelligence sind und Hilfe beim Aufbau der BI-Prozesse benötigen. </label>
+        <ul class='likert'>
+          <li>
+            <input type="radio" name="mehrwert" value="1">
+            <label>Stimme überhaupt nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="mehrwert" value="2">
+            <label>Stimme eher nicht zu</label>
+          </li>
+          <li>
+            <input type="radio" name="mehrwert" value="3">
+            <label>Neutral</label>
+          </li>
+          <li>
+            <input type="radio" name="mehrwert" value="4">
+            <label>Stimme eher zu</label>
+          </li>
+          <li>
+            <input type="radio" name="mehrwert" value="5">
+            <label>Stimme voll und ganz zu</label>
+          </li>
+        </ul>
       <form action="">
-        <label class="statement">Inwieweit wurden die definierten Ziele des Business Intelligence-Prozesses erreicht?</label>
+        <label class="statement">Das Ziel dieses Tools lautet, den Aufbau der Business Intelligence in Unternehmen zu
+          vereinfachen und sicherzustellen, dass beim Aufbau systematisch und vollständig vorgegangen wird. Dieses
+          Ziel wird aus meiner Sicht erreicht. </label>
         <ul class='likert'>
           <li>
-            <input type="radio" name="ziele_erreicht" value="0">
+            <input type="radio" name="ziel_erreicht" value="1">
             <label>Stimme überhaupt nicht zu</label>
           </li>
           <li>
-            <input type="radio" name="ziele_erreicht" value="1">
-            <label>Stimme nicht zu</label>
+            <input type="radio" name="ziel_erreicht" value="2">
+            <label>Stimme eher nicht zu</label>
           </li>
           <li>
-            <input type="radio" name="ziele_erreicht" value="3">
+            <input type="radio" name="ziel_erreicht" value="3">
             <label>Neutral</label>
           </li>
           <li>
-            <input type="radio" name="ziele_erreicht" value="4">
-            <label>Stimme zu</label>
+            <input type="radio" name="ziel_erreicht" value="4">
+            <label>Stimme eher zu</label>
           </li>
           <li>
-            <input type="radio" name="ziele_erreicht" value="5">
+            <input type="radio" name="ziel_erreicht" value="5">
             <label>Stimme voll und ganz zu</label>
           </li>
         </ul>
-
-        <label class="statement">Wie genau sind die analysierten Daten und generierten Berichte?</label>
-        <ul class='likert'>
-          <li>
-            <input type="radio" name="likert2" value="0">
-            <label>Stimme überhaupt nicht zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert2" value="1">
-            <label>Stimme nicht zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert2" value="3">
-            <label>Neutral</label>
-          </li>
-          <li>
-            <input type="radio" name="likert2" value="4">
-            <label>Stimme zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert2" value="5">
-            <label>Stimme voll und ganz zu</label>
-          </li>
-        </ul>
-
-        <label class="statement">Wie zufrieden sind die Nutzer mit den bereitgestellten Informationen und Ergebnissen?</label>
-        <ul class='likert'>
-          <li>
-            <input type="radio" name="likert3" value="0">
-            <label>Stimme überhaupt nicht zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert3" value="1">
-            <label>Stimme nicht zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert3" value="3">
-            <label>Neutral</label>
-          </li>
-          <li>
-            <input type="radio" name="likert3" value="4">
-            <label>Stimme zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert3" value="5">
-            <label>Stimme voll und ganz zu</label>
-          </li>
-        </ul>
-
-        <label class="statement">Wie lange dauert die Bearbeitung von Datenanfragen im Business Intelligence-Prozess?</label>
-        <ul class='likert'>
-          <li>
-            <input type="radio" name="likert4" value="0">
-            <label>Stimme überhaupt nicht zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert4" value="1">
-            <label>Stimme nicht zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert4" value="3">
-            <label>Neutral</label>
-          </li>
-          <li>
-            <input type="radio" name="likert4" value="4">
-            <label>Stimme zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert4" value="5">
-            <label>Stimme voll und ganz zu</label>
-          </li>
-        </ul>
-
-        <label class="statement">Wie hoch sind die Kosten für den Betrieb des Business Intelligence-Prozesses im Verhältnis zu den erzielten Ergebnissen?</label>
-        <ul class='likert'>
-          <li>
-            <input type="radio" name="likert5" value="0">
-            <label>Stimme überhaupt nicht zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert5" value="1">
-            <label>Stimme nicht zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert5" value="3">
-            <label>Neutral</label>
-          </li>
-          <li>
-            <input type="radio" name="likert5" value="4">
-            <label>Stimme zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert5" value="5">
-            <label>Stimme voll und ganz zu</label>
-          </li>
-        </ul>
-
-        <label class="statement">Wie gut ist der Ressourcenverbrauch (z.B. CPU-Auslastung, Speicherbedarf) im Business Intelligence-Prozess optimiert?</label>
-        <ul class='likert'>
-          <li>
-            <input type="radio" name="likert6" value="0">
-            <label>Stimme überhaupt nicht zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert6" value="1">
-            <label>Stimme nicht zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert6" value="3">
-            <label>Neutral</label>
-          </li>
-          <li>
-            <input type="radio" name="likert6" value="4">
-            <label>Stimme zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert6" value="5">
-            <label>Stimme voll und ganz zu</label>
-          </li>
-        </ul>
-
-        <label class="statement">Wie flexibel ist der Business Intelligence-Prozess, um sich an veränderte Geschäftsanforderungen anzupassen?</label>
-        <ul class='likert'>
-          <li>
-            <input type="radio" name="likert7" value="0">
-            <label>Stimme überhaupt nicht zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert7" value="1">
-            <label>Stimme nicht zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert7" value="3">
-            <label>Neutral</label>
-          </li>
-          <li>
-            <input type="radio" name="likert7" value="4">
-            <label>Stimme zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert7" value="5">
-            <label>Stimme voll und ganz zu</label>
-          </li>
-        </ul>
-
-        <label class="statement">Wie gut können neue Datenquellen in den Business Intelligence-Prozess integriert werden?</label>
-        <ul class='likert'>
-          <li>
-            <input type="radio" name="likert8" value="0">
-            <label>Stimme überhaupt nicht zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert8" value="1">
-            <label>Stimme nicht zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert8" value="3">
-            <label>Neutral</label>
-          </li>
-          <li>
-            <input type="radio" name="likert8" value="4">
-            <label>Stimme zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert8" value="5">
-            <label>Stimme voll und ganz zu</label>
-          </li>
-        </ul>
-
-        <label class="statement">Inwieweit berücksichtigt der Business Intelligence-Prozess neue technologische Entwicklungen und Trends?</label>
-        <ul class='likert'>
-          <li>
-            <input type="radio" name="likert9" value="0">
-            <label>Stimme überhaupt nicht zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert9" value="1">
-            <label>Stimme nicht zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert9" value="3">
-            <label>Neutral</label>
-          </li>
-          <li>
-            <input type="radio" name="likert9" value="4">
-            <label>Stimme zu</label>
-          </li>
-          <li>
-            <input type="radio" name="likert9" value="5">
-            <label>Stimme voll und ganz zu</label>
-          </li>
-        </ul>
-
-        <label class="statement">Wie zufrieden sind Sie insgesamt mit dem entwickelten Business Intelligence-Prozess?</label>
-        <ul class='likert'>
-          <li>
-            <input type="radio" name="ziele_erreicht0" value="0">
-            <label>Stimme überhaupt nicht zu</label>
-          </li>
-          <li>
-            <input type="radio" name="ziele_erreicht0" value="1">
-            <label>Stimme nicht zu</label>
-          </li>
-          <li>
-            <input type="radio" name="ziele_erreicht0" value="3">
-            <label>Neutral</label>
-          </li>
-          <li>
-            <input type="radio" name="ziele_erreicht0" value="4">
-            <label>Stimme zu</label>
-          </li>
-          <li>
-            <input type="radio" name="ziele_erreicht0" value="5">
-            <label>Stimme voll und ganz zu</label>
-          </li>
-        </ul>
-
         <label class="statement">Welche Verbesserungsvorschläge haben Sie für den Business Intelligence-Prozess?</label>
-       <div class="text-center"> <textarea name="improvements" rows="4" cols="195"></textarea>
+       <div class="text-center"> <textarea name="improvements" rows="4" cols="150"></textarea>
+       </div>
+         <label class="statement">Kommentare/ Was ich sonst noch sagen wollte:</label>
+       <div class="text-center"> <textarea name="comments" rows="4" cols="150"></textarea>
        </div>
              <br>
               <br>
