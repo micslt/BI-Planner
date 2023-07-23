@@ -15,14 +15,27 @@
         <td>Branche:</td>
         <td><input type="text" name="industry" required></td>
       </tr>
+      <tr>
         <td>Unternehmensgröße:</td>
         <td>
-          <select name="company_size" required>
+          <select class="form-select form-select-sm" name="company_size" required>
             <option value="">Bitte auswählen</option>
-            <option value="0-10">0-10 Mitarbeitende</option>
-            <option value="10-50">10-50 Mitarbeitende</option>
-            <option value="50-300">50-300 Mitarbeitende</option>
-            <option value="300+">>300 Mitarbeitende</option>
+            <option value="1-9">1-9 Mitarbeitende</option>
+            <option value="10-49">10-49 Mitarbeitende</option>
+            <option value="50-249">50-249 Mitarbeitende</option>
+            <option value=">249+">>249 Mitarbeitende</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Einschätzung der eigenen BI-Kenntnisse: </td>
+        <td>
+          <select class="form-select form-select-sm" name="company_size" required>
+            <option value="">Bitte auswählen</option>
+            <option value="0">Keine Kenntnisse</option>
+            <option value="1">Grundkenntnisse</option>
+            <option value="2">Fortgeschrittene Kenntnisse</option>
+            <option value="3">Experte</option>
           </select>
         </td>
       </tr>

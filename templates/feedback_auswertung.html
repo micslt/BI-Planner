@@ -3,42 +3,47 @@
 <div class="container">
     <h4 class="rahmen">Feedbacks Nutzer</h4>
     <br>
-        <h5>Antworten</h5>
-        <div class="table table-striped table-hover" border="1">
-            {{ table_html|safe }}
-        </div>
+    <h5>Antworten</h5>
+    <div class="table table-striped table-hover" border="1">
+        {{ table_html|safe }}
+    </div>
     <br>
     <h5>Deskriptive Statistiken</h5>
-        <table class="table table-striped table-hover" border="1">
-            <tr>
-                <th>Frage</th>
-                <th>Mittelwert</th>
-                <th>Standardabw.</th>
-                <th>Varianz</th>
-                <th>Minimum</th>
-                <th>25. Perzentil</th>
-                <th>Median</th>
-                <th>75. Perzentil</th>
-                <th>Maximum</th>
-            </tr>
-            {% for spalte, stats in deskriptive_statistiken.items() %}
-            <tr>
-                <td>{{ spalte }}</td>
-                <td>{{ stats['mean'] }}</td>
-                <td>{{ stats['std'] }}</td>
-                <td>{{ stats['var'] }}</td> <!-- Varianz -->
-                <td>{{ stats['min'] }}</td>
-                <td>{{ stats['25%'] }}</td>
-                <td>{{ stats['50%'] }}</td>
-                <td>{{ stats['75%'] }}</td>
-                <td>{{ stats['max'] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+    <table class="table table-striped table-hover" border="1">
+        <tr>
+            <th>Frage</th>
+            <th>Mittelwert</th>
+            <th>Standardabw.</th>
+            <th>Varianz</th>
+            <th>Minimum</th>
+            <th>25. Perzentil</th>
+            <th>Median</th>
+            <th>75. Perzentil</th>
+            <th>Maximum</th>
+        </tr>
+        {% for spalte, stats in deskriptive_statistiken.items() %}
+        <tr>
+            <td>{{ spalte }}</td>
+            <td>{{ stats['mean'] }}</td>
+            <td>{{ stats['std'] }}</td>
+            <td>{{ stats['var'] }}</td> <!-- Varianz -->
+            <td>{{ stats['min'] }}</td>
+            <td>{{ stats['25%'] }}</td>
+            <td>{{ stats['50%'] }}</td>
+            <td>{{ stats['75%'] }}</td>
+            <td>{{ stats['max'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 
-</div>
+    <br>
+    <!--
+    <h5>Ordinale Logistische Regression Ergebnisse</h5>
+    {{ ordinal_logit_result|safe }}
+    -->
 
-
+    <!-- CSV herunterladen Button -->
+    <a href="/download_csv" class="btn btn-primary">CSV herunterladen</a>
 </div>
 
 {% include "footer.html" %}

@@ -164,3 +164,11 @@ form .buttons .submit:hover {background-color: #14892c;}
 .table-top {
     vertical-align: top;
 }
+.center-text {
+    text-align: center;
+        }
+
+        .italic-small {
+            font-style: italic;
+            font-size: smaller;
+        }

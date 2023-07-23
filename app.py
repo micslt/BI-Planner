@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, Response
 import csv
 import os
 import pandas as pd
@@ -495,8 +495,10 @@ def informationsbereitstellung():
         except FileNotFoundError:
             informationsbereitstellung = []
 
-    dropdown_options = biplanner.load_analysen()
-
+        try:
+            dropdown_options = biplanner.load_analysen()
+        except FileNotFoundError:
+            dropdown_options = []
 
     return render_template('informationsbereitstellung.html', informationsbereitstellung=informationsbereitstellung, dropdown_options=dropdown_options)
 
@@ -539,10 +541,15 @@ def visualisierung():
                 reader = csv.reader(csvfile)
                 # enumerate() wird verwendet, um sowohl die visualisierung als auch deren Nummern zu bekommen.
                 visualisierung = [(i, row) for i, row in enumerate(reader, start=1)]
+
+
         except FileNotFoundError:
             visualisierung = []
 
-    dropdown_options = biplanner.load_analysen()
+        try:
+            dropdown_options = biplanner.load_analysen()
+        except FileNotFoundError:
+            dropdown_options = []
 
     return render_template('visualisierung.html', visualisierung=visualisierung, dropdown_options=dropdown_options)
 
@@ -585,10 +592,14 @@ def dashboard():
                 reader = csv.reader(csvfile)
                 # enumerate() wird verwendet, um sowohl die dashboard als auch deren Nummern zu bekommen.
                 dashboard = [(i, row) for i, row in enumerate(reader, start=1)]
+
         except FileNotFoundError:
             dashboard = []
 
-    dropdown_options = biplanner.load_informationsbereitstellung()
+        try:
+            dropdown_options = biplanner.load_informationsbereitstellung()
+        except FileNotFoundError:
+            dropdown_options = []
 
     return render_template('dashboard.html', dashboard=dashboard, dropdown_options=dropdown_options)
 
@@ -750,6 +761,9 @@ def feedback_auswertung():
     # Berechne deskriptive Statistiken
     deskriptive_statistiken = biplanner.berechne_deskriptive_statistiken(df)
 
+    # Führe Ordinale Logistische Regression durch
+    #ordinal_logit_result = biplanner.ordinate_logistic_regression(df)
+
     return render_template("feedback_auswertung.html", deskriptive_statistiken=deskriptive_statistiken,
                            table_html=table_html)
 
@@ -771,6 +785,16 @@ def delete_all():
 def end():
     return render_template("end.html")
 
+@app.route('/download_csv')
+def download_csv():
+    # CSV-Datei aus dem Backend lesen
+    with open('feedback.csv', 'r') as csv_file:
+        csv_content = csv_file.read()
+
+    # HTTP-Response mit dem CSV-Inhalt erstellen
+    response = Response(csv_content, content_type='text/csv')
+    response.headers["Content-Disposition"] = "attachment; filename=feedback.csv"
+    return response
 
 @app.route("/deleted")
 def deleted():
