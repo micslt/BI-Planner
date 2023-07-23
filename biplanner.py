@@ -2,7 +2,6 @@ import csv
 import os
 import pandas as pd
 import numpy as np
-import statsmodels.api as sm
 
 def calculate_points_and_save_to_csv(csv_file):
     # Überprüfen, ob die CSV-Datei vorhanden ist
@@ -132,17 +131,3 @@ def berechne_deskriptive_statistiken(dataframe):
 
     return deskriptive_stats
 
-
-def ordinate_logistic_regression(dataframe):
-    # Daten vorbereiten
-    target_column = "likert2"
-    feature_columns = ["industry", "company_size", "likert2", "likert3", "likert4", "likert5", "likert6", "likert7", "likert8", "likert9"]
-    X = dataframe[feature_columns]
-    y = dataframe[target_column]
-
-    # Ordinale Logistische Regression durchführen
-    X = sm.add_constant(X)
-    ordinal_logit_model = sm.MNLogit(y, X)
-    ordinal_logit_result = ordinal_logit_model.fit()
-
-    return ordinal_logit_result
