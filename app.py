@@ -204,21 +204,21 @@ def informationsbedarf():
 
 @app.route('/informationsbedarf/delete', methods=['POST'])
 def delete_informationsbedarf():
-    informationsbedarf_nummer = request.form['informationsbedarf_nummer']
+    informationsbedarf_nummer = int(request.form['informationsbedarf_nummer'])
 
     # Lesen Sie alle Informationsbedarfe
-    with open('informationsbedarf.csv','r', encoding="utf-8") as csvfile:
+    with open('informationsbedarf.csv', 'r', encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
-        informationsbedarf = [row[0] for row in reader]
+        informationsbedarf_list = list(reader)
 
     # Löschen Sie den ausgewählten Informationsbedarf
-    del informationsbedarf[int(informationsbedarf_nummer) - 1]
+    if 1 <= informationsbedarf_nummer <= len(informationsbedarf_list):
+        del informationsbedarf_list[informationsbedarf_nummer - 1]
 
     # Überschreiben Sie die CSV-Datei mit den verbleibenden Informationsbedarfen
     with open('informationsbedarf.csv', 'w', newline='', encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile)
-        for informationsbedarf in informationsbedarf:
-            writer.writerow([informationsbedarf])
+        writer.writerows(informationsbedarf_list)
 
     return redirect('/informationsbedarf')
 

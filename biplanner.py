@@ -97,7 +97,7 @@ def load_analysen():
     with open('analysen.csv', 'r') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
-            options.append(row[1])
+            options.append(row[0])
     return options
 
 def load_visualisierung():
