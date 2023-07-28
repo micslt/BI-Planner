@@ -23,7 +23,7 @@
     <form action="/informationsbedarf" method="POST"><br>
         <div class="input-group mb-3">
             <select id="betroffenes_ziel" name="betroffenes_ziel" class="form-control" placeholder="betroffenes Ziel">
-                <option value="Angabe fehelt" selected>Betroffenes Ziel</option>
+                <option value="Angabe fehlt" selected>Betroffenes Ziel</option>
                 <!-- Hier werden die Dropdown-Optionen aus der CSV-Datei eingefügt -->
                 {% for ziel in dropdown_options %}
                     <option value="{{ ziel }}">{{ ziel }}</option>
