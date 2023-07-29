@@ -4,7 +4,9 @@ import os
 import pandas as pd
 import biplanner
 
+
 app = Flask(__name__)
+
 
 @app.route('/')
 def welcome():
@@ -727,7 +729,7 @@ def auswertungen():
 ##################################################8. Feedback### #######################################################
 @app.route("/feedback")
 def feedback():
-    return render_template("feedback.html")
+    return redirect("https://www.umfrageonline.ch/c/ij9rgg3q")
 
 
 @app.route("/submit_feedback", methods=["GET", "POST"])
@@ -738,6 +740,8 @@ def submit_feedback():
 
     message = "Ihre Antworten wurden erfasst. Sie werden weitergeleitet."
     return render_template("message.html", message=message, redirect_url="/end")
+
+
 
 def save_feedback(form_data):
     fieldnames = list(form_data.keys())
