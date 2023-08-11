@@ -729,8 +729,8 @@ def auswertungen():
 ##################################################8. Feedback### #######################################################
 @app.route("/feedback")
 def feedback():
-    return redirect("https://www.umfrageonline.ch/c/ij9rgg3q")
-
+    #return redirect("https://www.umfrageonline.ch/c/ij9rgg3q")
+    return render_template("feedback.html")
 
 @app.route("/submit_feedback", methods=["GET", "POST"])
 def submit_feedback():

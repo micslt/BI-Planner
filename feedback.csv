@@ -1,1 +1,4 @@
 name,industry,company_size,knowledge,bedienung,aufbau,stabilitaet,klarheit,verstaendnishilfe,lerneffekt,anleitung,optimierungspotenzial,mehrwert,ziel_erreicht,improvements,comments
+Sebastian Kälin,privat,1-9 MA,1,5,4,5,5,5,5,5,5,5,5,"+ Der Fragebogen für die Standortbestimmung ist sinnvollerweise umfassend. Möglicherweise wäre es weniger erschlagend, wenn eine Page pro Thema ausgefüllt werden könnte (d.h. ""Organisation"" => ""Ressourcen"" => ...)
++ Beim Informationsbedarf wird auf die im vorangehenden Schritt definierten Unternehmensziele Bezug genommen. Die Ziele sind als Dropdown-Liste verfügbar, dies war aber für mich nicht sofort erkennbar => die Liste könnte durch ein UI-Element explizit erkennbarer gemacht werden","- Bei der Auswertung der ersten Standortbestimmung hatte ich Zugriff auf einen Eintrag, der nicht von mir stammt (Timestamp: ""23-07-2023 14:32:19"")
+- Auch bei den Rahmenbedingungen waren für mich Angaben, die nicht ich gegeben hatte, einsehbar"
